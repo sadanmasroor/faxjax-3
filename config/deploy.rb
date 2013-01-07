@@ -1,3 +1,4 @@
+require "rvm/capistrano"
 require "bundler/capistrano"
 
 server "198.74.55.22", :web, :app, :db, :primary => true
@@ -11,6 +12,7 @@ set :use_sudo, false
 set :scm, "git"
 set :repository, "git@github.com:sadanmasroor/faxjax-3.git"
 set :branch, "master"
+set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true

@@ -78,6 +78,8 @@ GEM
     rake (10.0.3)
     rdoc (3.12)
       json (~> 1.4)
+    rvm-capistrano (1.2.7)
+      capistrano (>= 2.0.0)
     thor (0.14.6)
     treetop (1.4.12)
       polyglot
@@ -91,3 +93,4 @@ DEPENDENCIES
   capistrano
   mysql
   rails (= 3.0.12)
+  rvm-capistrano
