@@ -30,11 +30,11 @@
   <td class="label">Also seen at:</td>
   <td>
     <% if !@listing.url_1.empty? %>
-      <%= @listing.url_1_link %><br/>
+      <%= raw(@listing.url_1_link) %><br/>
     <% end %>
     
     <% if !@listing.url_2.empty? %>
-      <%= @listing.url_2_link %>
+      <%= raw(@listing.url_2_link) %>
     <% end %>
   </td>
   </tr>
@@ -113,22 +113,22 @@
 </td>
 <td align="right" valign="top" width="150" id="#listing-details-photos">
   <p>
-    <%= link_to_function(image_tag(@listing.photo_path(Listing::PhotoMediumSuffix, 1), {
+    <%= link_to_function(image_tag("/#{@listing.photo_path(Listing::PhotoMediumSuffix, 1)}", {
     :size => Listing::PhotoMediumDimensions, :border => 0
     }), 'window.open("'+url_for({:action => "show_large_photo", :id => @listing.id, :num => 1})+'",null,"height=400,width=500,status=no,toolbar=no,menubar=no,location=no");') if !@listing.photo_path(Listing::PhotoMediumSuffix, 1).nil? %>
   </p>
   <p>
-    <%= link_to_function(image_tag(@listing.photo_path(Listing::PhotoMediumSuffix, 2), {
+    <%= link_to_function(image_tag("/#{@listing.photo_path(Listing::PhotoMediumSuffix, 2)}", {
     :size => Listing::PhotoMediumDimensions, :border => 0
     }), 'window.open("'+url_for({:action => "show_large_photo", :id => @listing.id, :num => 2})+'",null,"height=400,width=500,status=no,toolbar=no,menubar=no,location=no");') if !@listing.photo_path(Listing::PhotoMediumSuffix, 2).nil? %>
   </p>
   <p>
-    <%= link_to_function(image_tag(@listing.photo_path(Listing::PhotoMediumSuffix, 3), {
+    <%= link_to_function(image_tag("/#{@listing.photo_path(Listing::PhotoMediumSuffix, 3)}", {
     :size => Listing::PhotoMediumDimensions, :border => 0
     }), 'window.open("'+url_for({:action => "show_large_photo", :id => @listing.id, :num => 3})+'",null,"height=400,width=500,status=no,toolbar=no,menubar=no,location=no");') if !@listing.photo_path(Listing::PhotoMediumSuffix, 3).nil? %>
   </p>
   <p>
-    <%= link_to_function(image_tag(@listing.photo_path(Listing::PhotoMediumSuffix, 4), {
+    <%= link_to_function(image_tag("/#{@listing.photo_path(Listing::PhotoMediumSuffix, 4)}", {
     :size => Listing::PhotoMediumDimensions, :border => 0
     }), 'window.open("'+url_for({:action => "show_large_photo", :id => @listing.id, :num => 4})+'",null,"height=400,width=500,status=no,toolbar=no,menubar=no,location=no");') if !@listing.photo_path(Listing::PhotoMediumSuffix, 4).nil? %>
   </p>

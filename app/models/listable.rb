@@ -33,8 +33,8 @@ module Listable
   
   def _mk_url_link url
     return '' if url.blank?
-    url=sanitize(url)
-    u=URI.parse url
+    #url=sanitize(url)
+    u=URI.parse(URI.encode(url))
     case u
     when URI::HTTP
       u=url
