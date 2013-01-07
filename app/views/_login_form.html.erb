@@ -1,0 +1,19 @@
+<% form_tag(absolute_url_for(:controller => "home", :action => "sign_in")) do %>
+  <h1>Sign In</h1>
+  <div class="field">
+    <label for="username">Username</label>
+    <%= text_field_tag :name, params[:name] %>
+  </div>
+  <div class="field">
+    <label for="password">Password</label>
+    <%= password_field_tag :password %>
+  </div>
+  <%= submit_tag "Sign In", {:class => "submit"} %>
+  <%= link_to_function "cancel", "new Effect.BlindUp('signin', {duration: .5, afterFinish: function() {$('choice').toggle()}});" %>
+  <p>
+    <%= link_to "Forgot your password?", :controller => "home", :action => "forgot_password" %>
+    <br/>
+    <%= link_to "Create an account", :controller => "users", :action => "new" %>
+  </p>
+<% end %>
+

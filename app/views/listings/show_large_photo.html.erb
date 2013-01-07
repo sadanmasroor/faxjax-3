@@ -1,0 +1,2 @@
+<%= image_tag @listing.photo_path(Listing::PhotoLargeSuffix, params[:num]), :size => Listing::PhotoLargeDimensions if !@listing.photo_path(Listing::PhotoLargeSuffix, params[:num]).nil? %><br/>
+<%= link_to_function "Close window", "window.close()" %>

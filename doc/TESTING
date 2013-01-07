@@ -1,0 +1,5 @@
+== TESTING.md
+
+This file remarks on testing strategies within the FaxJax Rails app. <ost testing is done via RSpec. due to the current limitations of FJ needing Rails 1.2.6, the current version of RSpec for this is bundled in the vendor plugins. You need to run the spec command from there, or create an alias for it:
+
+`alias spec='./vendor/plugins/rspec/bin/spec -c'

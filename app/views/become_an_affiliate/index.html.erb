@@ -1,0 +1,59 @@
+<%= error_messages_for "contact" %>
+
+<% form_for :contact, @contact, :url => {:action => "create"} do |f| %>
+	<div>
+		<label>First Name: <span class="required">*</span></label>
+		<%= f.text_field :fname, :required => true %>
+	</div>
+	<div>
+		<label>Last Name: <span class="required">*</span></label>
+		<%= f.text_field :lname, :required => true %>
+	</div>
+	<div>
+		<label>Address Line 1: <span class="required">*</span></label>
+		<%= f.text_field :address_1, :required => true %>
+	</div>
+	<div>
+		<label>Address Line 2:</label>
+		<%= f.text_field :address_2 %>
+	</div>
+	<div>
+		<label>City: <span class="required">*</span></label>
+		<%= f.text_field :city, :required => true %>
+	</div>
+	<div>
+		<label>State: <span class="required">*</span></label>
+		<select id="contact_state" name="contact[state]">
+			<option value=""></option>
+			<%= state_abbrev_options_for_select() %>
+		</select> 
+	</div>
+	<div>
+		<label>Zip Code: <span class="required">*</span></label>
+		<%= f.text_field :postal_code, :required => true, :size => 5 %>
+	</div>
+	<div>
+		<label>Phone 1: <span class="required">*</span></label>
+		<%= f.text_field :phone_1, :required => true, :size => 11 %>
+	</div>
+	<div>
+		<label>Phone 2:</label>
+		<%= f.text_field :phone_2, :size => 11 %>
+	</div>
+	<div>
+		<label>E-mail: <span class="required">*</span></label>
+		<%= f.text_field :email_1, :required => true %>
+	</div>
+	<div>
+		<label>Would you prefer to be reimbursed via PayPal?</label>
+		<%= f.check_box :prefer_paypal_reimburse %>
+	</div><br/><br/>
+	<div style="display:none">
+		<label>PayPal User ID:</label>
+		<%= f.text_field :paypal_user_id %>
+	</div>
+
+	<div>
+		<%= submit_tag "Send Affiliate Request", {:class => "submit"} %>
+	</div>
+<% end %>

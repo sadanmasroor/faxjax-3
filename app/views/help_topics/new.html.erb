@@ -1,0 +1,10 @@
+<% form_tag(:action => "create") do  %>
+
+<%= render(:partial => "form") %>
+<div style="text-align:left; padding: 10px 30px 0 130px; ">
+<%= submit_tag "Create", {:class => "submit"} %>
+<%= submit_tag "Cancel", {:class => "submit"} %>
+</div>
+
+<% end %>
+

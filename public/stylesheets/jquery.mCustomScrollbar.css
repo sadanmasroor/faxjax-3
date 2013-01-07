@@ -1,0 +1,387 @@
+#mcs_container {
+    /*border-bottom: 1px solid #333333;
+    border-top: 1px solid #333333;*/
+    height: 450px;
+    margin: 0 0 0 0;
+    padding: 0 0px;
+    position: relative;
+    top: 0;
+    width: 200px;
+}
+#mcs_container .customScrollBox {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+#mcs_container .customScrollBox .container {
+    float: left;
+    position: relative;
+    top: 0;
+    width: 180px;
+}
+#mcs_container .customScrollBox .content {
+    clear: both;
+}
+#mcs_container .customScrollBox .content p {
+    color: #FFFFFF;
+    font-family: Verdana,Geneva,sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+    margin: 10px 0;
+    padding: 0 5px;
+}
+#mcs_container .customScrollBox .content p.alt {
+    color: #999999;
+    font-family: Georgia,"Times New Roman",Times,serif;
+    font-size: 17px;
+    line-height: 19px;
+    margin: 10px 0;
+    padding: 10px 5px;
+}
+#mcs_container .customScrollBox img {
+    border: 5px solid #FFFFFF;
+}
+#mcs_container .dragger_container {
+    background: none repeat scroll 0 0 #000000;
+    border-radius: 2px 2px 2px 2px;
+    cursor: s-resize;
+    float: left;
+    height: 377px;
+    margin: 40px 0 0 10px;
+    position: relative;
+    width: 2px;
+}
+#mcs_container .dragger {
+    background: none repeat scroll 0 0 #999999;
+    border-radius: 2px 2px 2px 2px;
+    color: #666666;
+    cursor: pointer;
+    height: 60px;
+    line-height: 60px;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    width: 2px;
+}
+#mcs_container .dragger_pressed {
+    background: none repeat scroll 0 0 #999999;
+    border-radius: 4px 4px 4px 4px;
+    color: #666666;
+    cursor: s-resize;
+    height: 60px;
+    line-height: 60px;
+    margin-left: -1px;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    width: 4px;
+}
+#mcs_container .scrollUpBtn, #mcs_container .scrollDownBtn {
+    display: inline-block;
+    height: 15px;
+    margin-right:2px;
+    opacity: 0.7;
+    position: absolute;
+    right: 0;
+    text-decoration: none;
+    width: 14px;
+}
+#mcs_container .scrollUpBtn {
+    background: url("../images/mcs_btnUp.png") no-repeat scroll center center transparent;
+    top: 16px;
+}
+#mcs_container .scrollDownBtn {
+    background: url("../images/mcs_btnDown.png") no-repeat scroll center center transparent;
+    bottom: 12px;
+}
+#mcs_container .scrollUpBtn:hover, #mcs_container .scrollDownBtn:hover {
+    opacity: 0.9;
+}
+#mcs2_container {
+    border-bottom: 1px dashed #999999;
+    border-top: 1px dashed #999999;
+    height: 500px;
+    left: 340px;
+    margin: 0;
+    padding: 0 10px;
+    position: absolute;
+    top: 20px;
+    width: 260px;
+}
+#mcs2_container .customScrollBox {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+#mcs2_container .customScrollBox .container {
+    float: left;
+    position: relative;
+    top: 0;
+    width: 240px;
+}
+#mcs2_container .customScrollBox .content {
+    clear: both;
+}
+#mcs2_container .customScrollBox .content p {
+    color: #FFFFFF;
+    font-family: Verdana,Geneva,sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+    margin: 10px 0;
+    padding: 10px 5px;
+}
+#mcs2_container .customScrollBox .content p.alt {
+    color: #999999;
+    font-family: Georgia,"Times New Roman",Times,serif;
+    font-size: 17px;
+    line-height: 19px;
+    margin: 10px 0;
+    padding: 10px 5px;
+}
+#mcs2_container .customScrollBox img {
+    border: 5px solid #FFFFFF;
+}
+#mcs2_container .dragger_container {
+    box-shadow: 0 0 10px #000000 inset;
+    cursor: pointer;
+    float: left;
+    height: 480px;
+    margin: 10px 0 0 10px;
+    position: relative;
+    width: 9px;
+}
+#mcs2_container .dragger {
+    background: none repeat scroll 0 0 #333333;
+    border-left: 1px solid #787878;
+    border-right: 1px solid #000000;
+    color: #666666;
+    cursor: pointer;
+    height: 60px;
+    line-height: 60px;
+    margin-left: 1px;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    width: 6px;
+}
+#mcs2_container .dragger_pressed {
+    background: none repeat scroll 0 0 #444444;
+    border-left: 1px solid #878787;
+    border-right: 1px solid #000000;
+    color: #777777;
+    cursor: pointer;
+    height: 60px;
+    line-height: 60px;
+    margin-left: 1px;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    width: 6px;
+}
+#mcs3_container {
+    background: none repeat scroll 0 0 #6D5843;
+    border-bottom: 1px solid #666666;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 0 20px #000000 inset;
+    height: 96%;
+    left: 640px;
+    margin: 0;
+    padding: 0 10px;
+    position: absolute;
+    top: 20px;
+    width: 280px;
+}
+#mcs3_container .customScrollBox {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+#mcs3_container .customScrollBox .container {
+    float: left;
+    position: relative;
+    top: 0;
+    width: 240px;
+}
+#mcs3_container .customScrollBox .content {
+    clear: both;
+}
+#mcs3_container .customScrollBox .content p {
+    color: #31231E;
+    font-family: Verdana,Geneva,sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+    margin: 0;
+    padding: 10px 5px 10px 15px;
+}
+#mcs3_container .customScrollBox img {
+    border: 3px solid #31231E;
+    margin: 0 0 0 15px;
+}
+#mcs3_container .dragger_container {
+    border-left: 1px solid #31231E;
+    border-right: 1px solid #8E7757;
+    cursor: pointer;
+    float: left;
+    height: 33%;
+    margin: 35px 0 0 25px;
+    position: relative;
+    width: 0;
+}
+#mcs3_container .dragger {
+    background: none repeat scroll 0 0 #31231E;
+    border-radius: 6px 6px 6px 6px;
+    cursor: pointer;
+    height: 60px;
+    margin-left: -5px;
+    overflow: hidden;
+    position: absolute;
+    width: 9px;
+}
+#mcs3_container .dragger_pressed {
+    background: none repeat scroll 0 0 #31231E;
+    border-radius: 6px 6px 6px 6px;
+    cursor: pointer;
+    height: 60px;
+    margin-left: -5px;
+    overflow: hidden;
+    position: absolute;
+    width: 9px;
+}
+#mcs4_container {
+    border: 1px dotted #0099CC;
+    border-radius: 4px 4px 4px 4px;
+    height: 200px;
+    left: 340px;
+    margin: 0;
+    padding: 0 10px;
+    position: absolute;
+    top: 540px;
+    width: 260px;
+}
+#mcs4_container .customScrollBox {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+#mcs4_container .customScrollBox .container {
+    float: left;
+    position: relative;
+    top: 0;
+    width: 240px;
+}
+#mcs4_container .customScrollBox .content {
+    clear: both;
+}
+#mcs4_container .customScrollBox .content p {
+    color: #0099CC;
+    font-family: Verdana,Geneva,sans-serif;
+    font-size: 13px;
+    line-height: 20px;
+    margin: 10px 0;
+    padding: 10px 5px;
+}
+#mcs4_container .dragger_container {
+    border-left: 1px dotted #555555;
+    cursor: pointer;
+    float: left;
+    height: 180px;
+    margin: 10px 0 0 10px;
+    position: relative;
+    width: 0;
+}
+#mcs4_container .dragger {
+    background: none repeat scroll 0 0 #555555;
+    border-radius: 18px 18px 18px 18px;
+    cursor: pointer;
+    height: 9px;
+    margin-left: -5px;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    width: 9px;
+}
+#mcs4_container .dragger_pressed {
+    background: none repeat scroll 0 0 #0099CC;
+    cursor: s-resize;
+    height: 9px;
+    margin-left: -5px;
+    overflow: hidden;
+    position: absolute;
+    width: 9px;
+}
+#mcs5_container {
+    border: 1px dashed #CC3300;
+    border-radius: 4px 4px 4px 4px;
+    height: 130px;
+    left: 40px;
+    margin: 0;
+    padding: 0 10px;
+    position: absolute;
+    top: 760px;
+    width: 560px;
+}
+#mcs5_container .customScrollBox {
+    overflow: hidden;
+    position: relative;
+    width: 550px;
+}
+#mcs5_container .customScrollBox .horWrapper {
+    left: 0;
+    position: relative;
+}
+#mcs5_container .customScrollBox .container {
+    display: inline-block;
+    left: 0;
+    position: relative;
+}
+#mcs5_container .customScrollBox .content {
+    clear: both;
+}
+#mcs5_container .customScrollBox .content p {
+    margin: 0 5px;
+    padding: 5px;
+}
+#mcs5_container .customScrollBox .content p img {
+    margin-right: 5px;
+}
+#mcs5_container .dragger_container {
+    border-top: 1px dashed #CC3300;
+    height: 0;
+    margin: 10px;
+    position: relative;
+    width: 540px;
+}
+#mcs5_container .dragger {
+    background: url("mcsDragger.png") no-repeat scroll 0 0 #111111;
+    height: 9px;
+    margin-top: -5px;
+    position: absolute;
+    width: 60px;
+}
+#mcs5_container .dragger_pressed {
+    background: url("mcsDraggerHover.png") no-repeat scroll 0 0 #111111;
+    height: 9px;
+    margin-top: -5px;
+    position: absolute;
+    width: 60px;
+}
+#mcs5_container .scrollUpBtn, #mcs5_container .scrollDownBtn {
+    color: #CC3300;
+    display: inline-block;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: large;
+    font-weight: normal;
+    margin: 8px 5px 0 10px;
+    position: absolute;
+    text-decoration: none;
+    top: 0;
+}
+#mcs5_container .scrollDownBtn {
+    right: 10px;
+}
+#mcs5_container .scrollUpBtn {
+    right: 50px;
+}
+#mcs5_container .scrollUpBtn:hover, #mcs5_container .scrollDownBtn:hover {
+    color: #FFFFFF;
+}

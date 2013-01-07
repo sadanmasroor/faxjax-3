@@ -1,0 +1,26 @@
+<br/><% unless @premium_listings.blank? and @basic_listings.blank? and @inactive_listings.blank? %>
+
+  <% unless @premium_listings.blank? %>
+    <h3>Premium Listings</h3><br/>
+    <% @listings = @premium_listings %>
+    <%= render :partial => "listing_list" %>
+  <% end %>
+  <% unless @basic_listings.blank? %>
+    <h3>Basic Listings</h3><br/>
+    <% @listings = @basic_listings %>
+    <%= render :partial => "basic_listing_list" %><br/>
+    <%= link_to "Add a new Basic Listing", :controller => "basic_listings", :action => "add" %>
+  <% end %>
+  <% unless @inactive_listings.blank? %>
+    <h3>Inactive &amp; Expired Listings</h3><br/>
+    <% @listings = @inactive_listings %>
+    <%= render :partial => "listing_list" %>
+  <% end %>
+<% else %>
+  <p>
+    You do not have any listings.
+    <%= link_to "Add a new Basic Listing", :controller => "basic_listings", :action => "add" %>
+  </p>
+<% end %>
+<p> 
+</p>

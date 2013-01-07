@@ -1,0 +1,29 @@
+<table id="message-table" cellspacing="0">
+  <tr class="trh">
+    <th width="150">
+      <% if action_name == "inbox" %>
+        From
+      <% else %>
+        To
+      <% end %>
+    </th>
+    <th>Subject</th>
+    
+    <th width="120">
+      <% if action_name == "inbox" %>
+        Received
+      <% else %>
+        Sent
+      <% end %>
+    </th>
+    
+    <th width="100">Action</th>
+  </tr>
+  <% if !@messages.nil? && !@messages.empty? %>
+    <%= render :partial => "message", :collection => @messages %>
+  </table>
+  <% else %>
+  </table>
+  <p align="center"><em>No messages</em></p>
+  <% end %>
+

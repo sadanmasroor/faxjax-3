@@ -1,0 +1,32 @@
+<tr class="tr1" id="field_<%= field.id %>">
+  <td>
+    <%= field.name %>
+  </td>
+  <td>
+    <%= field[:type] %>
+  </td>
+  <td>
+    <% 
+      if !field.field_group.nil?
+        field_id = field.field_group.id
+      else
+        field_id = -1
+      end 
+    %>
+    <select id="field_group_id_for_field_<%= field.id %>" onchange="fieldGroupChange('<%=field.id%>')">
+      <%= options_from_collection_for_select(@category.field_groups, "id", "name", field_id) %>
+    </select>
+    <input type="button" name="save" value="Save" style="display: none;" onclick="saveFieldGroupForField('<%=field.id%>')" id="field_group_for_field_submit_<%= field.id %>">
+  </td>
+  <td align="center">
+    <%= link_to image_tag("edit-listing.gif", :size => "24x24", :border => 0, :alt => "Edit field", :title => "Edit field"), 
+    :action => "edit_field", 
+    :id => field.id %><%= link_to image_tag("delete.gif", :size => "24x24", :border => 0, :alt => "Delete field", :title => "Delete field"), {
+      :action => "delete_field",
+      :id => field.id
+    }, {
+      :onclick => "return confirm('Are you sure you want to delete this field?\\n\\nNOTE: Once a field is deleted it is gone forever.');"
+    }
+    %>
+  </td>
+</tr>

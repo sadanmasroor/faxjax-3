@@ -1,0 +1,39 @@
+<br/><% if admin? %>
+  <%= render(:partial => "listing_list") %>
+<% else %>
+
+  <div id="listings-search-container">
+  <%= form_tag(:action => "list", :id => nil) do %>
+    <%= text_field_tag(:keywords, params[:keywords], :size => 24, :style=>"height:25px;") %>
+    <select name="id" style="font-family: arial">
+      <%= options_for_select([[@category.name, @category.id]]) %> 
+      <% if !@category.children.empty? %>
+        <% @category.children.each do |cat| %>
+          <option value="<%= cat.id %>">&nbsp;&nbsp;- <%= cat.name %></option>
+        <% end %>
+      <% end %>
+      <% if !@category.root? %>
+      <%= options_for_select([["------------------------------", @category.id]]) %>
+      <%= options_for_select([[@root_category.name, @root_category.id]]) %>
+      <%= @root_categories.collect{|x| "<option value=\"#{x.id}\">&nbsp;&nbsp;- #{x.name}</option>"}.join() %>
+      <% end %>
+    </select>
+    <%= submit_tag "Search", {:class => "submit"} %>
+  <% end %>
+  </div>
+  
+  <% if !params[:keywords].nil? %>
+  <p>Search results for &quot;<%= params[:keywords] %>&quot; in <%= @category.name %></p>
+  <% end %>
+  
+  <%= will_paginate @listings_pages %>
+  <%= render :partial => "listing_list" %>
+
+  <% if @listings.nil? || @listings.empty? %>
+    <p>
+    <%= link_to "Back up one level", :id => @breadcrumbs[@breadcrumbs.length-2].id %>
+    <% if !session[:show_nested_categories] && @category.children.length > 0 %> <% end %>
+    <% if @category.children.length > 0 %> or choose a subcategory from the left<% end %>
+    </p>
+  <% end %>
+<% end %>

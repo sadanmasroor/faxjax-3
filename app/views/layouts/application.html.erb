@@ -1,14 +1,495 @@
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" 
+"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html lang="en">
 <head>
-  <title>Faxjax3</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
-  <%= csrf_meta_tag %>
-</head>
-<body>
+<title>Faxjax.com, Inc.<% if !@title.nil? %> - <%= @title %><% end %></title>
+  <meta name="description" content="Custom Digital Signs" />
+  
+  <%= render :partial => "/metatag" %>
+  <!-- keywords -->
+  <%= yield :meta %> 
+  <link rel="shortcut icon" href="/favicon.ico" />
 
-<%= yield %>
+<!--<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/jquery.mCustomScrollbar.css" />
+<link rel="stylesheet" href="css/banner.css" type="text/css" media="screen" charset="utf-8" />-->
+	
+<!--<script type="text/javascript" src="js/jquery-1.2.6.js"></script>
+<script type="text/javascript" src="js/startstop-slider.js"></script>
+
+<script type="text/javascript" src="js/jsjquery-1.7.1.min.js"></script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+<script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="js/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="js/jquery.mCustomScrollbar.js"></script>-->
+
+<style type="text/css">
+		#mcs_container .customScrollBox{/*overflow:auto;*/}
+		#mcs_container .dragger_container{display:none;}
+    #modify-urls-link span { color:#043B77; text-decoration:none; cursor:pointer;  }
+    #modify-urls-link span:hover { color:#076BD9; }
+     #listing-urls span { color:#043B77; text-decoration:none; cursor:pointer;  }
+    #listing-urls span:hover { color:#076BD9; }
+
+
+	</style>
+<%#= render :partial => "/metatag" %>
+  <!-- keywords -->
+  <%#= yield :meta %> 
+  <!--<link rel="shortcut icon" href="/favicon.ico" />-->
+
+  
+  <%= stylesheet_link_tag "faxjax", :media => "all" %>
+  <%= stylesheet_link_tag "banner", :media => "all" %>
+  <%= stylesheet_link_tag "style", :media => "all" %>
+    <%= stylesheet_link_tag "how_it_banner", :media => "all" %>
+    <%#= stylesheet_link_tag "style_old", :media => "all" %>
+  <%= stylesheet_link_tag "jquery.mCustomScrollbar", :media => "all" %>
+   
+
+  <%= javascript_include_tag "jquery-1.6.2.min.js" %>
+
+    <%= javascript_include_tag "jquery-1.2.6.js" %>
+  <%= javascript_include_tag "startstop-slider.js" %>
+  <%= javascript_include_tag "jsjquery-1.7.1.min.js" %>
+   <%= javascript_include_tag "how_it_work.js" %>
+   <%= javascript_include_tag "jquery.easing.1.3.js" %>
+    <%= javascript_include_tag "jquery.mousewheel.min.js" %>
+     <%#= javascript_include_tag "jquery.mCustomScrollbar.js" %>
+  
+  <%= javascript_include_tag "optionDisabledSupport" %>
+  
+     <%= javascript_include_tag "jquery-1.3.2.min.js" %>
+    <%= javascript_include_tag "jquery.flow.1.2.js" %>
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+$('#send-message-btn').toggle(function() {
+    $("#send-message").show()
+  }, function() {
+    $("#send-message").hide()
+  });
+
+
+//function for add external link
+
+  $("#modify-urls-link span").click(function(){
+   
+    $(this).parent().hide();
+    $("#listing-urls").show();
+
+  });
+
+   $("#listing-urls span").click(function(){
+     
+    $(this).parent().hide();
+    $("#modify-urls-link").show();
+
+  });
+
+});
+
+$(document).ready(function(){
+	$("#myController").jFlow({
+	slides: "#slides",
+		controller: ".jFlowControl", // must be class, use . sign
+		slideWrapper : "#jFlowSlide", // must be id, use # sign
+		selectedWrapper: "jFlowSelected",  // just pure text, no sign
+		auto: true,
+		easing: 'swing',		//auto change slide, default true
+		width: "530px",
+		height: "235px",
+		duration: 400,
+		prev: ".jFlowPrev", // must be class, use . sign
+		next: ".jFlowNext" // must be class, use . sign
+	});
+});
+</script>
+  <%#= javascript_include_tag :defaults, "ie_bg" %>
+  <!--[if lt IE 8]><%#= javascript_include_tag "optionDisabledSupport" %><![endif]-->
+  <!--[if lte IE 6]><style type="text/css" media="screen">
+  #wrapper { width:expression(((document.compatMode && document.compatMode=='CSS1Compat') ? document.documentElement.clientWidth : document.body.clientWidth) < 771 ? "771px" : "auto"); }
+  </style><![endif]-->
+<!-- Google Analytics
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24788882-1']);
+  _gaq.push(['_trackPageview']);
+ 
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script> -->
+<script type="text/javascript">
+$(document).ready(function() {
+	
+		$(".side_link:first").show();
+		$('.cat_title_plus:first').removeClass().addClass('cat_title_min');
+	
+		$(".cat_title_plus,.cat_title_min").click(function(){
+			
+		if($(this).attr("class") == 'cat_title_plus')
+		{
+			$(".side_link").hide('slow');	
+			$('.cat_title_min').removeClass().addClass('cat_title_plus');
+			$(this).removeClass().addClass('cat_title_min');
+			$(this).next(".side_link").show('slow');
+		}
+		else
+		{
+			$(this).removeClass().addClass('cat_title_plus');
+			$(this).next(".side_link").hide('slow');
+			
+		}
+		
+		
+		});
+	
+});
+</script>
+<script>
+$(window).load(function() {
+	mCustomScrollbars();
+});
+
+function mCustomScrollbars(){
+	/* 
+	malihu custom scrollbar function parameters: 
+	1) scroll type (values: "vertical" or "horizontal")
+	2) scroll easing amount (0 for no easing) 
+	3) scroll easing type 
+	4) extra bottom scrolling space for vertical scroll type only (minimum value: 1)
+	5) scrollbar height/width adjustment (values: "auto" or "fixed")
+	6) mouse-wheel support (values: "yes" or "no")
+	7) scrolling via buttons support (values: "yes" or "no")
+	8) buttons scrolling speed (values: 1-20, 1 being the slowest)
+	*/
+	$("#mcs_container").mCustomScrollbar("vertical",300,"easeOutCirc",1.05,"auto","yes","yes",15); 
+}
+
+/* function to fix the -10000 pixel limit of jquery.animate */
+$.fx.prototype.cur = function(){
+    if ( this.elem[this.prop] != null && (!this.elem.style || this.elem.style[this.prop] == null) ) {
+      return this.elem[ this.prop ];
+    }
+    var r = parseFloat( jQuery.css( this.elem, this.prop ) );
+    return typeof r == 'undefined' ? 0 : r;
+}
+
+/* function to load new content dynamically */
+function LoadNewContent(id,file){
+	$("#"+id+" .customScrollBox .content").load(file,function(){
+		mCustomScrollbars();
+	});
+}
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-24788882-1']);
+  _gaq.push(['_trackPageview']);
+ 
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+</head>
+
+<body>
+<div id="main_container">
+	<div class="header_main">
+    
+    	<div class="logo_main">
+        	<div class="logo"><%= link_to (image_tag "logo.png"), :controller => "/home"  %>
+		<!--<img src="images/logo.png" width="248" height="72" />-->
+		</div>
+        	<div class="logo_right">
+            	<div class="header_link_main">
+		<%= link_to "Obtain a Listing", {:controller => "sign_products", :action => "list"}%>&nbsp;|
+		<% if !logged_in? || (controller_name == 'home' && action_name == 'sign_in') %>
+		    <%= link_to "Sign-in", {:controller => "home", :action => "sign_in"} %>&nbsp;| 
+		    <%= link_to "Register", :controller => "users", :action => "new" %>
+		    <%#= render :partial => '/login_form' %>
+						<% elsif logged_in? %>
+						  <nobr>
+						    <% if admin? %>
+						      Administrator
+						    <% elsif user? %>
+						      <%= active_user.first_name %>
+						    <% end %>
+						  </nobr>
+					(<%= link_to "Sign out", :controller => 'home', :action => 'sign_out' %>)
+                                       <% end %>|&nbsp;<%= link_to "About", {:controller => "home", :action => "about"} %><%#= link_to "Manage My Ads", {:controller => "help_topics"} %></li>
+		<!--<a href="">Creating a Listing </a>|<a href="">Sign-in</a>|<a href="">Manage My Ads</a> -->
+                 </div>
+                 <div class="search_main">
+                 	<div class="left_bg"></div>
+			<%= form_tag({:controller => "listings", :action => "list"}, {:id => "form"}) do %>
+			  <%= text_field_tag "keywords", nil, { :size => 15, :maxlength => 64, :id => "search" } %>
+			  <%= submit_tag "", {:id => "submit"} %>
+			<% end %>
+                 	<!--<form name="form" action="">
+                    <input type="text" name="search"  />
+                    <input type="submit" value=" " name="submit" />                    
+                    </form>-->
+                    <div class="clear"></div>
+                    
+                 </div>
+                 
+            
+            </div>
+            <div class="clear"></div>
+        </div>
+        
+        <div class="menu_main">
+        	<div class="menu_left_bg"></div>
+            <div class="menu_mid_bg">
+	    <% if user? %>
+            	<ul class="expertise_mainmenu">
+		    <li><%= link_to "Home", {:controller => "home", :action => "index"} %></li>
+			    <li><%= link_to "Listings", {:controller => "listings"} %>
+			    <ul class="expertise_submenu">
+				<%= side_link_to "Add a Listing",{:controller => "basic_listings", :action => "add" } %>
+				<%= side_link_to "Activate a Listing", {:controller => "signs", :action => "activate" } %>
+				<%= side_link_to "Your Signs", {:controller => "signs", :action => "list" } %>
+				<%= side_link_to "Your Listings", {:controller => "listings", :action => "list", :id => "yours" } %>
+				<%= side_link_to "Your Account", {:controller => "users", :action => "edit" } %>
+			    </ul>
+			    </li>
+		    <li><%= link_to "How It Works", {:controller => "home", :action => "how_it_works"} %></li>
+		    <%= side_link_to "Activate", {:controller => "signs", :action => "activate" } %>
+		    <li><%= link_to "Help", {:controller => "help_topics"} %></li>
+			    <li><a href="">Messages</a><%#= link_to "Messages", {:controller => "listings"} %>
+			    <ul class="expertise_submenu">
+				    <% if active_user.unread_messages.empty? %>
+				    <%= side_link_to "Inbox", {:controller => "messages", :action => "inbox"} %>
+				    <% else %>
+				    <%= side_link_to "<strong>Inbox ("+active_user.unread_messages.length.to_s+")</strong>", {:controller => "messages", :action => "inbox"} %>
+				    <% end %>
+				    <%= side_link_to "Sent", {:controller => "messages", :action => "sent"} %>
+			    </ul>
+			    </li>
+		   <div class="clear"></div>
+                </ul>    
+		
+		<%else%>
+		<ul class="expertise_mainmenu_default">
+		    <li><%= link_to "Home", {:controller => "home", :action => "index"} %></li>
+			    <li><%= link_to "Listings", {:controller => "listings"} %>
+			    <ul class="expertise_submenu">
+				<%= side_link_to "Add a Listing", {:controller => "basic_listings", :action => "add" } %>
+				<%= side_link_to "Activate a Listing", {:controller => "signs", :action => "activate" } %>
+				<%= side_link_to "Your Signs", {:controller => "signs", :action => "list" } %>
+				<%= side_link_to "Your Listings", {:controller => "listings", :action => "list", :id => "yours" } %>
+				<%= side_link_to "Your Account", {:controller => "users", :action => "edit" } %>
+			    </ul>
+			    </li>
+		    <li><%= link_to "How It Works", {:controller => "home", :action => "how_it_works"} %></li>
+		    <%= side_link_to "Activate", {:controller => "signs", :action => "activate" } %>
+		    <li><%= link_to "Help", {:controller => "help_topics"} %></li>
+		   <div class="clear"></div>
+                </ul>    
+             <%end%>		
+            </div>            
+            <div class="menu_right_bg"></div>
+        	<div class="clear"></div>
+        </div>
+    
+    </div>
+    
+    <div class="body_main_contain">
+    
+          <div class="side_bar_main">
+                    <div class="topic_main"><h1>Advertising Categories</h1></div>
+                    
+                    <div id="mcs_container">
+						<div class="customScrollBox">
+                        
+							<div class="container">
+    							<div class="content">
+							<%= render :partial => "/side" %>
+                                    
+                                </div>
+                        	   </div>
+                               
+                        <div class="dragger_container">
+                            <div class="dragger"></div>
+                        </div>
+                        
+                    </div>
+                    <a href="#" class="scrollUpBtn"></a> <a href="#" class="scrollDownBtn"></a>
+                     </div>
+                    
+                    <div class="topic_main"><h1>Videos</h1></div>
+                    <% if admin? %>
+                     <div class="topic_main"><%= link_to "Add Videos" ,:controller => "videos",:action => "new" %></div>
+                     <div class="topic_main"><%= link_to "Delete Videos" ,:controller => "videos",:action => "index" %></div>
+
+                    <% end %>
+                     <ul class="video_link ">
+		            <%= render :partial => '/video' %>
+		                           <!--<li><a href="">Video1</a></li>
+                      <li><a href="">Video2</a></li>
+                      <li><a href="">Video3</a></li>
+                      <li><a href="">Video4</a></li>   -->      
+                    </ul>
+                     <div class="topic_main" ><h1>Company</h1></div>
+                     <ul class="company_link" >
+		     <li ><%= link_to "Company Details", {:controller => "home", :action => "company1"} %></li>
+		   <!--  <li><%#= link_to "Company Details", {:controller => "home", :action => "company2"} %></li>-->
+                      <!--<li><a href="">Link1</a></li>
+                      <li><a href="">Link2</a></li>
+                      <li><a href="">Link3</a></li>
+                      <li><a href="">Link4</a></li> -->    
+                    </ul>
+                      <% if active_user %>
+                    <div class="topic_main" ><h1>Messages</h1></div>
+                    <ul class="company_link" >
+                  
+                  <% if active_user.unread_messages.empty? %>
+                    <%= side_link_to "Inbox", {:controller => "messages", :action => "inbox"} %>
+                  <% else %>
+                    <%= side_link_to "<strong>Inbox ("+active_user.unread_messages.length.to_s+")</strong>", {:controller => "messages", :action => "inbox"} %>
+                  <% end %>
+                  <%= side_link_to "Sent", {:controller => "messages", :action => "sent"} %>
+                </ul>
+                <% end %>
+
+		     <div class="createlist"><%= link_to "CREATE A LISTING",:controller=>"basic_listings", :action => "add" %></div><br/>
+		     
+        
+              </div> <!-- Side bar End -->
+              
+        <div class="body_main">
+	
+   <% if @breadcrumbs.length > 1 %>
+      <div id="breadcrumbs">
+        <%= render :partial => "/breadcrumb", :collection => @breadcrumbs %>
+      </div>
+      <% end %>
+       <h1><%= @title %></h1>
+      <%= render_flash [:warning, :info, :notice] %>
+      <%= yield %>
+        	 <!--<div class="pro_banner_main">
+            	<div class="pro_banner_bg">
+                
+                <div id="slider">
+
+               <div id="mover">
+            
+                   <div id="slide-1" class="slide">
+                    <span class="rightalign">
+                        <h1>Garden Rack</h1>
+                        
+                        <p>Donec gravida posuere arcu. Nulla facilisi. Phasellus imperdiet. Vestibulum at metus. Integer euismod. Nullam placerat rhoncus sapien. Ut euismod. Praesent libero. Morbi pellentesque libero sit amet ante. Maecenas tellus.</p>					
+                        </span>
+                        <a href="#"><img src="images/slide-1-image.png" alt="learn more" /></a>
+    
+                    </div>
+                    
+                    <div class="slide">
+                        <span class="rightalign">
+                        <h1>Tulip Bulbs</h1>
+                        <p>Donec gravida posuere arcu. Nulla facilisi. Phasellus imperdiet. Vestibulum at metus. Integer euismod. Nullam placerat rhoncus sapien. Ut euismod. Praesent libero. Morbi pellentesque libero sit amet ante. Maecenas tellus.</p>					
+                        </span>
+                        
+                        <a href="#"><img src="images/slide-2-image.png" alt="learn more" /></a>
+    
+                    </div>
+                    
+                    <div class="slide">
+                        <span class="rightalign">
+                        <h1>Garden Gloves</h1>
+                        <p>Donec gravida posuere arcu. Nulla facilisi. Phasellus imperdiet. Vestibulum at metus. Integer euismod. Nullam placerat rhoncus sapien. Ut euismod. Praesent libero. Morbi pellentesque libero sit amet ante. Maecenas tellus.</p>
+                        </span>
+                        <a href="#"><img src="images/slide-3-image.png" alt="learn more" /></a>
+                        
+                    </div>
+                
+                </div>
+		
+				</div>	
+                
+                </div>            
+            	
+                </div>-->
+            
+        
+        </div>
+        <div class="clear"></div>  
+    </div> <!-- Body Main End -->
+        
+    
+	<div class="footer_main_contain">
+    	<div class="footer_top_main">
+        	<div class="foo_left-bg"></div>
+            <div class="foo_mid-bg">
+<div class="search_list_main">
+                	<h1>SEARCH IN LISTINGS</h1>
+                	<%= form_tag :controller => "listings", :action => "search" do %>
+                    <!--<form name="form1" action="">-->
+                    <span>Sign code</span> 
+		    <%= text_field_tag "code", nil, { :size => 6, :maxlength => 5, :class => "sign-code" } %>
+                    <!-- <input type="text" name="code" />-->
+                <%= submit_tag "Go" , {:class => "submit"} %>
+                <% end %>
+                    <br />
+    <%= form_tag :controller => "listings", :action => "search" do %>
+
+                    <span> or Keyword </span>
+		    <%= text_field_tag "keywords", nil, { :size => 15, :maxlength => 255 } %>
+                      <!-- <input type="text" name="keyword" />-->
+		     <%= submit_tag "Go" , {:class => "submit"} %>
+                     <!--  <input type="submit" value="Go" />-->
+                    <!--</form>-->
+		    <% end %>
+                </div>
+                
+<div class="foo_sign_main">
+                	<h1>ACTIVATE YOUR SIGN</h1>
+                	
+		    <%= form_tag :controller => "signs", :action => "activate" do %>
+
+                   <!-- <form name="form1" action="">
+                    
+                     <input type="text" name="code" />-->
+		     <%= text_field_tag "code", nil, { :size => 6, :maxlength => 5, :class => "sign-code" } %>
+                     <span>Sign code</span> <br />
+                     <!--<input type="text" name="keyword" class="pin" />
+                     <input type="text" name="keyword" class="pin" />
+                     <input type="text" name="keyword" class="pin" />-->
+		     <%= text_field_tag "key1", nil, { :size => 3, :maxlength => 4, :onkeyup => "handlePINKeyUp(event, this, 1);",:class=>"pin" } %>
+            <%= text_field_tag "key2", nil, { :size => 3, :maxlength => 4, :onkeyup => "handlePINKeyUp(event, this, 2);" ,:class=>"pin"} %>
+            <%= text_field_tag "key3", nil, { :size => 3, :maxlength => 4,:class=>"pin" } %>
+                      <span> Pin # </span><br />
+<%= submit_tag "Activate", {:class => "submit"} %>
+                     <!--<input type="submit" value="Go" />
+                    </form>-->
+		    <% end %>
+                </div>
+                
+            
+            	<div class="clear"></div>
+    </div>
+        	<div class="foo_right-bg"></div>
+            <div class="clear"></div>
+            
+            
+    </div>
+        
+  	<div class="foo_call_main"> 1-855-5-FAXJAX </div>
+        <div class="foo_social_main"> <a href="https://twitter.com/#!/faxjax/" target="_blank"><img src="/images/face_icon.png" width="27" height="24" /></a> <a href="https://twitter.com/#!/faxjax/" target="_blank"><img src="/images/twitter_icon.png" width="27" height="24" /></a><a href="https://profiles.google.com/114642389032406139124/edit?np=1&hl=en#114642389032406139124/about/edit/d" target="_blank"> <img src="/images/share_icon.png" width="26" height="24" /></a></div>
+    
+    </div> <!-- Footer End -->
+
+</div>
 
 </body>
 </html>

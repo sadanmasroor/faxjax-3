@@ -1,0 +1,105 @@
+<%
+  # Show address details if any of the personal fields are filled in
+  @show_all_user_details = false
+  [:address, :address2, :city, :state, :zip].each do |attr|
+    @show_all_user_details = true if !@user.attributes[attr.to_s].nil? && !@user.attributes[attr.to_s].to_s.empty?
+  end
+%>
+
+<%= hidden_field_tag :id, @user.id %>
+
+<div>[&nbsp;<a style="color:red">*</a>&nbsp; Mandatory Fields&nbsp;]<br/><br/>
+  <label for="user_name">Username: <%= required_if_empty(@user.id).html_safe %></label>
+  <% if !@user.id.nil? %>
+    <%= h @user.name %>
+  <% else %>
+    <%= text_field :user, :name, :size=>25 %>
+  <% end %>
+</div>
+<% if !@user.id.nil? %>
+<div id="modify-password-link">
+  <%= link_to "Reset password", :controller => "home", 
+  :action => "forgot_password"  %>
+</div>
+<% else %>
+  <%= render :partial => "password_fields" %>
+<% end %>
+
+<div>
+  <label for="user_name">First Name: <%= required_if_empty(@user.id).html_safe %></label>
+  <%= text_field :user, :first_name, :size=>25 %>
+</div>
+
+<div>
+  <label for="user_name">Last Name: </label>
+  <%= text_field :user, :last_name, :size=>25 %>
+</div>
+
+<div>
+  <label for="user_name">Email: <%= required_if_empty(@user.id).html_safe %></label>
+  <%= text_field :user, :email, :size=>25 %>
+</div>
+
+<% if !@show_all_user_details %>
+
+<div id="register-details-link">
+  <em> All information will be <%= link_to "kept strictly confidential", :controller => "home", :action => "privacy" %> and will not under any circumstances be used by anyone other than Faxjax.com, Inc.</em>
+</div>
+
+
+  <%#= link_to_function "Cancel, do not provide more information", 
+      "new Effect.Appear('register-details-link', {duration: .5});
+       self.setTimeout('$(\\'register-details\\').toggle()', 50);
+       Field.clear('user_address', 'user_address2', 'user_city', 'user_state', 'user_zip');" %>
+<% end %>
+  <div>
+    <label for="address">Address:</label>
+    <%= text_field :user, :address, :size=>25 %>
+  </div>
+  <div>
+    <label for="address2">&nbsp;</label>
+    <%= text_field :user, :address2, :size=>25 %>
+  </div>
+  <div>
+    <label for="city">City:</label>
+    <%= text_field :user, :city, :size=>25%>
+  </div>
+  <div>
+    <label for="state">State:</label>
+    <select id="user_state" name="user[state]">
+    <option value=""></option>
+    <%= state_abbrev_options_for_select(@user.state) %>
+    </select>    
+  </div>
+  <div>
+    <label for="zip">Zip:</label>
+    <%= text_field :user, :zip, {:size=>25, :maxlength=>5}%>
+  </div>
+<% if !@show_all_user_details %>
+
+<% end %>
+
+<h3>Preferences</h3>
+<% fields_for :user_prefs, @user.user_prefs do |user_prefs_fields| %>
+  <div>
+    <%= user_prefs_fields.check_box :send_promotions  %> It's ok for Faxjax to send me valuable deals and information 
+  </div>
+  <div>
+    <%= user_prefs_fields.check_box :notify_on_message_received %> Notify me by email when I receive a message
+  </div>
+<% end %>
+
+<% if @user.id.nil? %>
+  <div>
+    <br/>
+    <%= check_box :user, :has_read_tos %> I have read and agree to the <%= link_to "terms of service", {:controller => "home", :action => "tos"}, {:target => "_blank"} %>
+  </div>
+<% end %>
+<br/>
+<% if @user.id.nil? %>
+  <%= submit_tag "Create Account", {:class => "submit"} %>
+<% else %>
+  <%= submit_tag "Save Changes", {:class => "submit"} %>
+<% end %>
+<%= submit_tag "Cancel", {:class => "submit"} %>
+

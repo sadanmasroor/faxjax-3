@@ -1,0 +1,11 @@
+<h3><br/><%= h @help_topic.title %></h3>
+<br/>
+<p>
+  <%= simple_format(@help_topic.content) %>
+</p><br/>
+
+<% if admin? %>
+  <%= link_to 'Edit', :action => 'edit', :id => @help_topic %> |
+<% end %>
+<%= link_to 'Back', :action => 'list' %>
+

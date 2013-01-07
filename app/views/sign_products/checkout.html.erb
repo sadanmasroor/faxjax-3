@@ -1,0 +1,30 @@
+<%
+  cart = session[:cart]
+  if !cart.nil? && !cart.sign_products.nil? && !cart.sign_products.empty?
+%>
+  <h3>Your Cart - <%=cart.sign_products.length%> items</h3>
+  <ul>
+  <% cart.sign_products.each_pair do |sign_product_id, sign_product| %>
+    <li style="font-size: 10px;"><%= sign_product.title_string%> <%=link_to "remove", {:controller => "sign_products", :action => "remove_from_cart", :id => sign_product_id, :type => params[:type]}, {:style => "display: inline;"} %> </li>
+  <% end %>
+  </ul>
+  
+  <form action="<%= url_for :controller => "sign_products", :action => 'checkout' %>" method="post">
+    <p>
+    <label for="promo_code">Promo Code</label>
+    <input type="text" name="promo_code" size="8" maxlength="5" />
+    </o>
+    <p>
+    <% params.each do |key, val| %>
+      <input type="hidden" name="<%= h(key) %>" value="<%= h(val) %>" />
+    <% end %>
+    <input type="submit" class="green" value="Checkout &raquo;">
+    </p>
+  </form>
+  <!-- REMOVEME -->
+<!-- 
+  <input type="button" class="green" value="Checkout &raquo;" style="margin-top: 3px;" onclick="javascript:go('<%=url_for :controller => "sign_products", :action => "checkout"%>');"/>
+-->
+<%
+  end
+%>

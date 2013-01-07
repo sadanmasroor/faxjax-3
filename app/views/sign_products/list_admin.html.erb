@@ -1,0 +1,34 @@
+<br/><% if admin? %>
+  <table>
+    <tr class="trh">
+      <th width="100">Type</th>
+      <th>Title</th>
+      <th width="100">Duration</th>
+      <th width="100">Action</th>
+    </tr>
+  
+  <% for sign_product in @sign_products %>
+    <tr class="<%= cycle("tr1", "tr2") %>">
+      <td><%= sign_product.sign_type %></td>
+      <td><%= link_to sign_product.title, :action => "edit", :id => sign_product.id %></td>
+      <td><%= sign_product.sign_duration %> days</td>
+      <td align="center">
+        <!--<%= link_to image_tag("view-listing.gif", :size => "24x24", :border => 0, :alt => "Show", :title => "Show"), :action => "show", :id => sign_product %>-->
+        <%= link_to image_tag("add-listing.gif", :size => "24x24", :border => 0, :alt => "Add to Cart", :title => "Add to Cart"), :action => "add_to_cart", :id => sign_product %>
+        <%= link_to image_tag("edit-listing.gif", :size => "24x24", :border => 0, :alt => "Edit", :title => "Edit"), :action => "edit", :id => sign_product %>
+        <%= link_to image_tag("delete.gif", :size => "24x24", :border => 0, :alt => "Delete", :title => "Delete"), {:action => "delete", :id => sign_product}, :confirm => 'Are you sure?', :post => true %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+  
+  <br />
+  
+  <%= link_to 'New Sign Product', :action => 'new' %>
+<% else %>
+  <ul>
+    <% for sign_product in @sign_products %>
+      <li><%= link_to sign_product.title, :action => "show", :id => sign_product.id %></li>
+    <% end %>
+  </ul>
+<% end %>

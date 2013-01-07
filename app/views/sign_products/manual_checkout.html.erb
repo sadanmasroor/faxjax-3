@@ -1,0 +1,43 @@
+<% form_tag :action => 'purchase_complete' do %>
+  <div>
+    <label for="address_name">Name:</label>
+    <%= text_field_tag :address_name %>
+  </div>
+  <div>
+    <label for="address_street">Street:</label>
+    <%= text_field_tag :address_street %>
+  </div>
+  <div>
+    <label for="address_city">City:</label>
+    <%= text_field_tag :address_city %>
+  </div>
+  <div>
+    <label for="address_state">State:</label>
+    <%= text_field_tag :address_state %>
+  </div>
+  <div>
+    <label for="address_zip">Zip:</label>
+    <%= text_field_tag :address_zip %>
+  </div>
+  <div>
+    <label for="payer_email">Email:</label>
+    <%= text_field_tag :payer_email %>
+  </div>
+  <%= hidden_field_tag :verify_sign, true %>
+  <%
+    cart = session[:cart]
+    payment_gross = 0
+    cart.sign_products.each_pair do |key, sign_product|
+      payment_gross = payment_gross + sign_product.price if !sign_product.price.nil?
+      payment_gross = payment_gross + sign_product.shipping_price if !sign_product.shipping_price.nil?
+    end
+    
+    payment_gross = fmt_price(payment_gross)[1..-1]
+  %>
+  <div>
+    <label for="payment_total">Payment Total:</label>
+    $<%= payment_gross %>
+  </div>
+  <%= hidden_field_tag :payment_gross, payment_gross %>
+  <%= submit_tag "Checkout" %>
+<% end %>

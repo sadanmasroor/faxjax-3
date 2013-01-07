@@ -1,0 +1,21 @@
+<table cellspacing="0">
+  <tr class="trh">
+    <th width="50">Photo</th>
+    <th>Name</th>
+    <th>Sign Code</th>
+    <% if show_inactive %>
+    <th width="100">Expires in</th>
+    <% end %>
+    <th width="75">Price</th>
+    <% if params[:id] == "yours" || admin?%>
+    <th width="75">Action</th>
+    <% end %>
+  </tr>
+  <% if !@listings.nil? && !@listings.empty? %>
+    <%= render :partial => "/listings/listing", :collection => @listings %>
+    </table>
+  <% else %>
+    </table>
+    <p class="empty_list">No listings found under this category.</p>
+  <% end %>
+

@@ -1,0 +1,24 @@
+<%= render_paginator_controls @vendor_pages %>
+<table cellspacing="0">
+  <tr class="trh">
+    <th>Name</th>
+    <th>Contact Name</th>
+    <th>Contact Email</th>
+    <th width="100">Action</th>
+  </tr>
+  
+<% for vendor in @vendors %>
+  <tr class="<%= cycle("tr1", "tr2") %>">
+    <td><%=h vendor.name %></td>
+    <td><%=h vendor.contact_first_name %> <%=h vendor.contact_last_name %></td>
+    <td><a href="mailto:<%=h vendor.contact_email %>"><%=h vendor.contact_email %></a></td>
+    <td align="center">
+        <%= link_to image_tag("view-listing.gif", :size => "24x24", :border => 0, :alt => "Show", :title => "Show"), :action => "show", :id => vendor %>
+        <%= link_to image_tag("edit-listing.gif", :size => "24x24", :border => 0, :alt => "Edit", :title => "Edit"), :action => "edit", :id => vendor %>
+        <%= link_to image_tag("delete.gif", :size => "24x24", :border => 0, :alt => "Delete", :title => "Delete"), {:action => "destroy", :id => vendor}, :confirm => 'Are you sure you want to delete this vendor?', :post => true %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+

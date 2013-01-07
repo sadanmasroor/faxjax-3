@@ -1,0 +1,48 @@
+<table width="100%" class="details">
+<tr>
+<td valign="top">
+  <table width="100%">
+    <tr>
+    <td class="label">Code:</td>
+    <td><strong><%= h @sign.code %></strong></td>
+    </tr>
+    <tr>
+    <tr>
+    <td class="label">Type:</td>
+    <td><strong><%= h @sign.type_string %></strong></td>
+    </tr>
+    <tr>
+    <td class="label">Duration:</td>
+    <td><strong><% if !@sign.duration.nil? %><%= h @sign.duration %> days<% end %></strong></td>
+    </tr>
+    <tr>
+    <td class="label">Activated on:</td>
+    <td>
+      <strong><%= fmt_date(@sign.activated_on) %></strong>
+    </td>
+    </tr>
+    <tr>
+    <td class="label">Expires on:</td>
+    <td>
+      <% if @sign.expires_on > Time.now %>
+        <strong><%= fmt_date(@sign.expires_on) %></strong> (<%= TimeFunc::days_from_now_as_string(@sign.expires_on) %>)
+      <% else %>
+        Expired
+      <% end %>
+    </td>
+    </tr>
+    <% if !@sign.listing.nil? %>
+    <tr>
+    <td class="label">Listing:</td>
+    <td><strong><%= link_to (@sign.listing.name[0..50], :controller => "listings", :action => "show", :id => @sign.listing.id) %></strong></td>
+    </tr>
+    <% end %>
+ 
+  </table>
+  <p>
+    <%= link_to "Add a listing &raquo;", :controller => 'listings', :action => 'add_step1' %>
+  </p>
+</td>
+</tr>
+</table>
+

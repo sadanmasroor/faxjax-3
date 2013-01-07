@@ -1,0 +1,38 @@
+<%
+  cart = session[:cart]
+  
+  if !cart.nil? && !cart.sign_products.nil? && !cart.sign_products.empty?
+    payment_gross = 0
+    cart.sign_products.each_pair do |key, sign_product|
+      payment_gross = payment_gross + sign_product.price if !sign_product.price.nil?
+    end
+  
+%>
+  <h3>Your Cart -  <span id="sidecart-count"><%= cart.count_str -%></span></h3>
+
+<% if admin? %>
+  <form action="/sign_products/manual_checkout" method="post">
+<% else %>
+  <!-- <%= PAYPAL_POST_URL %> method =>'post' " -->
+  <form action="<%= url_for :controller => 'sign_products', :action => 'paypal_checkout' %>" method="get">
+<% end %>
+    <ul>
+    <% 
+    cart.sign_products.each_pair do |sign_product_id, sign_product|
+    %>
+      
+      <li style="font-size: 12px;"><%= sign_product.title_string%> - <%= sign_product.price_alt %> <%=link_to "remove", {:controller => "sign_products", :action => "remove_from_cart", :id => sign_product_id, :type => params[:type]}, {:style => "display: inline;color:blue;"} %> </li>
+    <% end %>
+    </ul>
+    Total: <strong id="cart-total"><%= cart.total_alt  -%></strong><span style="color: blue;" ><span>&nbsp&nbsp</span><%=link_to "EmptyCart", :controller => "sign_products", :action => "clear_cart" %></span>
+  
+
+    <% if admin? %>
+      <input type="submit" class="green" value="Manual Checkout" style="margin-top: 3px; font-size: 12px; width: 152px;" />
+    <% else %> <!-- "PayPal Checkout" -->
+      <input type="submit" class="green" value="Checkout" style="margin-top: 3px; font-size: 12px; width: 152px;" />
+    <% end %>
+  </form>
+<%
+  end
+%>

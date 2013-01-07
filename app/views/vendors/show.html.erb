@@ -1,0 +1,6 @@
+<% for column in Vendor.content_columns %>
+<% next if column.name == "password" || column.name == "username" %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @vendor.send(column.name) %>
+</p>
+<% end %>

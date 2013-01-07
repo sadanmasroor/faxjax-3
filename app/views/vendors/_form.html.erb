@@ -1,0 +1,52 @@
+<%= error_messages_for 'vendor' %>
+
+<!--[form:vendor]-->
+<div><label for="vendor_name">Vendor Name</label>
+<%= text_field 'vendor', 'name'  %></div>
+
+<!--<div><label for="vendor_username">Username</label>
+<%= text_field 'vendor', 'username'  %></div>
+
+<div><label for="vendor_password">Password</label>
+<%= password_field 'vendor', 'password'  %></div>-->
+
+<div><label for="vendor_contact_first_name">First name</label>
+<%= text_field 'vendor', 'contact_first_name'  %></div>
+
+<div><label for="vendor_contact_last_name">Last name</label>
+<%= text_field 'vendor', 'contact_last_name'  %></div>
+
+<div><label for="vendor_contact_email">Email</label>
+<%= text_field 'vendor', 'contact_email'  %></div>
+
+<div><label for="vendor_address">Address</label>
+<%= text_field 'vendor', 'address'  %></div>
+
+<div><label for="vendor_address2">Address2</label>
+<%= text_field 'vendor', 'address2'  %></div>
+
+<div><label for="vendor_city">City</label>
+<%= text_field 'vendor', 'city'  %></div>
+
+<div><label for="vendor_state">State</label>
+<%= text_field 'vendor', 'state'  %></div>
+
+<div><label for="vendor_zip">Zip</label>
+<%= text_field 'vendor', 'zip'  %></div>
+
+<div><label for="vendor_phone">Phone</label>
+<%= text_field 'vendor', 'phone'  %></div>
+
+<div><label for="vendor_url">Website</label>
+<%= text_field 'vendor', 'url'  %></div>
+
+<% if @vendor.id.nil? %>
+  <%= submit_tag "Create Vendor", {:class => "submit"} %>
+<% else %>
+  <%= submit_tag "Save Changes", {:class => "submit"} %>
+<% end %>
+<%= submit_tag "Cancel", {:class => "submit"} %>
+
+<!--[eoform:vendor]-->
+
+

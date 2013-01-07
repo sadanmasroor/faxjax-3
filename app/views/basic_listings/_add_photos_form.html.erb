@@ -1,0 +1,34 @@
+<% form_tag( {:action => "add_photos"}, {:multipart => true}) do %>
+
+  <%= hidden_field_tag :id, params[:id] %>
+  <p>
+    <label for="listing_caption">Listing Caption:</label>
+    <strong><%= h @listing.name %></strong>
+  </p>
+  <p class="listing-photo-field">
+    <label for="photo1">Photo 1:</label>
+    <%= file_field_tag "photo1" %>
+  </p>
+  <p class="listing-photo-field">
+    <label for="photo2">Photo 2:</label>
+    <%= file_field_tag "photo2" %>
+  </p>
+  <p class="listing-photo-field">
+    <label for="photo3">Photo 3:</label>
+    <%= file_field_tag "photo3" %>
+  </p>
+  <p class="listing-photo-field">
+    <label for="photo4">Photo 4:</label>
+    <%= file_field_tag "photo4" %>
+  </p>
+  
+  <div id="file-upload-times">
+    <strong>A 500kb photo upload will take about</strong><br/>
+    ...75 seconds over dialup<br/>
+    ...12 seconds over DSL<br/>
+    ...5 second over Cable
+  </div>
+  <%= submit_tag "Continue", {:class => "submit"} %>
+  <%= submit_tag "Cancel", {:class => "submit"} %>
+<% end %>
+

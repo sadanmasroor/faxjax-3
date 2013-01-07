@@ -1,0 +1,11 @@
+<%= if breadcrumb_counter != @breadcrumbs.length-1
+      link_to truncate(breadcrumb.name, 40, "..."), {
+        :controller => breadcrumb.controller, 
+        :action => breadcrumb.action, 
+        :id => breadcrumb.id
+        }
+    elsif breadcrumb_counter == @breadcrumbs.length-1
+      "<span id=\"active-breadcrumb\">"+truncate(breadcrumb.name, 40, "...")+"</span>"
+    end
+%>
+<%= "&gt;" unless breadcrumb_counter == @breadcrumbs.length-1 %>

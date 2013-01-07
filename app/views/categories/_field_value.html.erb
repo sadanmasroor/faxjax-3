@@ -1,0 +1,16 @@
+<tr class="<%= cycle("tr1", "tr2") %>">
+  <td>
+    <%= field_value.value %>
+  </td>
+  <td>
+    <%= link_to image_tag("edit-listing.gif", :size => "24x24", :border => 0, :alt => "Edit field value", :title => "Edit field value"), 
+    :action => "edit_field_values", 
+    :id => field_value.id  %><%= link_to image_tag("delete.gif", :size => "24x24", :border => 0, :alt => "Delete field value", :title => "Delete field value"), {
+      :action => "delete_field_value",
+      :id => field_value.id 
+    }, {
+      :onclick => "return confirm('Are you sure you want to delete this field value?\\n\\nNOTE: Once a field value is deleted it is gone forever.');"
+    }
+    %>
+  </td>
+</tr>

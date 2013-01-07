@@ -1,0 +1,142 @@
+<% action = @listing.id.nil? ? "save" : "update" %>
+<% form_for :listing, @listing, :url => {:action => action} do |form| %>
+  <%= form.hidden_field :id %>
+  <div>
+    <label for="listing_category_id">Category:</label>
+    <%= form.hidden_field :category_id %>
+    <strong><%= @category.name %></strong>
+  </div>
+
+  <% if !admin? %>
+    <% if @listing.id.nil? %>
+      <div>
+        <label for="listing_sign_id">Sign to use:</label>
+        <%= collection_select('listing', 'sign_id', @signs, 'id', 'code_and_expire') %>
+      </div>
+    <% else %>
+      <div>
+        <label for="listing_sign_id">Sign to use:</label>
+        <%= collection_select('listing', 'sign_id', @signs, 'id', 'code_and_expire') %>
+        <% if @listing.canceled?%>
+          <br/>
+          <label>&nbsp;</label>
+          <em>Choose a sign to reactivate this listing</em>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %><!-- in admin -->
+    <div>
+      <label for="listing_sign_id">User:</label>
+      <%= !@listing.user.nil? ? @listing.user.name : "N/A" %>
+    </div>
+    <div>         <!--  !@listing.sign.nil? ?  : "N/A"    -->
+      <label for="listing_sign_id">Sign code:</label>
+      <%= form.text_field :sign_code, :size => 6 %>
+    </div>
+  <% end %>
+
+  <div>
+    <label for="listing_name">Caption:<span class="required">*</span></label>
+    <%= form.text_field :name, :size=>40 %>
+  </div>
+  <div>
+    <label for="listing_description">Description:<span class="required">*</span></label>
+    <%= form.text_area :description, :cols => 40, :rows => 5 %>
+  </div>
+
+   <div>
+    <% if admin? %>
+    <label for="listing_featured">Featured:<span class="required">*</span></label>
+    <%= form.check_box :featured  %>
+    <% end %>
+  </div>
+
+  <%
+    # Get all non excluded fields to make sure that the fields within each field group
+    # are showable fields
+    non_excluded_fields = @category.all_non_excluded_fields
+    nef_hash = {}
+    non_excluded_fields.each do |field|
+      nef_hash[field.id] = true
+    end
+  %>
+  <% @listing.field_groups.each do |field_group| %>
+    <%
+      # run through the fields to make sure at least one of them is non excluded
+      # if all are excluded, break out
+      cont = true
+      field_group.fields.each do |field|
+        if nef_hash[field.id] == true
+          cont = false
+          break
+        end
+      end
+      if cont
+        next
+      end
+    %>
+    <% if field_group.id != -1 %><fieldset><legend><%= field_group.name %></legend><% end %>
+    <% field_group.fields.each do |field| %>
+    <%
+      next if nef_hash[field.id] != true # If the field isn't in the non-excluded-fields list, don't show it
+      field_html = field.render_html(request)
+      next if field_html.nil? or field_html.empty?
+    %>
+    <div style="clear: both;">
+      <label for="field_<%= field.id %>"><%= field.name %>:&nbsp;<% if field.required %><span class="required">*</span><% end %></label>
+      <%= field_html %>
+    </div>
+    <% end %>
+    <% if field_group.id != -1 %></fieldset><% end %>
+  <% end %>
+
+  <div>
+    <label for="listing_name">City:</label>
+    <%= form.text_field :city, :size=>40 %>
+  </div>
+  <div>
+    <label for="listing_name">State:</label>
+    <select id="listing_state" name="listing[state]">
+    <option value=""></option>
+    <%= state_abbrev_options_for_select((@listing.state.nil? || @listing.state.empty?) && !active_user.nil? ? active_user.state : @listing.state) %>
+    </select>
+  </div>
+  <div>
+    <label for="listing_price">Price:<span class="required">*</span></label>
+    <%= form.text_field :price_alt, {:size=>8, :maxlength=>13} %>
+    <%= form.check_box :negotiable %> Or best offer
+  </div>
+
+  <% if (@listing.url_1.nil? || @listing.url_1.empty?) && (@listing.url_2.nil? || @listing.url_2.empty?) %>
+  <div id="modify-urls-link">
+    <span>Add links to external websites</span>
+  </div>
+  <% end %>
+  <div id="listing-urls"
+   <%= 'style="display: none;"' if (@listing.url_1.nil? || @listing.url_1.empty?) && (@listing.url_2.nil? || @listing.url_2.empty?) %>
+  >
+    <span> Cancel, do not add links to external websites</span>
+
+    <div>
+      <label for="listing_url_1">External Link 1:</label>
+      <%= form.text_field :url_1, :size=>40 %><br/>
+    </div>
+    <div>
+      <label for="listing_url_2"wa>External Link 2:</label>
+      <%= form.text_field :url_2, :size=>40 %>
+    </div>
+  </div>
+
+  <div>
+  <% if @listing.id.nil? %>
+    <%= check_box_tag :add_photos, true, params[:add_photos].nil? && request.post? ? false : true %> Add photos to this listing
+  <% else %>
+    <%= check_box_tag :update_photos, true, params[:add_photos].nil? ? false : true %> Update listing photos
+  <% end %>
+  </div>
+
+  <%= submit_tag "Save & Continue", {:class => "submit"} %>
+  <%= submit_tag "Cancel", {:class => "submit"} %>
+
+<% end %>
+

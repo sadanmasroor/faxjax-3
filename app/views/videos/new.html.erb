@@ -1,0 +1,7 @@
+<%form_tag  :action => 'create' do-%><%#= form_tag @video,:url=>{:action=>"create", :controller=>"videos"} %><br/><br/>
+    <label>Title</label>
+    <%= text_field_tag :title %><br/><br/>
+    <label>Embed Code</label>
+    <%= text_field_tag :embed_code %><br/><br/>
+    <%= submit_tag "Add Video" %>
+<%end%>

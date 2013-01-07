@@ -1,0 +1,32 @@
+<% if admin? %>
+  <br/><table>
+    <tr class="trh">
+      <th>Title</th>
+      <th width="100">Action</th>
+    </tr>
+  
+  <% for help_topic in @help_topics %>
+    <tr class="<%= cycle("tr1", "tr2") %>">
+      <td><%= link_to help_topic.title, :action => "show", :id => help_topic.id %></td>
+      <td align="center">
+        <%= link_to image_tag("view-listing.gif", :size => "24x24", :border => 0, :alt => "Show", :title => "Show"), :action => "show", :id => help_topic %>
+        <%= link_to image_tag("edit-listing.gif", :size => "24x24", :border => 0, :alt => "Edit", :title => "Edit"), :action => "edit", :id => help_topic %>
+        <%= link_to image_tag("delete.gif", :size => "24x24", :border => 0, :alt => "Delete", :title => "Delete"), {:action => "delete", :id => help_topic}, :confirm => 'Are you sure?', :post => true %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+  
+  <%= link_to 'Previous page', { :page => @help_topic_pages.current.previous } if @help_topic_pages.current.previous %>
+  <%= link_to 'Next page', { :page => @help_topic_pages.current.next } if @help_topic_pages.current.next %> 
+  
+  <br />
+  
+  <%= link_to 'New Help Topic', :action => 'new' %>
+<% else %><br/>
+  <ul>
+    <% for help_topic in @help_topics %>
+      <li><%= link_to help_topic.title, :action => "show", :id => help_topic.id %></li><br/>
+    <% end %>
+  </ul>
+<% end %>

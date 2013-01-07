@@ -1,0 +1,65 @@
+<%= error_messages_for 'field' %>
+<% form_for :field, @field do |f| %>
+  <%= f.hidden_field :category_id, :value=>params[:category_id] %>
+  
+  <div>
+    <label>Category:</label>
+    <%= h @field.category.name %>
+  </div>
+
+  <div>
+    <label for="field_group_id">Field Group:</label>
+    <% 
+      if !@field.field_group_id.nil?
+        field_id = @field.field_group_id
+      else
+        field_id = -1
+      end 
+    %>
+    <select name="field[field_group_id]">
+      <%= options_from_collection_for_select(@field.category.field_groups, "id", "name", field_id) %>
+    </select> 
+  </div>
+
+  <div>
+    <label for="field_name">Field Name:</label>
+    <%= f.text_field :name, :size => 40, :maxlength => 25 %>
+  </div>
+
+  <div>
+    <label for="field_type">Type:</label>
+    <%= h @field[:type] %>
+  </div>
+  <% if ([Field::SelectField.name, Field::RadioButtonSet.name].include? @field[:type]) && !@field.field_values.nil? %>
+  <div>
+    <label for="field_name">Values:<br/>
+    <%= link_to "Edit field values", :action => "edit_field_values", 
+                                     :field_id => @field.id  %>
+    </label>
+    <select size="5">
+      <%= options_from_collection_for_select(@field.field_values, "id", "value") %>
+    </select> 
+    
+  </div>
+  <% end %>
+
+  <% if [Field::TextField.name].include? @field[:type] %>
+  <div>
+    <label for="field_maximum">Maximum Length:</label>
+    <%= f.text_field :maximum, :size => 5, :maxlength => 4 %> (e.g. 400)
+  </div>
+  <% end %>
+
+  <div>
+    <%= f.check_box :required %> Required
+  </div>
+  
+  <div>
+    <%= f.check_box :numeric %> Must be a number
+  </div>
+
+  <%= submit_tag "Save & Finish", {:class => "submit"} %>
+  <%= submit_tag "Cancel", {:class => "submit"} %>
+  
+<% end %>
+

@@ -1,0 +1,83 @@
+<style>
+ul.sign_products {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+ul.sign_products li {
+  width: 228px;
+  float: left;
+  display: block;
+  border: 1px solid #CCC;
+  background: #aaa;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+ul.sign_products img {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #ccc;
+  float: right;
+  margin-left: 5px;
+}
+ul.sign_products p {
+  padding: 5px;
+  margin: 0px;
+  overflow: auto;
+  height: 105px;
+  border: 1px solid #999;
+  border-radius: 5px;
+  background: #FDEAD7;
+  margin-bottom: 5px;
+}
+ul.sign_products .sign_product_price {
+  color: #090;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+
+</style>
+
+<br/><p><h3>Create Basic Classified Ad:</h3><br/><%= link_to(image_tag("/images/sign_product.gif", :size => "100x100"), :controller => 
+'basic_listings', :action => "add") %><br/><br/>
+  <h3>Or Choose a Sign below:</h3><br/>
+</p>
+<p>
+<h3>
+<%= type_link nil, "All" %> |
+  <% SignProduct.active_types.map(&:sign_type).each do |type| %>
+<%= type_link type %> |
+<% end %></h3>
+</p><br/>
+
+<%= "No matching signs" if @sign_products.nil? || @sign_products.empty? %>
+
+<ul class="sign_products">
+  <% @sign_products.each do |sign_product| %>
+  <li>
+  <% unless sign_product.nil? %>
+    <%= form_tag ({:controller => "sign_products", :action => "add_to_cart"}) do %>
+    <h3 style="margin: 0 0 5px 0; padding: 0; font-size: 13px;">
+      <% unless sign_product.title_string.nil? %>
+      <%= sign_product.title_string %>
+      <% end %>
+    </h3>
+    <p>
+      <%  if !sign_product.photo_path(SignProduct::PhotoSmallSuffix).nil? %>
+        <%= image_tag("/#{sign_product.photo_path(SignProduct::PhotoSmallSuffix)}", :size => SignProduct::PhotoSmallDimensions) %>
+      <% else %>
+        <%= image_tag("/images/sign_product.gif", :size => "100x100") %>
+      <% end %>
+      <%=sign_product.description.gsub(/\n/, "<br/>")%>
+    </p>
+    <%= hidden_field_tag :type, params[:type] %>
+    <%= hidden_field_tag :id, sign_product.id %>
+    <%= submit_tag "Add to Cart", {:class => "submit", :style => "float: right; background-color:#548554;" }%>
+    <span class="sign_product_price"><%=sign_product.price_alt%></span>
+    <% end %> <!-- of form -->
+  <% end %> <!-- of unless -->
+  </li>
+<% end %> <!-- of each -->
+</ul>

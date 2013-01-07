@@ -1,0 +1,4 @@
+<%= render(:partial => "/side_default") if !admin? %>
+<%= render(:partial => "/side_user") if user? %>
+<%= render(:partial => "/side_admin") if admin? %>
+

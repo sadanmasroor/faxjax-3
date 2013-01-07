@@ -1,0 +1,23 @@
+
+<div class="field">
+Hello <%= h @user.email %>,
+</div>
+
+
+<% absolute_form_for :user, @user, :controller=>"home", :action =>"reset", :id=>params[:id] do |f| %>
+  <%= error_messages_for :user %>
+
+  <!-- This field gets auto filled by many browsers. Not a bug, but os there a work around? -->
+  <div class="field">
+    <label for="password">Password</label>
+    <%= f.password_field :password %>
+  </div>
+
+  <div class="field">
+    <label for="password_confirmation">Confirm Password</label>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <%= submit_tag 'Reset your Password', {:class => "submit"} %>
+
+<% end %>

@@ -1,0 +1,10 @@
+<% i_p = InvoiceHelper::InvoicePresenter.new(invoice)   %>
+<tr>
+  <td><%= i_p.link %> </td>
+  <td><%= i_p.last_name %> </td>
+  <td><%= i_p.first_name %> </td>
+  <td><%= i_p.updated_at %> </td>
+  <td><%= i_p.promo_code %> </td>
+  <td><%= i_p.discount %> </td>
+  <td><%= i_p.total %> </td>
+</tr>

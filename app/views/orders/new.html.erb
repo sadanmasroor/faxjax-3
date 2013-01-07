@@ -1,0 +1,14 @@
+<% if !Vendor.find_all_active.empty? %>
+  <%= error_messages_for 'order' %>
+
+  <% form_for :order, @order, :url => {:action => "create"} do |form| %>
+    <%= hidden_field_tag(:mode, @mode) %>
+  
+    <%= render(:partial => "form") %>
+
+    <%= submit_tag "Continue", {:class => "submit"} %>
+    <%= submit_tag "Cancel", {:class => "submit"} %>
+  <% end %>
+<% else %>
+You must first <%= link_to "create a vendor", {:controller => "vendors", :action => "new"} %>.
+<% end %>

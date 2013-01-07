@@ -1,0 +1,88 @@
+<script>  
+<!--
+  function handleTypeChange() {
+    elem = $('field_type');
+    switch(elem.options[elem.selectedIndex].value) {
+      case "CheckBoxField":
+      case "RadioButtonSet":
+        new Effect.Fade('maximum-length', {duration: .5});
+        new Effect.Fade('required', {duration: .5});
+        new Effect.Fade('numeric', {duration: .5});
+        break;
+      case "StateSelectField":
+      case "SelectField":
+      case "YearSelectField":
+      case "CountrySelectField":
+        new Effect.Fade('maximum-length', {duration: .5});
+        new Effect.Appear('required', {duration: .5});
+        new Effect.Fade('numeric', {duration: .5});
+        break;
+      case "TextField":
+        new Effect.Appear('numeric', {duration: .5});
+        new Effect.Appear('maximum-length', {duration: .5});
+        new Effect.Appear('required', {duration: .5});
+        break;
+      case "TextAreaField":
+        new Effect.Fade('numeric', {duration: .5});
+        new Effect.Appear('maximum-length', {duration: .5});
+        new Effect.Appear('required', {duration: .5});
+        break;
+    }
+  }
+//-->
+</script>
+
+<%= error_messages_for 'field' %>
+<% form_for :field, @field do |f| %>
+  <%= f.hidden_field :category_id, :value=>params[:category_id] %>
+  
+  <div>
+    <label>Category:</label>
+    <%= link_to @field.category.name, :action => "edit", :id => @field.category.id %>
+  </div>
+  
+  <% if !@field.category.field_groups.empty? && @field.category.field_groups.length > 1 %>
+  <div>
+    <label for="field_group_id">Field Group:</label>
+    <% 
+      if !@field.field_group_id.nil?
+        field_id = @field.field_group_id
+      else
+        field_id = -1
+      end 
+    %>
+    <select name="field[field_group_id]">
+      <%= options_from_collection_for_select(@field.category.field_groups, "id", "name", field_id) %>
+    </select> 
+  </div>
+  <% end %>
+
+  <div>
+    <label for="field_name">Field Name:</label>
+    <%= f.text_field :name, :size => 40, :maxlength => 25 %>
+  </div>
+
+  <div>
+    <label for="field_type">Type:</label>
+    <%= select_tag "field[type]", options_for_select(Field::TYPES, [@field.type]), :onchange => "handleTypeChange()", :id => "field_type" %>
+  </div>
+  
+  <div id="maximum-length">
+    <label for="field_maximum">Maximum Length:</label>
+    <%= f.text_field :maximum, :size => 5, :maxlength => 4 %> (e.g. 400)
+  </div>
+
+  <div id="required">
+    <%= f.check_box :required %> Required
+  </div>
+  
+  <div id="numeric">
+    <%= f.check_box :numeric %> Must be a number
+  </div>
+  
+  <%= submit_tag "Save & Add Another", {:class => "submit"} %>
+  <%= submit_tag "Save & Finish", {:class => "submit"} %>
+  <%= submit_tag "Cancel", {:class => "submit"} %>
+  
+<% end %>
+

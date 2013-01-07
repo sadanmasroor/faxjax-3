@@ -1,0 +1,10 @@
+<br/><h1>Send Feedback Email</h1><br/>
+<% form_tag(:controller => 'home',:action => 'sendmail') do %>
+<p><label for="email_from">From</label>:
+<%= text_field 'email', 'from' , {:class => "text_box", :size=>"27"}%></p>
+<p><label for="email_subject">Subject</label>:
+<%= text_field 'email', 'subject' , {:class => "text_box", :size=>"27"} %></p>
+<p><label for="email_message">Message</label>&nbsp;
+<%= text_area 'email', 'message' ,:rows=>10, :cols=>30, :class => "text_area"%></p><br/><p style="text-align:center;">
+<%= submit_tag "Send" , {:class => "submit"}%></p>
+<% end %>

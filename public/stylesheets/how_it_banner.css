@@ -1,0 +1,98 @@
+#jFlowSlide3{ }
+#myController3 {  }
+#myController3 span.jFlowSelected3 img {  border: 5px solid #000;  }
+
+.slide-wrapper3 { padding: 0px; }
+.slide-thumbnail3 { width:345px; float:left; }
+.slide-thumbnail3 img {max-width:345px; }
+.slide-details3 { width:150px; float:right; margin-left:10px; margin-right:20px; margin-top:15px; min-height:210px;}
+.slide-details3 h2 { font-size:1.5em;  font-weight:normal; line-height: 1; margin:0; text-align:center; }
+.slide-details3 .description3 { margin-top:10px; text-align:center; }
+.slide-details3 .view { margin-top:10px; text-align:center; }
+
+.jFlowControl3 img, .jFlowPrev3, .jFlowNext3 { color:#FFF;  border: 5px solid #FFFFFF;  cursor:pointer; }
+.jFlowControl3 img:hover, .jFlowPrev3:hover, .jFlowNext3:hover {  border: 5px solid #000; }
+.jFlowControl3 span, .jFlowPrev3, .jFlowNext3 {
+    background: url("../images/or_dot.png") no-repeat scroll center center transparent;
+    color: #FFFFFF;
+    cursor: pointer;
+    height: 5px;
+    margin: 3px;
+    padding: 0 10px;
+    width: 20px;
+}
+.jFlowControl3 span:hover, .jFlowPrev3:hover, .jFlowNext3:hover {
+    background: url("../images/blu_dot.png") no-repeat scroll center center transparent;
+}
+#myController3 span.jFlowSelected3 span {
+    background: url("../images/blu_dot.png") no-repeat scroll center center transparent;
+    margin: 5px;
+}
+
+
+#jFlowSlide2{ }
+#myController2 {  }
+#myController2 span.jFlowSelected2 img {  border: 5px solid #000;  }
+
+.slide-wrapper2 { padding: 0px; }
+.slide-thumbnail2 { width:345px; float:left; }
+.slide-thumbnail2 img {max-width:345px; }
+.slide-details2 { width:150px; float:right; margin-left:10px; margin-right:20px; margin-top:15px; min-height:210px;}
+.slide-details2 h2 { font-size:1.5em;  font-weight:normal; line-height: 1; margin:0; text-align:center; }
+.slide-details2 .description2 { margin-top:10px; text-align:center; }
+.slide-details2 .view2 { margin-top:10px; text-align:center; }
+
+.jFlowControl2 img, .jFlowPrev2, .jFlowNext2 { color:#FFF;  border: 5px solid #FFFFFF;  cursor:pointer; }
+.jFlowControl2 img:hover, .jFlowPrev2:hover, .jFlowNext2:hover {  border: 5px solid #000; }
+.jFlowControl2 span, .jFlowPrev2, .jFlowNext2 {
+    background: url("../images/or_dot.png") no-repeat scroll center center transparent;
+    color: #FFFFFF;
+    cursor: pointer;
+    height: 5px;
+    margin: 3px;
+    padding: 0 10px;
+    width: 20px;
+}
+.jFlowControl2 span:hover, .jFlowPrev2:hover, .jFlowNext2:hover {
+    background: url("../images/blu_dot.png") no-repeat scroll center center transparent;
+}
+#myController2 span.jFlowSelected2 span {
+    background: url("../images/blu_dot.png") no-repeat scroll center center transparent;
+    margin: 5px;
+}
+
+
+
+#jFlowSlide1{  }
+#myController1 { }
+#myController1 span.jFlowSelected1 img {  border: 5px solid #000;  }
+
+.slide-wrapper1 { padding: 0px; }
+.slide-thumbnail1 { width:345px; float:left; }
+.slide-thumbnail1 img {max-width:345px; }
+.slide-details1 { width:150px; float:right; margin-left:10px; margin-right:20px; margin-top:15px; min-height:210px;}
+.slide-details1 h2 { font-size:1.5em;  font-weight:normal; line-height: 1; margin:0; text-align:center; }
+.slide-details1 .description1 { margin-top:10px; text-align:center; }
+.slide-details1 .view1 { margin-top:10px; text-align:center; }
+
+.jFlowControl1 img, .jFlowPrev1, .jFlowNext1 { color:#FFF;  border: 5px solid #FFFFFF;  cursor:pointer; }
+.jFlowControl1 img:hover, .jFlowPrev1:hover, .jFlowNext1:hover {  border: 5px solid #000; }
+
+.jFlowControl1 span, .jFlowPrev1, .jFlowNext1 {
+    background: url("../images/or_dot.png") no-repeat scroll center center transparent;
+    color: #FFFFFF;
+    cursor: pointer;
+    height: 5px;
+    margin: 3px;
+    padding: 0 10px;
+    width: 20px;
+}
+.jFlowControl1 span:hover, .jFlowPrev1:hover, .jFlowNext1:hover {
+    background: url("../images/blu_dot.png") no-repeat scroll center center transparent;
+}
+#myController1 span.jFlowSelected1 span {
+    background: url("../images/blu_dot.png") no-repeat scroll center center transparent;
+    margin: 5px;
+}
+
+.dot_main{   margin: 0 auto;    padding: 0 0 0 117px;     width: 100px; }

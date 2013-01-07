@@ -1,0 +1,51 @@
+<!-- @todo The next thing you need to do is handle the resorting using the postBody below. There
+           should be a way to get each array of values as well as their associated id to do the
+           position setting.
+-->
+
+<%
+  @field_groups.each_index do |index|
+    field_group = @field_groups[index]
+    if field_group.id == -1
+      @unsorted_field_group = field_group
+      next
+    end
+  end
+%>
+<ul>
+  <li class="field_group" id="fieldgroup_-1">
+    <strong><%= h @unsorted_field_group.name %></strong>
+    <ul id="resort_field_group_fields_<%= h @unsorted_field_group.id %>" class="draggable">
+    <% @unsorted_field_group.fields.each do |field| %>
+      <li id="field_<%= field.id %>">
+        <%= h field.name %> (<%= h field['type'] %>)
+      </li>
+    <% end %>
+    </ul>
+  </li>
+</ul>
+
+<ul id="resort_field_groups" class="draggable">
+<%
+  @field_groups.each_index do |index|
+    field_group = @field_groups[index]
+    if field_group.id == -1
+      @unsorted_field_group = field_group
+      next
+    end
+%>
+  <li class="field_group" id="fieldgroup_<%= field_group.id %>">
+    <strong><%= h field_group.name %></strong>
+    <ul id="resort_field_group_fields_<%= h field_group.id %>" class="draggable">
+    <% field_group.fields.each do |field| %>
+      <li id="field_<%= field.id %>">
+        <%= h field.name %> (<%= h field['type'] %>)
+      </li>
+    <% end %>
+    </ul>
+  </li>
+<% end %>
+</ul>
+
+<%= button_to_function "Save field order", "saveFieldGroupOrder();" %>
+

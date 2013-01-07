@@ -1,0 +1,25 @@
+<% i_p =  InvoiceHelper::InvoicePresenter.new(@invoice)    %>
+<h1>Invoice # <%= i_p.id %></h1>
+<p>
+  <%= i_p.last_name %>, <%= i_p.first_name %><br />
+  <%= i_p.street %><br />
+  <%= i_p.city %><br />
+  <%= i_p.state %>, <%= i_p.zip %>
+  <%= mail_to(i_p.email) %>
+</p>
+
+Items Purchased
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Discount</th>
+      <th>Line Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render :partial => 'detail', :collection => i_p.invoice.invoice_details %>
+  </tbody>
+</table>

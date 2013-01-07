@@ -1,0 +1,26 @@
+<h3>Vendor Details</h3>
+
+<div>
+  <label for="order_vendor_id">Vendor:</label>
+  <%= h @order.vendor.name %>
+</div>
+
+<h3>Sign Lots</h3>
+<% @sign_lots = @order.sign_lots %>
+<% @no_delete_sign_lots = true %>
+<%= render(:partial => "sign_lots") %>
+  
+<% form_tag(:action => "create_step_3", :id => params[:id]) do %>
+  <%= hidden_field_tag(:mode, @mode) %>
+  <p>
+    <label for="promo_code">Promo Code</label>
+    <%= text_field_tag 'promo_code', nil, :size=> 9, :maxlength => 6 %>
+  </p>
+  <p>
+    <%= submit_tag "Finish", {:class => "submit"} %>
+    <%= submit_tag "Revise Order", {:class => "submit"} %>
+    <%= submit_tag "Cancel", {:class => "submit"} %>
+  </p>
+<% end %>
+  
+    

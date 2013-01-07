@@ -1,0 +1,15 @@
+<% if !@fields.nil? && !@fields.empty? %>
+<table cellspacing="0">
+  <tr class="trh">
+    <th>Name</th>
+    <th>Type</th>
+    <th width="200">Field Group</th>
+    <th width="50">Action</th>
+  </tr>
+  <%= render :partial => "field", :collection => @fields %>
+</table>
+<% else %>
+<p>
+  No fields found.
+</p>
+<% end %>

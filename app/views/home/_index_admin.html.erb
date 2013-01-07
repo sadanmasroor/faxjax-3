@@ -1,0 +1,34 @@
+<br/><h3>Management</h3><br/>
+<ul>
+  <li>
+    <p>
+    <%= link_to "Configuration", :controller => "application_config", :action => "edit" %><br/>
+    Edit the application configuration. Change admin password here.
+    </p><br/>
+  </li>
+  <li>
+    <p>
+    <%= link_to "Categories", :controller => "categories", :action => "list" %><br/>
+    List, add, edit and delete categories and their associated fields.
+    </p><br/>
+  </li>
+  <li>
+    <p>
+    <%= link_to "Users", :controller => "users", :action => "list" %><br/>
+    List, add, edit and delete users.
+    </p><br/>
+  </li>
+  <li>
+    <p>
+    <%= link_to "Signs", :controller => "signs", :action => "list" %><br/>
+    List, add, edit and delete signs.
+    </p><br/>
+  </li>
+  <li>
+    <p>
+    <%= link_to "Listings", :controller => "listings", :action => "list" %><br/>
+    List, add, edit and delete listings.
+    </p><br/>
+  </li>
+  
+</ul>

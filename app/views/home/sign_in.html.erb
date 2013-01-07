@@ -1,0 +1,25 @@
+<% @title = "Sign In" %>
+<%= form_tag(url_for(:controller => "home", :action => "sign_in")) do  %>
+  <% if flash[:login_notice] %>
+    <div id="login-notice"><%= flash[:login_notice] %></div>
+  <% end %>
+<br/>
+  <div class="field">
+    <label for="username">Username</label>
+    <%= text_field_tag :name, params[:name], {:autocomplete => "off"} %>
+  </div>
+  <div class="field">
+    <label for="password">Password</label>
+    <%= password_field_tag :password, nil, {:autocomplete => "off"} %>
+  </div>
+
+  <%= submit_tag "Sign In", {:class => "submit"} %>
+  <div class="field">
+    <br/>
+    <%= link_to "Forgot your password?", :controller => "home", :action => "forgot_password" %>
+    </div>
+    <div class="field">
+    <%= link_to "Create an account", :controller => "users", :action => "new" %>
+   </div>
+<% end %>
+

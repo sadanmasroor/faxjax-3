@@ -1,0 +1,331 @@
+<script>
+
+	$(document).ready(function(){
+
+				
+		$(".ho_img_main").hide();
+		$(".ho_img_main:first").show(); 
+		
+		$('.ho_menu').click(function(){
+			
+			$('.ho_menu').children('div:first-child').removeClass().addClass('ho_menu_b_left');
+			$('.ho_menu').children('div:first-child').next().removeClass().addClass('ho_menu_b_mid');
+			$('.ho_menu').children('div:last-child').removeClass().addClass('ho_menu_b_right');
+			
+			$(this).children('div:first-child').removeClass().addClass('ho_menu_left');
+			$(this).children('div:first-child').next().removeClass().addClass('ho_menu_mid');
+			$(this).children('div:last-child').removeClass().addClass('ho_menu_right');
+			//alert("test");
+			$(".ho_img_main").hide();
+			var div_attr = $(this).attr("id");
+			//alert(div_attr);
+			$('.ho_img_main_con #'+div_attr).fadeIn();
+			if(div_attr == "buyer"){
+				
+				buyer();
+			}
+			if(div_attr == "code"){
+				
+				qrcode();
+			}
+			if(div_attr == "seller"){
+				
+				seller();
+			}
+			return false;
+			
+		});
+		
+		$("#myController1").jFlow({
+		slides: "#slides1",
+		controller: ".jFlowControl1", // must be class, use . sign
+		slideWrapper : "#jFlowSlide1", // must be id, use # sign
+		selectedWrapper: "jFlowSelected1",  // just pure text, no sign
+		auto: true,
+		easing: 'swing',		//auto change slide, default true
+		width: "345px",
+		height: "235px",
+		duration: 400,
+		prev: ".jFlowPrev1", // must be class, use . sign
+		next: ".jFlowNext1" // must be class, use . sign
+	});
+	
+	function buyer(){
+	$("#myController1").jFlow({
+		slides: "#slides1",
+		controller: ".jFlowControl1", // must be class, use . sign
+		slideWrapper : "#jFlowSlide1", // must be id, use # sign
+		selectedWrapper: "jFlowSelected1",  // just pure text, no sign
+		auto: true,
+		easing: 'swing',		//auto change slide, default true
+		width: "345px",
+		height: "235px",
+		duration: 400,
+		prev: ".jFlowPrev1", // must be class, use . sign
+		next: ".jFlowNext1" // must be class, use . sign
+	});
+	
+	}
+	
+	
+	
+		function seller(){
+	$("#myController2").jFlow({
+		slides: "#slides2",
+		controller: ".jFlowControl2", // must be class, use . sign
+		slideWrapper : "#jFlowSlide2", // must be id, use # sign
+		selectedWrapper: "jFlowSelected2",  // just pure text, no sign
+		auto: true,
+		easing: 'swing',		//auto change slide, default true
+		width: "345px",
+		height: "235px",
+		duration: 400,
+		prev: ".jFlowPrev2", // must be class, use . sign
+		next: ".jFlowNext2" // must be class, use . sign
+	});
+	
+	}
+			function qrcode(){
+	$("#myController3").jFlow({
+		slides: "#slides3",
+		controller: ".jFlowControl3", // must be class, use . sign
+		slideWrapper : "#jFlowSlide3", // must be id, use # sign
+		selectedWrapper: "jFlowSelected3",  // just pure text, no sign
+		auto: true,
+		easing: 'swing',		//auto change slide, default true
+		width: "345px",
+		height: "235px",
+		duration: 400,
+		prev: ".jFlowPrev3", // must be class, use . sign
+		next: ".jFlowNext3" // must be class, use . sign
+	});
+	
+	}
+	
+	});
+	
+	
+	
+	
+	
+</script>
+
+
+</head>
+
+<body>
+
+<div class="ho_it_main">
+            <fieldset>
+                <div class="titl"><legend>HOW FAXJAX WORKS</legend></div>
+                    
+                    <div class="ho_img_main_con">
+                    
+                <div class="ho_img_main" id="buyer">
+                        <div class="ho_lft_main">
+                           
+                                       <img src="../images/how/buy_th1.png"  />
+                                      <img src="../images/how/buy_th2.png"  />
+                                       <img src="../images/how/buy_th3.png"  />
+                                       
+                              </div>
+                                
+                                
+                                
+                            </div>
+                            
+                          <div class="ho_right_main">
+                                   <div class="jflow-content-slider1">
+                                    <div id="slides1">
+                                        <div class="slide-wrapper1">
+                                            <div class="slide-thumbnail1">
+                                            <div class="topic"><h1>Step1 - See the Sign</h1></div>
+                                                <img src="../images/how/buyer1.png" width="345" alt="photo"/>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="slide-wrapper1">
+                                            <div class="slide-thumbnail1">
+                                            <div class="topic"><h1>Step2 - Search or Scan Listing</h1></div>
+                                                <img src="../images/how/buyer2.png" width="345" alt="photo"/>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="slide-wrapper1">
+                                            <div class="slide-thumbnail1">
+                                            <div class="topic"><h1>Step3 - Contact Seller</h1></div>
+                                                <img src="../images/how/buyer3.png" width="345" alt="photo"/>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                        
+                                    
+                                    <div class="clear"></div>
+                                </div>
+
+                           <div class="clear"></div>
+                            </div>
+			    <div id="myController1">
+				<span style="display:none;" class="jFlowPrev1">Prev</span>
+				<span class="jFlowControl1"><span></span></span>
+				<span class="jFlowControl1"> <span></span></span>
+				<span class="jFlowControl1"><span></span></span>
+				<span style="display:none;" class="jFlowNext1">Next</span>
+			   </div>
+                           
+                           <div class="clear"></div> 
+                        </div>
+                        
+                        <div class="ho_img_main" id="seller">
+                                <div class="ho_lft_main">
+                                          
+                                       <img src="../images/how/sel_th1.png"  />
+                                       <img src="../images/how/sel_th2.png"  />
+                                       <img src="../images/how/sel_th3.png"  />
+				       
+                                    </div>
+                                
+                               
+                                
+                            </div>
+                            
+                          <div class="ho_right_main">
+                                    
+<div class="jflow-content-slider2">
+                                    <div id="slides2">
+                                        <div class="slide-wrapper2">
+                                          <div class="slide-thumbnail2">
+                                            <div class="topic"><h1>Step1 - Select Your Sign</h1></div>
+                                              <img src="../images/how/seller1.png" width="345" alt="photo"/>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="slide-wrapper2">
+                                          <div class="slide-thumbnail2">
+                                            <div class="topic"><h1>Step2 - Activate Sign Info</h1></div>
+                                              <img src="../images/how/seller2.png" width="345" alt="photo"/>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="slide-wrapper2">
+                                          <div class="slide-thumbnail2">
+                                            <div class="topic"><h1>Step3 - Place Sign</h1></div>
+                                              <img src="../images/how/seller3.png" width="345" alt="photo"/>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                        
+                                    
+                                    <div class="clear"></div>
+                                </div>
+                            
+                           <div class="clear"></div>
+                            </div>
+                           
+			   <div id="myController2">
+				<span style="display:none;" class="jFlowPrev2">Prev</span>
+				<span class="jFlowControl2"><span></span></span>
+				<span class="jFlowControl2"> <span></span></span>
+				<span class="jFlowControl2"><span></span></span>
+				<span style="display:none;" class="jFlowNext2">Next</span>
+			   </div>
+			   
+                           <div class="clear"></div> 
+                        </div>
+                        
+                        <div class="ho_img_main" id="code">
+                           <div class="ho_lft_main">
+                               
+                                        <img src="../images/how/qr_th2.png"  />
+                                       <img src="../images/how/qr_th1.png" />
+                                        <img src="../images/how/qr_th3.png"  />
+                                </div>
+                                
+                                
+                                
+                                
+                               </div>
+                            
+                          <div class="ho_right_main">
+                          
+                          <div class="jflow-content-slider3">
+                                    <div id="slides3">
+                                        <div class="slide-wrapper3">
+                                            <div class="slide-thumbnail3">
+                                            <div class="topic"><h1>Step1 - See the Sign</h1></div>
+                                                <img src="../images/how/qr2.png" width="345" alt="photo"/>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="slide-wrapper3">
+                                            <div class="slide-thumbnail3">
+                                            <div class="topic"><h1>Step2 - Use QR Reader</h1></div>
+                                                <img src="../images/how/qr1.png" width="345" alt="photo"/>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        <div class="slide-wrapper3">
+                                            <div class="slide-thumbnail3">
+                                            <div class="topic"><h1>Step3 - See the Listing</h1></div>
+                                                <img src="../images/how/qr3.png" width="345" alt="photo"/>
+                                            </div>
+                                            <div class="clear"></div>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                        
+                                    
+                                    <div class="clear"></div>
+                                </div>
+                              <div id="myController3">
+				<span style="display:none;" class="jFlowPrev3">Prev</span>
+				<span class="jFlowControl3"><span></span></span>
+				<span class="jFlowControl3"> <span></span></span>
+				<span class="jFlowControl3"><span></span></span>
+				<span style="display:none;" class="jFlowNext3">Next</span>
+			   </div>
+                           <div class="clear"></div>
+                            </div>
+                       
+                           <div class="clear"></div> 
+                        </div>
+                        
+                        </div>
+                
+                </fieldset>
+                
+                <div class="ho_menu_main">
+               
+                <div class="ho_menu" id="buyer" >
+                        <div class="ho_menu_left"></div>
+                        <div class="ho_menu_mid">B<br />U<br />Y<br />E<br />R<br /></div>
+                            <div class="ho_menu_right"></div>
+                        </div> 
+                        <div class="ho_menu" id="seller">
+                        <div class="ho_menu_b_left"></div>
+                        <div class="ho_menu_b_mid">S<br />E<br />L<br />L<br />E<br />R<br /></div>
+                            <div class="ho_menu_b_right"></div>
+                        </div> 
+                          <div class="ho_menu" id="code">
+                        <div class="ho_menu_b_left"></div>
+                        <div class="ho_menu_b_mid">Q<br />R<br />C<br />O<br />D<br />E</div>
+                            <div class="ho_menu_b_right"></div>
+                        </div>     
+                    
+                    
+               </div>
+                
+            
+            <div class="clear"></div>
+            </div>
+
+
+
+</body>

@@ -1,0 +1,16 @@
+<table>
+  <thead>
+    <tr>
+      <th>Invoice</th>
+      <th>Last</th>
+      <th>First</th>
+      <th>Updated</th>
+      <th>Promo Code</th>
+      <th>Discount</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render :partial => 'invoice', :collection => @invoices %>
+  </tbody>
+</table>

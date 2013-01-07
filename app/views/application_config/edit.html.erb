@@ -1,0 +1,16 @@
+<br/><div class="faxjax-form">
+  <%= error_messages_for 'application_config' %>
+  <% form_tag :action => "update" do %>
+    <div>
+      <label for="user_name">Admin Password:</label>
+      <%= text_field :application_config, :admin_password, :size=>40 %>
+    </div>
+    
+    <div>
+      <label for="user_name">Session Timeout:</label>
+      <%= text_field :application_config, :session_timeout_minutes, :size=>5 %>&nbsp;(Minutes)
+    </div>
+    <br/>
+    <%= submit_tag "Save Configuration", {:class => "submit"} %>
+  <% end %>
+</div>

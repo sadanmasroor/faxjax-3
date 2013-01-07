@@ -1,0 +1,25 @@
+<%= error_messages_for 'field_value' %>
+<% form_for :field_value, @field_value do |f| %>
+  <%= f.hidden_field :id %>
+  <%= f.hidden_field :field_id %>
+  <%= hidden_field_tag :add_another_field, params[:add_another_field] %>
+  
+  <div>
+    <label for="field_name">Field:</label>
+    <%= @field_value.field.name %>
+  </div>
+
+  <div>
+    <label for="field_name">Value:</label>
+    <%= f.text_field :value, :size => 40, :maxlength => 40 %>
+  </div>
+
+  <%= submit_tag "Save & Add Another", {:class => "submit"} %>
+  <%= submit_tag "Save & Finish", {:class => "submit"} %>
+  <%= submit_tag "Cancel", {:class => "submit"} %>
+  
+<% end %>
+
+<h3>Values for '<%= @field_value.field.name %>'</h3>
+<% @field_values = @field_value.field.field_values %>
+<%= render :partial => "field_value_list" %>

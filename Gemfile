@@ -5,14 +5,20 @@ gem 'rails', '3.0.12'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql'
+gem "mysql"
+gem "acts_as_tree","0.1.1"
+gem "rmagick","2.12.2"
+gem "will_paginate","3.0.0"
+gem "rake","0.8.7"
+gem 'dynamic_form'
+
 
 
 # Use unicorn as the web server
 # gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano'
+gem "capistrano","2.12.0"
 gem 'rvm-capistrano'
 
 # To use debugger (ruby-debug for Ruby 1.8.7+, ruby-debug19 for Ruby 1.9.2+)

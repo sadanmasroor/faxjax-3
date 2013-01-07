@@ -1,4 +1,25 @@
-Faxjax3::Application.routes.draw do
+Faxjax3::Application.routes.draw do |map|
+  
+  map.sitemap '/sitemap.xml', :controller => 'sitemap', :action => 'sitemap'
+  
+    map.connect '', :controller => "home"
+    map.connect '/admin', :controller => "admin/index"
+
+    map.connect '', :controller => "home/how_it_works"
+    
+    map.connect '', :controller => "listings/image"
+     # Allow downloading Web Service WSDL as a file with an extension
+     # instead of a file named 'wsdl'
+     map.connect ':controller/service.wsdl', :action => 'wsdl'
+
+
+     map.connect '/reset/:id', :controller => 'home', :action => 'reset'
+
+     # Install the default route as the lowest priority.
+     map.connect ':controller/:action/:id'
+    
+    
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -16,12 +37,12 @@ Faxjax3::Application.routes.draw do
   # Sample resource route with options:
   #   resources :products do
   #     member do
-  #       get 'short'
-  #       post 'toggle'
+  #       get :short
+  #       post :toggle
   #     end
   #
   #     collection do
-  #       get 'sold'
+  #       get :sold
   #     end
   #   end
 
@@ -35,7 +56,7 @@ Faxjax3::Application.routes.draw do
   #   resources :products do
   #     resources :comments
   #     resources :sales do
-  #       get 'recent', :on => :collection
+  #       get :recent, :on => :collection
   #     end
   #   end
 

@@ -1,0 +1,8 @@
+--- !ruby/object:HomeHelper::ContactInfo 
+email: support@faxjax.com
+email_text: or by email at
+last_modified: 2011-08-09 18:52:27.503779 -04:00
+name: FaxJax, Inc.
+phone: (855) 532-9529 or (855) 5-faxjax
+phone_text: We can also be reached at
+preamble: To contact

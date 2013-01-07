@@ -1,0 +1,28 @@
+<br/><div id="activate">
+<% form_tag do %>
+  <%= error_messages_for 'sign' %>
+  <fieldset>
+  <legend>Enter Your Sign Code &amp; PIN #</legend>
+  <div>
+    <label for="sign_code">1. Sign code:</label>
+    <%= text_field_tag "code", !session[:activating_sign_code].nil? ? session[:activating_sign_code] : params[:code], { :size => 6, :maxlength => 5, :class => "sign-code" } %>
+  </div>
+  <div>
+    <label for="activation_key">2. PIN #:</label>
+    <%= text_field_tag "key1", !session[:activating_sign_key1].nil? ? session[:activating_sign_key1] : params[:key1], { :size => 3, :maxlength => 4, :onkeyup => "handlePINKeyUp(event, this, 1);"  } %>
+    <%= text_field_tag "key2", !session[:activating_sign_key2].nil? ? session[:activating_sign_key2] : params[:key2], { :size => 3, :maxlength => 4, :onkeyup => "handlePINKeyUp(event, this, 2);"  } %>
+    <%= text_field_tag "key3", !session[:activating_sign_key3].nil? ? session[:activating_sign_key3] : params[:key3], { :size => 3, :maxlength => 4 } %>
+    <%
+      # Clear out the keys in the session
+      session[:activating_sign] = nil
+      session[:activating_sign_code] = nil
+      session[:activating_sign_key1] = nil
+      session[:activating_sign_key2] = nil
+      session[:activating_sign_key3] = nil
+    %>
+  </div>
+  <%= submit_tag "Activate Listing", {:class => "submit"} %>
+  </fieldset>
+<% end %>
+</div>
+

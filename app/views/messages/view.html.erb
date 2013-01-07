@@ -1,0 +1,38 @@
+
+<% if can_delete? %>
+  <p>
+    <label>From:</label>
+    <%= mail_to @message.from_email %>
+  </p>
+<% else %>
+  <p>
+    <label>To:</label>
+    <%= h(@message.user.name) %>
+  </p>
+<% end %>
+<p>
+  <label>Subject:</label>
+  <%= h(@message.subject) %>
+</p>
+
+<p>
+  <label>Message:</label>
+  <div class="message-body">
+    <pre><%= h(@message.message) %></pre>
+  </div>
+</p>
+
+<% unless @message.listing_id.nil? %>
+  <p>
+    <label><%= listing_label %>:</label>
+    <%= link_to(@listing.name, :controller => "listings", :action => "show", :id => @message.listing_id) %>
+  </p>
+<% end %>
+
+<p>
+  <% if can_delete? %>
+  <div>
+  <%= button_to "Delete", {:action => "delete", :id => @message}, :confirm => 'Are you sure you want to delete this message?',  :class => "submit" %>
+  </div>
+  <% end %>
+</p>

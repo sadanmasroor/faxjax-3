@@ -1,0 +1,161 @@
+<script type="text/javascript">
+<!--
+  function fieldGroupChange(id) {
+    // unhide the save button
+    $('field_group_for_field_submit_'+id).show();
+  }
+  
+  function saveFieldGroupForField(id) {
+    // submit the form via ajax and update the existing field group/field table with the response
+    var select_box = $('field_group_id_for_field_'+id);
+    var field_group_id = select_box.options[select_box.selectedIndex].value;
+    
+    var postBody =  "field_group_id="+field_group_id;
+        postBody += "&category_id=<%= @category.id %>";
+    
+    var url = '<%= url_for :action => "update_field_group_for_field" %>/'+id;
+    var opt = {
+      method: 'post',
+      postBody: postBody,
+      onSuccess: onFieldGroupUpdate(id)
+    }
+    new Ajax.Request(url, opt);
+  }
+  
+  function onFieldGroupUpdate(id) {
+    return function(t) {
+      Element.update($('field_group_list'), t.responseText);
+      new Effect.Highlight('field_'+id);
+    }
+  }
+
+  function refreshResort() {
+    var url = '<%= url_for :action => "refresh_resort", :id => params[:id] %>';
+    var opt = {
+      method: 'post',
+      onSuccess: function(t) {
+        Element.update($('resort_field_list'), t.responseText);
+        new Effect.Appear('resort_field_list', {duration: .5});
+        self.setTimeout('$(\'field_group_list\').toggle()', 50);
+        $('resort_link').toggle();$('cancel_resort_link').toggle();
+        initSorting();
+      }
+    }
+    new Ajax.Request(url, opt);
+  }
+  
+  function initSorting() {
+    var els = $$('.field_group');
+    for(var i=0;i<els.length;i++) {
+      var el = els[i];
+      var ulEl = el.getElementsByTagName('ul')[0];
+      if (ulEl.childNodes.length > 0) {
+        Sortable.create(ulEl.id, {ghosting: true, constraint: false});
+      }
+    }
+    Sortable.create('resort_field_groups',{ghosting:true,constraint:false})
+  }
+  
+  function saveFieldGroupOrder() {
+    var tmp = "";
+    var postBody = Sortable.serialize('resort_field_groups');
+
+    var els = $$('.field_group');
+    for(var i=0;i<els.length;i++) {
+      var el = els[i];
+      var ulEl = el.getElementsByTagName('ul')[0];
+      if (ulEl.childNodes.length > 0) {
+        tmp = Sortable.serialize(ulEl.id);
+      }
+      postBody += tmp && tmp.length > 0 ? "&"+tmp : "";
+    }
+    
+    var url = '<%= url_for :action => "resort_field_groups", :id => @category.id %>';
+    var opt = {
+      method: 'post',
+      postBody: postBody,
+      onSuccess: function(t) {
+        new Effect.Appear('field_group_list', {duration: .5});
+        self.setTimeout('$(\'resort_field_list\').toggle()', 50);
+        $('resort_link').toggle();
+        $('cancel_resort_link').toggle();
+        Element.update($('field_group_list'), t.responseText);
+      }
+    }
+    new Ajax.Request(url, opt);
+  }
+  
+  Event.observe(window, "load", initSorting);
+//-->
+</script>
+
+<%= error_messages_for 'category' %>
+
+<h3>Category Details</h3>
+<% form_for :category, @category do |f| %>
+  <%= f.hidden_field :id, :value => @category.id if !@category.id.nil? %>
+
+  <div>
+    <label for="category_name">Category Name:</label>
+    <%= f.text_field :name, :size => 40 %>
+  </div>
+  
+  <div>
+    <label for="category_category_id">Parent Category:</label>
+    <%= f.hidden_field :parent_id, :value => @category.parent_id %>
+    <% if @category.parent.id != Category::ROOT_ID %>
+      <%= link_to @category.parent.name, :id => @category.parent.id %>
+    <% else %>
+      <%= h @category.parent.name if !@category.parent.nil? %>
+    <% end %>
+  </div>
+
+  <% if !@category.ancestor_fields.empty? %>
+  <div>
+    <label for="category_exclude_fields">Exclude Fields:</label>
+    <%=
+      select_tag(
+      "excluded_field_ids[]", 
+      options_for_select([['- No Exclusions -','']].concat(@category.ancestor_fields.collect{|x| [x.name, x.id.to_s]}), (!@category.excluded_field_ids_array.nil? and !@category.excluded_field_ids_array.empty?) ? @category.excluded_field_ids_array : ''), 
+      :multiple => true
+      ) 
+    %>
+    <br/>
+    <label>&nbsp;</label>
+    (CTRL + click to select multiple)
+  </div>
+  <% end %>
+
+  <div>
+    <%= f.check_box(:allow_listings) %> Allow listings
+  </div>
+
+  <%= submit_tag "Save", {:class => "submit"} %>
+  <%= submit_tag "Save & Finish", {:class => "submit"} %>
+  <%= submit_tag "Cancel", {:class => "submit"} %>
+  
+<% end %>
+
+<h3>Fields</h3>
+<p>
+  <%= link_to "Add Fields", :action => "add_fields", :category_id => @category.id %>
+  <%= link_to "Add Field Groups", :action => "add_field_groups", :category_id => @category.id %>
+  <span id="resort_link">
+    <%= link_to_function "Re-sort", 
+        "refreshResort();" %>
+  </span>
+  <span id="cancel_resort_link" style="display: none;">
+    <%= link_to_function "Cancel re-sort", 
+        "new Effect.Appear('field_group_list', {duration: .5});
+        self.setTimeout('$(\\'resort_field_list\\').toggle()', 10);
+        $('resort_link').toggle();$('cancel_resort_link').toggle();" %>
+  </span>
+</p>
+
+<div id="field_group_list">
+  <% @field_groups = @category.field_groups %>
+  <%= render :partial => "field_group_list" %>
+</div>
+<div id="resort_field_list" style="display: none;">
+<%= render :partial => "field_resort_list" %>
+</div>

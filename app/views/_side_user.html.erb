@@ -1,0 +1,23 @@
+<!--<h1 style="margin-left: .75em; font-weight: bold; color:#E76E29;"><u>What to do?</u></h1>
+<ul style="margin-left: .75em; font-weight: bold;"><b>
+  <% if !active_user.unused_non_expired_signs.empty? %>
+    <%= side_link_to "Add a Listing", {:controller => "listings", :action => "add" } %>
+  <% else %>
+    <%= side_link_to "Add a Listing", {:controller => "basic_listings", :action => "add" } %>
+  <% end %>
+  <%= side_link_to "Activate a Listing", {:controller => "signs", :action => "activate" } %>
+  <%= side_link_to "Your Signs", {:controller => "signs", :action => "list" } %>
+  <%= side_link_to "Your Listings", {:controller => "listings", :action => "list", :id => "yours" } %>
+  <%= side_link_to "Your Account", {:controller => "users", :action => "edit" } %></b>
+</ul>-->
+
+<!--<h1 style="margin-left: .75em; font-weight: bold; color:#E76E29;"><u>Messages</u></h1>
+<ul style="margin-left: .75em; font-weight: bold;"><b>
+  <% if active_user.unread_messages.empty? %>
+    <%= side_link_to "Inbox", {:controller => "messages", :action => "inbox"} %>
+  <% else %>
+    <%= side_link_to "<strong>Inbox ("+active_user.unread_messages.length.to_s+")</strong>", {:controller => "messages", :action => "inbox"} %>
+  <% end %>
+  <%= side_link_to "Sent", {:controller => "messages", :action => "sent"} %></b>
+</ul>-->
+

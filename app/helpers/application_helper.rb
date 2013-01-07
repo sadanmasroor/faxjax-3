@@ -1,2 +1,206 @@
+# Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  include TagHelper
+  include UrlHelper
+  #include Inflector
+
+
+  
+  def logged_in
+    session[:user_id] != nil
+  end
+  
+  # Formatters
+  def fmt_date(date)
+    date.strftime("%m/%d/%Y") if !date.nil?
+  end
+  def fmt_time(time)
+    time.strftime("%I:%M%p") if !time.nil?
+  end
+  def fmt_datetime(datetime)
+    datetime.strftime("%m/%d/%Y %I:%M%p") if !datetime.nil?
+  end
+  def fmt_price(amount)
+    dollars, cents = amount.divmod(100)
+    dollars = dollars.to_s.reverse
+    count = 1
+    new_dollars = ''
+    dollars_a = dollars.split(//)
+    dollars_a.each do |char|
+      new_dollars += char
+      new_dollars += "," if count % 3 == 0 && count != dollars_a.length
+      count += 1
+    end
+    sprintf("$%s.%02d", new_dollars.reverse!, cents)
+  end
+
+  def hidden_if_empty(var)
+    if var.nil? or var.to_s.empty?
+      ' style="display: none;" '
+    end
+  end
+
+  def required_if_empty(var)
+    if var.nil? or var.to_s.empty?
+      '<span class="required">*</span>'
+    end
+  end
+  
+  def render_flash (names = nil)
+    output = ''
+    flash.each_pair do |key, value|
+      unless names != nil and !names.include?(key)
+        output += div(key.to_s) {value}
+      end
+    end
+    output.html_safe
+  end
+
+  #side_link_to "Add a Listing",{:controller => "basic_listings", :action => "add" } 
+  # Method modified by Bill to remove depreciations in Rails 3
+  # Side helpers
+  def side_link_to(name, options = {})
+    default_action = (options[:controller] == 'home') ? 'index' : 'list'
+    options.merge! :action => default_action if options[:action].nil?
+    #li(current_page?(options) ? 'class="side-active"' : '') do
+      (li(current_page?(options) ? 'class="side-active"' : '') do link_to_unless_current(name, options) end ).html_safe
+    #end
+  end
+  
+  
+  
+  # Pagination
+
+  def render_paginator_controls (paginator = nil)
+    div("paginator") do
+      div("paginator-left") do
+        if paginator.current.previous
+          link_to('&laquo; Previous', { :page => paginator.current.previous })
+        else
+          '&laquo; Previous'
+        end
+      end + 
+      div("paginator-right") do
+        if paginator.current.next
+          link_to('Next &raquo;', { :page => paginator.current.next })
+        else
+          'Next &raquo;'
+        end
+      end +
+      div("paginator-center") do
+        output = ''
+        page_num = paginator.current.number
+        offset = 3
+        if page_num < paginator.page_count - offset
+          page_num_start = page_num - offset > 0 ? page_num - offset : 1
+        else
+          page_num_start = page_num - (offset*2 - (paginator.page_count - page_num)) > 0 ? page_num - (offset*2 - (paginator.page_count - page_num)) : 1
+        end
+        if page_num > offset
+          page_num_end = page_num + offset < paginator.page_count ? page_num + offset : paginator.page_count
+        else
+          page_num_end = page_num + (offset*2 - (page_num-1)) < paginator.page_count ? page_num + (offset*2 - (page_num-1)) : paginator.page_count
+        end
+          
+        if paginator[page_num_start].previous
+          output += link_to('First', { :page => paginator.first })
+          output += " ... " if paginator[page_num_start].previous
+        end
+
+        (page_num_start..page_num_end).each do |num|
+          options = num == page_num ? {:style => "font-weight:bold;" } : {}
+          output += " " +
+            (num == paginator.current.number ? num.to_s :
+              link_to(num.to_s, { :page => num}, options)) +
+            " "
+          output += "&middot;" unless num == page_num_end
+        end
+        
+        if paginator[page_num_end].next
+          output += " ... "
+          output += link_to('Last', { :page => paginator.last })
+        end
+        output
+      end
+    end
+  end
+
+
+  # Category Select Box
+  def render_category_select(categories, options = {})
+    return if options[:property].nil? || options[:name].nil?
+    form = options[:form]
+    property = options[:property]
+    selected = options[:selected]
+    name = options[:form] != nil ? options[:form]+"["+options[:name]+"]" : options[:name]
+    disable_fields = !options[:disable_fields].nil? ? options[:disable_fields] : true
+    
+    ret = ''
+    ret += '<select id="listing_category_id" name="'+name+'" size="8" style="width: 250px">' 
+    for category in categories 
+      ret += '<option'
+      ret += ' value="'+category.id.to_s+'"' if !category.id.nil?
+      ret += ' disabled="disabled"' if !category.allow_listings && disable_fields
+      ret += ' selected="selected"' if category.id.to_s == selected.to_s
+      ret += '>'
+      ret += category[property] if category[property]
+      ret += "</option>"
+      ret += recurse_category_tree_for_select(category, 0, property, selected, disable_fields) if category.children.size>0
+    end 
+    ret += "</select>" 
+  end
+  def recurse_category_tree_for_select(category, depth, property, selected, disable_fields)
+    depth = depth + 1
+    level = "&nbsp;&nbsp;&nbsp;" * depth
+    level += "- "
+    ret = ''
+    if category.children.size > 0
+      category.children.each { |subcategory| 
+        if subcategory.children.size > 0
+          ret += '<option value="'+subcategory.id.to_s+'" id="'+subcategory.id.to_s+'"'
+          ret += ' disabled="disabled"' if !subcategory.allow_listings && disable_fields
+          ret += ' selected="selected"' if subcategory.id.to_s == selected.to_s
+          ret += '>'
+          ret += level + h(subcategory[property])
+          ret += recurse_category_tree_for_select(subcategory, depth, property, selected, disable_fields)
+          ret += '</option>'
+        else
+          ret += '<option value="'+subcategory.id.to_s+'" id="'+subcategory.id.to_s+'"'
+          ret += ' disabled="disabled"' if !subcategory.allow_listings && disable_fields
+          ret += ' selected="selected"' if subcategory.id.to_s == selected.to_s
+          ret += '>'
+          ret += level + h(subcategory[property])
+          ret += '</option>'
+        end
+        }
+      ret += ''
+    end
+  end
+
+  def port_string(request)
+    (request.port == 80 ? '' : ":#{request.port}")
+  end
+ 
+ def make_link request, path
+   "#{request.protocol}#{request.domain}#{port_string(request)}/#{path}"
+ end
+ 
+ #  should we show the message form?
+ def user_matches_listing_user?
+   !@listing.nil? and active_user.id == @listing.user_id
+ end
+ 
+ def show_inactive
+   logged_in? and (admin? or
+     ((defined?(@title) and @title == "Your Listings") or
+      user_matches_listing_user?))
+ end
+ 
+ 
+  def show_message_form?
+    not admin? and (not logged_in? or not user_matches_listing_user?)
+  end
+  
+  # Found Helper Methods
+
 end

@@ -1,0 +1,7 @@
+page << "$('billed_on_#{@order.id}').show();" if !@order.billed_on.nil?
+page << "$('paid_on_#{@order.id}').show();" if !@order.paid_on.nil?
+page << "$('canceled_on_#{@order.id}').show();" if !@order.canceled_on.nil?
+page << "$('billed_on_value_#{@order.id}').update('#{fmt_date(@order.billed_on)}');"
+page << "$('paid_on_value_#{@order.id}').update('#{fmt_date(@order.paid_on)}');"
+page << "$('canceled_on_value_#{@order.id}').update('#{fmt_date(@order.canceled_on)}');"
+

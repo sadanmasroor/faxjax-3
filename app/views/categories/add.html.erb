@@ -1,0 +1,43 @@
+<%= error_messages_for 'category' %>
+<h3>Category Details</h3>
+<% form_for :category, @category do |f| %>
+  <div>
+    <label for="category_name">Category Name:</label>
+    <%= f.text_field :name, :size => 40 %>
+  </div>
+  
+  <div>
+    <label for="category_category_id">Parent Category:</label>
+    <%= f.hidden_field :parent_id, :value => @category.parent_id %>
+    <%= h @category.parent.name if !@category.parent.nil? %>
+  </div>
+
+  <% if !@category.ancestor_fields.empty? %>
+  <div>
+    <label for="category_exclude_fields">Exclude Fields:</label>
+    <%=
+      select_tag(
+      "excluded_field_ids[]", 
+      options_for_select([['- No Exclusions -','']].concat(@category.ancestor_fields.collect{|x| [x.name, x.id.to_s]}), (!@category.excluded_field_ids_array.nil? and !@category.excluded_field_ids_array.empty?) ? @category.excluded_field_ids_array : ''), 
+      :multiple => true
+      ) 
+    %>
+    <br/>
+    <label>&nbsp;</label>
+    (CTRL + click to select multiple)
+    
+  </div>
+  <% end %>
+
+  <div>
+    <%= f.check_box(:allow_listings) %> Allow listings
+  </div>
+
+  <div>
+    <%= check_box_tag("add_fields", "1", true) %> Add fields
+  </div>
+
+  <%= submit_tag "Save", {:class => "submit"} %>
+  <%= submit_tag "Cancel", {:class => "submit"} %>
+  
+<% end %>

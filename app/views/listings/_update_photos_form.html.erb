@@ -1,0 +1,43 @@
+    <% form_tag( {:action => "update_photos"}, {:multipart => true}) do %>
+      <%= hidden_field_tag :id, params[:id] %>
+      <div>
+        <label for="listing_name">Name:</label>
+        <strong><%= h @listing.name %></strong>
+      </div>
+      <div class="listing-photo-field">
+        <label for="photo1">Photo 1:</label>
+        <%= file_field_tag "photo1" %><br/>
+        <% if !@listing.photo_path(Listing::PhotoMediumSuffix, 1).nil? %>
+          <label>&nbsp;</label><%= image_tag(@listing.photo_path(Listing::PhotoMediumSuffix, 1), :size => Listing::PhotoMediumDimensions) %><br/>
+          <label>&nbsp;</label><%= check_box_tag :delete_photo1, true, params[:delete_photo1].nil? ? false : true %> Delete Photo 1<br/>
+        <% end %>
+      </div>
+      <div class="listing-photo-field">
+        <label for="photo2">Photo 2:</label>
+        <%= file_field_tag "photo2" %><br/>
+        <% if !@listing.photo_path(Listing::PhotoMediumSuffix, 2).nil? %>
+          <label>&nbsp;</label><%= image_tag(@listing.photo_path(Listing::PhotoMediumSuffix, 2), :size => Listing::PhotoMediumDimensions) %><br/>
+          <label>&nbsp;</label><%= check_box_tag :delete_photo2, true, params[:delete_photo2].nil? ? false : true %> Delete Photo 2<br/>
+        <% end %>
+      </div>
+      <div class="listing-photo-field">
+        <label for="photo3">Photo 3:</label>
+        <%= file_field_tag "photo3" %><br/>
+        <% if !@listing.photo_path(Listing::PhotoMediumSuffix, 3).nil? %>
+          <label>&nbsp;</label><%= image_tag(@listing.photo_path(Listing::PhotoMediumSuffix, 3), :size => Listing::PhotoMediumDimensions) %><br/>
+          <label>&nbsp;</label><%= check_box_tag :delete_photo3, true, params[:delete_photo3].nil? ? false : true %> Delete Photo 3<br/>
+        <% end %>
+      </div>
+      <div class="listing-photo-field">
+        <label for="photo4">Photo 4:</label>
+        <%= file_field_tag "photo4" %><br/>
+        <% if !@listing.photo_path(Listing::PhotoMediumSuffix, 4).nil? %>
+          <label>&nbsp;</label><%= image_tag(@listing.photo_path(Listing::PhotoMediumSuffix, 4), :size => Listing::PhotoMediumDimensions) %><br/>
+          <label>&nbsp;</label><%= check_box_tag :delete_photo4, true, params[:delete_photo4].nil? ? false : true %> Delete Photo 4<br/>
+        <% end %>
+      </div>
+      
+      <%= submit_tag "Continue", {:class => "submit"} %>
+      <%= submit_tag "Cancel", {:class => "submit"} %>
+    <% end %>
+

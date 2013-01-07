@@ -1,0 +1,43 @@
+<%= render :partial => '/cart' %>
+<% if !@category.nil? && !@category.root?%>
+  <p id="category-list-back"><%= link_to "&lt;&lt; Back to #{@category.parent.name}", :controller => "listings", :action => "list", :id => @category.parent.id %></p>
+  <ul>
+    <li style="font-weight: bold;" class="side-active">
+    <%= h @category.name %></li>
+    <% @category.children.each do |category| %>
+      <li style="margin-left: .75em; font-weight: bold;" <%= 'class="side-active"' if @active_root_category != nil && category.id == @active_root_category.id %>><%= link_to_unless_current category.name, :controller => "listings", :action => "list", :id => category.id %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <ul>
+    <!--<li style="font-weight: bold" <%= 'class="side-active"' if params[:id] == Category::ROOT_ID.to_s %>><%#= link_to_unless_current "All Categories", :controller => "listings", :action => "list", :id => Category::ROOT_ID %></li>-->
+    <% @root_categories.each do |category| %>
+      <li style="margin-left: .75em; font-weight: bold;" <%= 'class="side-active"' if @active_root_category != nil && category.id == @active_root_category.id %>><%= link_to_unless_current category.name, :controller => "listings", :action => "list", :id => category.id %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h1 style="margin-left:9px; font-weight: bold; color:#E76E29; font-size:17px;"><a>Administration</a></h1>
+<ul style="margin-left: .75em; font-weight: bold;"><b>
+  <%= side_link_to "Home", :controller => "home" %>
+  <%= side_link_to "Configuration", :controller => "application_config", :action => "edit" %>
+  <%= side_link_to "Help Topics", :controller => "help_topics" %>
+  <%= side_link_to "Restore Data", :controller => "restore_data", :action => 'main' %>
+  </b>
+</ul>
+
+<h1 style="margin-left: .75em; font-weight: bold; color:#E76E29;"><a>Content Management</a></h1>
+<ul style="margin-left: .75em; font-weight: bold;"><b>
+  <%= side_link_to "Categories", :controller => "categories" %>
+  <%= side_link_to "Signs", :controller => "signs" %>
+  <%= side_link_to "Listings", :controller => "listings" %></b>
+</ul>
+
+<h1 style="margin-left: .75em; font-weight: bold; color:#E76E29;"><a>Operations</a></h1>
+<ul style="margin-left: .75em; font-weight: bold;"><b>
+  <%= side_link_to "Users", :controller => "users" %>
+  <%= side_link_to "Sign Products", :controller => "sign_products" %>
+  <%= side_link_to "Vendors", :controller => "vendors" %>
+  <%= side_link_to "Orders", :controller => "orders" %></b>
+<ul>
+

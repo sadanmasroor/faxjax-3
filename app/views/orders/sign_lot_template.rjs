@@ -1,0 +1,4 @@
+page << "$('sign_lot_quantity').value = '#{@sign_lot.quantity}';"
+page << "set_sign_product_id('#{@sign_lot.sign_product_id}');"
+page << "$('sign_lot_price_alt').value = '#{@sign_lot.price_alt}';"
+

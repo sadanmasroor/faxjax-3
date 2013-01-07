@@ -1,0 +1,70 @@
+<% listings.each do |listing| %>
+	<tr class="<%= cycle("tr1","tr2") -%>">
+      	 <td><%= link_to image_tag("/#{listing.photo_path(Listing::PhotoSmallSuffix, 1)}", :size => Listing::PhotoSmallDimensions), :controller => "listings", :action => "show", :id => listing.id  if !listing.photo_path(Listing::PhotoSmallSuffix, 1).nil?%>&nbsp;</td>
+	 <td><%= link_to(listing.name, link_hash_search(listing)) %></td>
+      <td><strong><%= h(listing.sign_code) %></strong></td>
+      <% if show_inactive %>
+      <td align="center">
+        <% if listing.expires_on < Time.now and listing.expires_on + 10.minutes > Time.now  %>
+          Just expired
+        <% elsif listing.expires_on > Time.now %>
+          <%= TimeFunc::days_from_now_as_string(listing.expires_on) %>
+        <% else %>
+          <% if @expires_list %>
+            <%= TimeFunc::days_from_now_as_string(listing.expires_on) %>
+          <% else %>
+            Expired
+          <% end %>
+        <% end %>
+      </td>
+      <% end %>
+      <td align="center"><%= fmt_price(listing.price) %></td>
+      <% if params[:id] == "yours" %>
+        <td align="center">
+          <% if listing.expired? || listing.canceled? %>
+            <%= link_to image_tag("delete-listing.gif", :size => "24x24", :border => 0, :alt => "Delete listing", :title => "Delete listing"), {
+              :controller => "listings",
+              :action => "delete",
+              :id => listing.id
+            }, {
+              :onclick => "return confirm('Are you sure you want to delete this listing?\\n\\nNOTE: Once a listing is deleted it is gone forever.');"
+            }
+            %><% else %>
+            <%= link_to image_tag("cancel-listing.gif", :size => "24x24", :border => 0, :alt => "Cancel listing", :title => "Cancel listing"), {
+              :controller => "listings",
+              :action => "cancel",
+              :id => listing.id
+            }, {
+              :onclick => "return confirm('Are you sure you want to cancel this listing and release it\\'s associated sign?\\n\\nNOTE: You can always relist a listing by reassigning a sign to it.');"
+            }
+            %><% end %><% if params[:id] == "yours" %><%= link_to image_tag("edit-listing.gif", :size => "24x24", :border => 0, :alt => "Edit listing", :title => "Edit listing"), :action => "edit", :id => listing.id %>
+          <% end %>
+        </td>
+      <% elsif admin? %>
+        <td align="center">
+          <%= link_to image_tag("delete-listing.gif", :size => "24x24", :border => 0, :alt => "Delete listing", :title => "Delete listing"), {
+            :controller => "listings",
+            :action => "delete",
+            :id => listing.id
+          }, {
+            :onclick => "return confirm('Are you sure you want to delete this listing?\\n\\nNOTE: Once a listing is deleted it is gone forever.');"
+          }
+          %><%= link_to image_tag("edit-listing.gif", :size => "24x24", :border => 0, :alt => "Edit listing", :title => "Edit listing"), 
+          :controller => "listings", 
+          :action => "edit", 
+          :id => listing.id %>
+
+          <% if listing.featured? %>
+         <%= "Yes" %>
+         <% else %>
+         <%= "No" %>
+         <% end %>
+
+        </td>
+        <td>
+      
+       </td> 
+
+      <% end %>
+    	</tr>
+	<% end %>

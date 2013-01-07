@@ -1,0 +1,5 @@
+<% if !@listings.nil? && !@listings.empty? %>
+  <%= render :partial => "listing_list" %>
+<% else %>
+  <p>No matching listings</p>
+<% end %>

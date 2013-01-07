@@ -1,0 +1,16 @@
+<% @videos.each do |video| %>
+
+<ul>
+<li>
+<b><%= video.title %></b>
+</li>
+<%#= link_to "View", :controller => "videos", :action => "show", :id => video.id %>
+<%#= link_to "Edit", :controller => "videos", :action => "edit", :id => video.id %>
+<%#= link_to "Delete", :controller => "videos", :action => "destroy", :id => video.id %>
+<%#= link_to 'View', video %>
+<%#= link_to 'Edit', edit_path(video) %><li>
+<%= link_to 'Delete', :controller => "videos",:action=>"destroy",:id=>video.id %></li>
+<div style="text-align:center;"><%#= video.embed_code %></div><br/>
+
+
+<%end%>

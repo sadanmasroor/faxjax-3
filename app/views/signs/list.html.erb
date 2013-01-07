@@ -1,0 +1,25 @@
+<% if admin? %>
+  <%= render(:partial => "sign_list_admin") %>
+<% elsif user? %><br/>
+  <p><em>Expired signs will be automatically removed after 30 days of inactivity.</em></p>
+
+  <% if !@unused_signs.empty? %>
+    <h3>Available Signs</h3>
+    <% @signs = @unused_signs %>
+    <%= render :partial => "sign_list" %>
+  <% end %>
+  
+  <% if !@used_signs.empty? %>
+    <h3>Listed Signs</h3>
+    <% @signs = @used_signs %>
+    <%= render :partial => "sign_list" %>
+  <% end %>
+  
+  <% if @unused_signs.empty? and @used_signs.empty? %>
+    <p>
+      You don't have any active signs. Please <%= link_to "activate a sign", :action => "activate" %>.
+    </p>
+  <% end %>
+
+<% end %>
+

@@ -1,0 +1,29 @@
+<br/><p><%= link_to 'Create a user', :action => 'new' %></p>
+<br/>
+<%= render_paginator_controls @user_pages %>
+<table cellspacing="0">
+  <tr class="trh">
+    <th>Name</th>
+    <th>Username</th>
+    <th>Email</th>
+    <th>Created On</th>
+    <th width="100">Action</th>
+  </tr>
+  
+<% for user in @users %>
+ <tr class="<%= cycle("tr1", "tr2") %>">
+    <td><%=h user.last_name %>, <%=h user.first_name %></td>
+    <td><%=h user.name %></td>
+    <td><a href="mailto:<%=h user.email %>"><%=h user.email %></a></td>
+    <td><%=fmt_date(user.created_on)%></td>
+    <td align="center">
+    <%= link_to image_tag("view.gif", :size => "24x24", :border => 0, :alt => "Show", :title => "Show"), :action => "show", :id => user %>
+    <%= link_to image_tag("edit-listing.gif", :size => "24x24", :border => 0, :alt => "Edit", :title => "Edit"), :action => "edit", :id => user %>
+    <%= link_to image_tag("delete.gif", :size => "24x24", :border => 0, :alt => "Delete", :title => "Delete"), {:action => "destroy", :id => user}, :confirm => 'Are you sure?', :post => true %>
+  </tr>
+<% end %>
+</table>
+<br/>
+<%= link_to 'Previous page', { :page => @user_pages.current.previous } if @user_pages.current.previous %>
+<%= link_to 'Next page', { :page => @user_pages.current.next } if @user_pages.current.next %> 
+

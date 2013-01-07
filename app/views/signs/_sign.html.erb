@@ -1,0 +1,31 @@
+    <tr class="<%= cycle("tr1", "tr2") %>">
+      <td><strong><%= link_to sign.code, :action => "show", :id => sign.id %></strong></td>
+      <td>
+        <%= link_to (sign.listing.name[0..50], :controller => "listings", :action => "show", :id => sign.listing.id) if !sign.listing.nil? %>
+        <%= "N/A" if !sign.listed? %>
+      </td>
+      <td align="center"><%= fmt_date(sign.activated_on) %>
+      <td align="center">
+        <% if sign.expires_on > Time.now %>
+          <%=   %>
+          <%= sign.expires_in %> days
+        <% else %>
+          Expired
+        <% end %>
+      </td>
+      <td align="center">
+        <%= link_to (image_tag("add-listing.gif", :size => "12*12", :border => 0, :alt => "Add listing", :title => "Add listing"), 
+          :controller => "listings", 
+          :action => "add", 
+          :sign_id => sign.id) if !sign.listed? %>
+        <%= link_to image_tag("release-listing.gif", :size => "24x24", :border => 0, :alt => "Release listing", :title => "Release listing"), {
+          :controller => "listings", 
+          :action => "cancel",
+          :id => sign.listing.id
+        }, {
+          :onclick => "return confirm('Are you sure you want to release the listing from this sign?\\n\\nNOTE: You can always reassign a sign to the listing.');"
+        } if sign.listed?
+        %>
+      </td>
+    </tr>
+

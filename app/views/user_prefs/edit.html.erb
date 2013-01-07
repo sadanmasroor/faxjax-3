@@ -1,0 +1,14 @@
+<h1>UserPrefs#edit</h1>
+
+<% form_for :user_prefs do |f| %>
+  <div>
+    <%= f.check_box :send_promotions %> It's ok for Faxjax to send me valuable deals and information 
+  </div>
+
+  <div>
+    <%= f.check_box :notify_on_message_received %> Notify me by email when I receive a message
+  </div>
+
+  <%= submit_tag "Update", {:class => "submit"} %>
+  <%= submit_tag "Cancel", {:class => "submit"} %>
+<% end %>

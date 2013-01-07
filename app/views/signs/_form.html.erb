@@ -1,0 +1,19 @@
+<%= error_messages_for 'sign' %>
+
+<!--[form:sign]-->
+<div><label for="sign_code">Code</label>
+<%= text_field 'sign', 'code'  %></div>
+
+<div><label for="sign_key">PIN</label>
+<%= text_field 'sign', 'key'  %></div>
+
+<div><label for="sign_activated_on">Activated on</label>
+<%= datetime_select 'sign', 'activated_on'  %></div>
+
+<div><label for="sign_updated_on">Updated on</label>
+<%= datetime_select 'sign', 'updated_on'  %></div>
+
+<div><label for="sign_duration">Duration</label>
+<%= text_field 'sign', 'duration'  %></div>
+<!--[eoform:sign]-->
+

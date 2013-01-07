@@ -1,0 +1,2 @@
+module BecomeAnAffiliateHelper
+end

@@ -1,0 +1,24 @@
+<% self.extend CurrencyFormatter -%>Sign purchase:
+<%= @invoice.last_name %>, <%= @invoice.first_name %>
+<%= @invoice.street %>
+<%= @invoice.city %>, <%= @invoice.state %> <%= @invoice.zip %>
+<%= @invoice.email %>
+
+<% unless @promo_code.nil? %>
+  The buyer supplied this promo code: <%= @promo_code %>
+<% end %>
+
+<% unless @affiliate_code.nil? %>
+  This affiliate code: <%= @affiliate_code %> was used.
+<% end %>
+
+The following sign codes and PINs were sent to <%= @invoice.email %>:
+<%
+count = 0
+@signs.each do |sign| 
+count = count + 1
+%>
+<%= count %>) <%= sign.sign_product.title_string %>
+   Code: <%= sign.code %>  PIN: <%= sign.key_string %>
+<% end %>
+Total Payment: <%= dollar_str(@invoice.total) %>

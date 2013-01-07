@@ -1,0 +1,43 @@
+<p>
+  <% if @reply_message.from_user != active_user %>
+    <label>From:</label>
+    <%= h @reply_message.from_user.name %>
+  <% else %>
+    <label>To:</label>
+    <%= h @reply_message.user.name %>
+  <% end %>
+</p>
+
+<p>
+  <% if @reply_message.from_user != active_user %>
+    <label>Received:</label>
+  <% else %>
+    <label>Sent:</label>
+  <% end %>
+  <%= fmt_date(@reply_message.created_on) %>
+</p>
+
+<p>
+  <label>Subject:</label>
+  <%= h @reply_message.subject %>
+</p>
+
+<p>
+  Message:<br/>
+  <%= h @reply_message.message %>
+</p>
+
+<% if @reply_message.from_user != active_user %>
+<div id="reply-link">
+<p>
+  <%= link_to_function "Reply", "new Effect.Appear('reply', {duration: .5});self.setTimeout('$(\\'reply-link\\').toggle()', 50)" %>
+</p>
+</div>
+
+<div id="reply" style="display: none;">
+<p>
+  <%= link_to_function "Cancel, do not reply", "new Effect.Appear('reply-link', {duration: .5});self.setTimeout('$(\\'reply\\').toggle()', 50)" %>
+</p>
+<%= render :partial => "/messages/message_form" %>
+</div>
+<% end %>

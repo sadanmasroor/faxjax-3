@@ -1,0 +1,21 @@
+<%= link_to (image_tag "logo.gif", {:id => "logo", :border => 0 }), :controller => "/home"  %>
+
+<ul id="banner-nav">
+  <li><%= link_to "Obtain a Listings", {:controller => "sign_products", :action => "list"}, {:style => "color: #090"} %></li>
+  <li>|</li>
+  <li><%= link_to "About Faxjax", {:controller => "home", :action => "about"}, {:style => "color: #090"} %></li>
+  <li>|</li>
+  <li><%= link_to "Help", {:controller => "help_topics"}, {:style => "color: #090"} %></li>
+  <li>|</li>
+  <li>
+    <div id="faxjax-phone-number">
+      1-855-5-FAXJAX<br/><span style="color: #999">(855 532-9529)</span>
+    </div>
+  </li>
+</ul>
+<% form_tag({:controller => "listings", :action => "list"}, {:id => "search-form"}) do %>
+  Search Listings:
+  <%= text_field_tag "keywords", nil, { :size => 15, :maxlength => 64, :id => "search-box" } %>
+  <%= submit_tag "GO!", {:id => "search-button", :class => "submit"} %>
+<% end %>
+

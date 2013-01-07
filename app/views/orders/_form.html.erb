@@ -1,0 +1,11 @@
+  <h3>Select Vendor</h3>
+  <div>
+    <label for="order_vendor_id">Vendor:</label>
+    <% if @order.nil? || @order.vendor.nil? %>
+      <%= select("order", "vendor_id", Vendor.find_all_active.collect {|v| [ v.name, v.id ] }, { :include_blank => true }) %>
+      <%= link_to "Add a vendor", :controller => "vendors", :action => "new" %>
+    <% else %>
+      <%= h @order.vendor.name %>
+    <% end %>
+  </div>
+

@@ -1,0 +1,22 @@
+Thank you for your listing purchase!
+
+Next steps:
+
+1. Login or create a Faxjax account:
+   http://www.faxjax.com/home/sign_in
+2. Activate your sign(s):
+   http://www.faxjax.com
+3. Add a classified listing to each sign. 
+3. Once you receive your sign(s), place them and sell your stuff!
+  
+
+Use the following sign codes and PINs to get started listing your items on Faxjax:
+<%
+count = 0
+@signs.each do |sign| 
+count = count + 1
+%>
+<%= count %>) <%= sign.sign_product.title_string %>
+   Code: <%= sign.code %>  PIN: <%= sign.key_string %>
+<% end %>
+Faxjax Support

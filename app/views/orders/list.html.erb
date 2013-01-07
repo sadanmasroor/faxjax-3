@@ -1,0 +1,64 @@
+<script type="text/javascript">
+<!--
+  function handleStatusChange(id) {
+    $('save_status_'+id).show();
+  }
+//-->
+</script>
+
+<br/><p><%= link_to 'Create an order', :action => 'new' %></p><br/>
+<%= render_paginator_controls @order_pages %>
+<table cellspacing="0">
+  <tr class="trh">
+    <th width="75">Created</th>
+    <th>Vendor</th>
+    <th width="175">Status</th>
+    <th width="175">Timestamps</th>
+    <th width="125">Action</th>
+  </tr>
+  
+<% for order in @orders %>
+  <tr class="<%= cycle("tr1", "tr2") %>">
+    <td valign="top"><%= fmt_date(order.created_on) %></td>
+    <td valign="top"><%= !order.vendor.nil? ? order.vendor.name : "" %></td>
+    <td valign="top">
+      <% form_remote_tag :url => {:action => "update_status", :id => order.id}, :complete => "$('save_status_spinner_#{order.id.to_s}').hide()", :success => "$('save_status_#{order.id.to_s}').hide();", :failure => "alert('Failed to save status')", :html => { :action => url_for(:action => "update_status", :id => order.id) } do %>
+      <%= select_tag("status", options_for_select(Order::STATUSES, order.status), { :onchange => "handleStatusChange("+order.id.to_s+");"}) %>
+      <%= submit_tag("Save", {:style => "display: none;", :id => "save_status_"+order.id.to_s, :onclick => "$('save_status_spinner_#{order.id.to_s}').show()"}) %>
+      <%= image_tag("spinner.gif", :alt => "spinner", :id => "save_status_spinner_#{order.id.to_s}", :style => "display: none;", :align => "absmiddle") %>
+      <% end %>
+    </td>
+    <td valign="top" nowrap="nowrap">
+      <table cellspacing="0">
+        <tbody id="billed_on_<%= order.id %>"<%= hidden_if_empty(order.billed_on) %>>
+        <tr>
+          <td>Billed:</td>
+          <td><span id="billed_on_value_<%= order.id %>"><%= fmt_date(order.billed_on) %></td>
+        </tr>
+        </tbody>
+        <tbody id="paid_on_<%= order.id %>" <%= hidden_if_empty(order.paid_on) %>>
+        <tr>
+          <td>Paid:</td>
+          <td><span id="paid_on_value_<%= order.id %>"><%= fmt_date(order.paid_on) %></td>
+        </tr>
+        </tbody>
+        <tbody id="canceled_on_<%= order.id %>" <%= hidden_if_empty(order.canceled_on) %>>
+        <tr>
+          <td>Canceled:</td>
+          <td><span id="canceled_on_value_<%= order.id %>"><%= fmt_date(order.canceled_on) %></td>
+        </tr>
+        </tbody>
+      </table>
+    </td>
+    <td valign="top" align="center">
+      <%= link_to image_tag("edit-listing.gif", :size => "24x24", :border => 0, :alt => "Edit", :title => "Edit"), :action => "edit", :id => order %>
+      <%= link_to image_tag("export.gif", :size => "24x24", :border => 0, :alt => "Export to CSV", :title => "Export to CSV"), :action => "export_csv", :id => order %>
+      <%= link_to image_tag("delete.gif", :size => "24x24", :border => 0, :alt => "Delete", :title => "Delete"), {:action => "destroy", :id => order}, :confirm => 'Are you sure?', :post => true %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @order_pages.current.previous } if @order_pages.current.previous %>
+<%= link_to 'Next page', { :page => @order_pages.current.next } if @order_pages.current.next %> 
+

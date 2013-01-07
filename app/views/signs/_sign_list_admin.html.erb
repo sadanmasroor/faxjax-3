@@ -1,0 +1,40 @@
+<% form_tag :action => 'list' do %>
+  By sign code:&nbsp;&nbsp;
+  <input type="text" name="code" value="<%= params[:code] %>"/>
+  <input type="submit" name="commit" value="GO"/>
+  <%= link_to "Reset", :action => "list" %>
+  <br/><br/>
+<% end %>
+
+<%= render_paginator_controls @signs_pages %>
+<table cellspacing="0">
+  <tr class="trh">
+  <% for column in Sign.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+    <th >Action</th>
+  </tr>
+  
+<% for sign in @signs %>
+   <tr class="<%= cycle("tr1", "tr2") %>">
+  <% for column in Sign.content_columns %>
+    <%
+      colname = column.name == "key" ? "key_string" : column.name
+    %>
+    <td><%=h sign.send(colname) %></td>
+  <% end %>
+    <td align="center">
+      <%= link_to image_tag("edit-listing.gif", :size => "12*12", :border => 0, :alt => "Edit", :title => "Edit"), :action => "edit", :id => sign %>
+      <%= link_to image_tag("delete.gif", :size => "12*12", :border => 0, :alt => "Reset", :title => "Reset"), {
+        :action => "reset",
+        :id => sign.id
+      }, {
+        :onclick => "return confirm('Are you sure you want to reset this sign and have it be put back into the pool of salable signs?\\n\\nNOTE: A sign reset changes the PIN and cannot be undone.');"
+      }
+      %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+

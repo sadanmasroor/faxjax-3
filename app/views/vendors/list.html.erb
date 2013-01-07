@@ -1,0 +1,9 @@
+<br/><p><%= link_to 'Create a vendor', :action => 'new' %></p>
+<br/>
+<% if admin? %>
+  <%= render(:partial => "vendor_list_admin") %>
+<% elsif user? %>
+    <h3>Companies Carrying Faxjax Signs</h3>
+    <%= render :partial => "vendor_list" %>
+<% end %>
+

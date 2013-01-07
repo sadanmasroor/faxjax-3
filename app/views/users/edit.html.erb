@@ -1,0 +1,6 @@
+<div class="faxjax-form">
+  <%= error_messages_for 'user' %>
+  <% form_tag(:action => "update") do %>
+    <%= render :partial => "user_form" %>
+  <% end %>
+</div>

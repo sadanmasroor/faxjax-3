@@ -1,0 +1,13 @@
+<%= error_messages_for 'sign_lot' %>
+
+<% form_tag(:action => "create_step_2", :id => params[:id]) do %>
+  <%= hidden_field_tag(:mode, @mode) %>
+
+  <%= render(:partial => "form") %>
+  <%= render(:partial => "form_step_2") %>
+  
+  <%= submit_tag "Save & Add Another", {:class => "submit"} %>
+  <%= submit_tag "Continue", {:class => "submit"} %>
+  <%= submit_tag "Cancel", {:class => "submit"} %>
+<% end %>
+

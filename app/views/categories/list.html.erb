@@ -1,0 +1,11 @@
+
+<% form_tag do %>
+  <div>
+    <label for="category_category_id">Select a Category:</label>
+    <%= render_category_select(@root_category, {:property => "name", :name => "category_id", :selected => 1, :disable_fields => false}) %>
+  </div>
+  <%= submit_tag "Add Subcategory", {:class => "submit"} %>
+  <%= submit_tag "Edit", {:class => "submit"} %>
+  <%= submit_tag "Delete", {:class => "submit", :onclick => "return confirm('Are you sure you want to permanently delete this category and all of its subcategories?\\n\\nWARNING: If this category has listings associated with it they will be permanently deleted. This is an unrecoverable operation.');"} %>
+<% end %>
+

@@ -1,0 +1,20 @@
+<table width="100%" class="details">
+<tr>
+<td valign="top">
+  <table width="100%">
+    <% for column in User.content_columns %>
+    <tr>
+      <td class="label"><%= column.human_name %></td>
+      <td><strong><%=h @user.send(column.name) %></strong></td>
+    </tr>
+    <% end %>
+  </table>
+</td>
+</tr>
+</table>
+
+<% if !@listings.nil? && !@listings.empty? %>
+<h3>Listings</h3>
+<%= render_paginator_controls @listing_pages %>
+<%= render :partial => "/listings/listing_list" %>
+<% end %>

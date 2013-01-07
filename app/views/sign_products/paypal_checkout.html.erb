@@ -1,0 +1,57 @@
+<%
+  cart = session[:cart]
+  if !cart.nil? && !cart.sign_products.nil? && !cart.sign_products.empty?
+%>
+<!-- Nonce <%= cart.invoice_nonce %>   -->
+  <h3>Your Cart - <span id="cart-count"><%= cart.count_str -%></span></h3>
+  <table cellspacing="0">
+    <tr class="trh">
+      <th>Sign Type</th>
+      <th>Quantity</th>
+      <th>Unit Price</th>
+      <th>Line Price</th>
+      <th>Remove</th>
+    </tr>
+  <%= checkout_table(cart) %>
+  <tr>
+    <td align="right" colspan="2">Promo Code</td>
+    <td align="right"><input id="promo_code" type="text" name="promo_code" size="8" maxlength="6" value="<%= cart.promo_code -%>" /></td>
+    <td align="right">
+      <font color="red" id="discount"><%= '(' + cart.discount_total_alt + ')' unless cart.discount_total == 0 %></font>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="6"><hr /></td>
+  </tr>
+  <tr>
+    <td colspan="3" align="right">Subtotal</td>
+    <td align="right"><strong id="subtotal"><%= cart.subtotal_alt %></strong></td>
+  </tr>
+  <tr>
+    <td colspan="3" align="right">Shipping</td>
+    <td align="right"><strong id="shipping"><%= cart.shipping_total_alt -%></strong></td>
+  </tr>
+
+  <tr>
+    <td colspan="3" align="right" style="font-size: 14px;"><strong>Total</strong></td>
+    <td align="right" style="font-size: 14px;"><strong id="total"><%= cart.total_alt %></strong></td>
+  </tr>
+  <tr>
+    <td colspan="6" style="background-color: 0xf0f0f0;"><hr /></td>
+  </tr>
+ </table>
+                  
+  <form id="paypal" action="<%= PAYPAL_POST_URL %>" method="post">
+
+    <p>
+      <span id="paypal_fields">
+        <%= render :partial => 'paypal_fields', :locals => {:cart => cart} %>
+      </span>
+    <button type="submit"><img src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif" align="left" style="margin-right: 7px;" /></button>
+    
+    </p>
+ </form>
+  
+<%
+  end
+%>

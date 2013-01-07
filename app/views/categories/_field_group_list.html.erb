@@ -1,0 +1,33 @@
+
+<table cellspacing="0">
+  <tr class="trh">
+    <th>Name</th>
+    <th>Type</th>
+    <th width="200">Field Group</th>
+    <th width="50">Action</th>
+  </tr>
+  <% @field_groups.each do |field_group| %>
+    <tbody>
+      <tr class="tr2" style="height: 32px">
+        <td colspan="3" style="border-bottom: 1px solid #999;"><strong><%= field_group.name %></strong></td>
+        <td style="border-bottom: 1px solid #999;">
+        <% if field_group.id != -1 %>
+          <%= link_to image_tag("edit-listing.gif", :size => "24x24", :border => 0, :alt => "Edit field group", :title => "Edit field group"), 
+          :action => "edit_field_group", 
+          :id => field_group.id %><%= link_to image_tag("delete.gif", :size => "24x24", :border => 0, :alt => "Delete field group", :title => "Delete field group"), {
+            :action => "delete_field_group",
+            :id => field_group.id
+          }, {
+            :onclick => "return confirm('Are you sure you want to delete this field group?\\n\\nNOTE: Once a field group is deleted it is gone forever.');"
+          }
+          %>
+        <% else %>
+          &nbsp;
+        <% end %>
+        </td>
+      </tr>
+      <%= render :partial => "field", :collection => field_group.fields %>
+    </tbody>
+  <% end %>
+</table>
+

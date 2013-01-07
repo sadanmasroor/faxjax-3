@@ -1,0 +1,23 @@
+  <script type="text/javascript">
+  <!--
+    function deleteSignLot(id) {
+      sign_lot = $("sign_lot_"+id);
+      sign_lot.remove();
+      sign_lots = $('sign_lots');
+      if (sign_lots.getElementsByTagName("tr").length == 1) {
+        sign_lots.remove();
+      }
+    }
+  //-->
+  </script>
+  <table width="100%" id="sign_lots">
+    <tr class="trh">
+      <th width="25%">Type</th>
+      <th width="25%">Duration</th>
+      <th width="25%">Quantity</th>
+      <th width="25%">Price</th>
+      <% if !@no_delete_sign_lots %><th></th><% end %>
+    </tr>
+    <%= render(:partial => "sign_lot", :collection => @sign_lots) %>
+  </table>
+

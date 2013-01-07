@@ -1,0 +1,6 @@
+<% @videos.each do |video| %>
+<li style="font-weight: bold;" class="side-active"><%= link_to video.title, :controller => "videos", :action => "video", :id => video.id %>
+</li>
+<%#= video.title %>
+<%#= video.embed_code %>
+<%end%>

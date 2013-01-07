@@ -1,0 +1,44 @@
+<br/>  <div>
+    <label for="sign_product_title">Title:</label>
+    <%= text_field :sign_product, :title, :size=>40 %>
+  </div>
+
+  <div>
+    <label for="sign_product_description">Description:</label>
+    <%= text_area :sign_product, :description, :rows => 5 %>
+  </div>
+
+  <div>
+    <label for="sign_product_type">Type:</label>
+    <%= select_tag "sign_product[sign_type]", options_for_select(Category.listing_types, [!@sign_product.nil? ? @sign_product.sign_type : nil]), :id => "sign_product_sign_type" %>
+  </div>
+
+  <div>
+    <label for="sign_product_duration">Duration:</label>
+    <%= text_field("sign_product", "sign_duration", :size => 5) %>
+  </div>
+
+  <div class="sign_product_photo">
+    <label for="photo">Photo:</label>
+    <%= file_field_tag "photo" %><br/>
+    <% if !@sign_product.photo_path(SignProduct::PhotoSmallSuffix).nil? %>
+      <label>&nbsp;</label><%= image_tag(@sign_product.photo_path(SignProduct::PhotoSmallSuffix), :size => SignProduct::PhotoSmallDimensions) %><br/>
+    <% end %>
+  </div>
+  
+  <div>
+    <label for="sign_product_price">Price:</label>
+    <%= text_field :sign_product, :price_alt, {:size=>8, :maxlength=>13} %>
+  </div>
+
+  <div>
+    <label for="sign_product_shipping_price">Shipping:</label>
+    <%= text_field :sign_product, :shipping_price_alt, {:size=>8, :maxlength=>13} %>
+  </div>
+  
+  <div>
+    <label for="sign_product_tax">Tax:</label>
+    <%= text_field :sign_product, :tax_alt, {:size=>8, :maxlength=>13} %>
+  </div>
+  
+

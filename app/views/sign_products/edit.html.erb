@@ -1,0 +1,9 @@
+<% form_tag({:action => "update", :id => params[:id]}, {:multipart => true}) do %>
+  <%= error_messages_for 'sign_product' %>
+  <%= render(:partial => "form") %>
+  <br/>
+  <%= submit_tag "Update", {:class => "submit"} %>
+  <%= submit_tag "Cancel", {:class => "submit"} %>
+
+<% end %>
+

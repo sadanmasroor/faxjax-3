@@ -1,0 +1,82 @@
+  <h3>Add Sign Lots</h3>
+  
+  <% if !@order.sign_lots.nil? && !@order.sign_lots.empty? %>
+    <% @sign_lots = @order.sign_lots %>
+    <%= render(:partial => "sign_lots") %>
+  <% end %>
+  <% if !SignLot.find_templates.empty? %>
+  <script type="text/javascript">
+  <!--
+  set_sign_product_id = function(id) {
+    var el = $('sign_lot_sign_product_id');
+    for(var i=0,len=el.options.length;i<len;i++) {
+      var val = el.options[i].value;
+      if (val == id) {
+        console.debug("HI");
+        el.selectedIndex = i;
+        return;
+      }
+    }
+  }
+  //-->
+  </script>
+  <div id="use_template">
+    <label for="sign_lot_template_id">Use Template:</label>
+    <%= select_tag("sign_lot_template_id", '<option>Select template (optional)</option>'+options_for_select(SignLot.find_templates.collect {|t| [ t.name, t.id ] }), {:onchange => "new Ajax.Request('/orders/sign_lot_template/'+($('sign_lot_template_id').options[$('sign_lot_template_id').selectedIndex].value), {asynchronous:true, evalScripts:true})"}) %>
+    <%= link_to_function "Delete", "
+      $('sign_lot_template_spinner').show();
+      confirm('Are you sure you wish to delete this sign lot template?') ? new Ajax.Request(
+        '/orders/destroy_sign_lot/'+($('sign_lot_template_id').options[$('sign_lot_template_id').selectedIndex].value),
+        {
+          asynchronous:true, 
+          evalScripts:true, 
+          onComplete:function(request){
+            $('sign_lot_template_spinner').hide();
+            if ($('sign_lot_template_id').options.length == 1) {
+              $('use_template').remove();
+            }
+          }, 
+          onSuccess:function(request){
+            if ($('sign_lot_template_id').selectedIndex > 0) {
+              $('sign_lot_template_id').options[$('sign_lot_template_id').selectedIndex].remove();
+            }
+          }
+        }
+      ) : alert('canceled');" %>
+      <%= image_tag("spinner.gif", :alt => "spinner", :id => "sign_lot_template_spinner", :style => "display: none;", :align => "absmiddle") %>
+  </div>
+  <% end %>
+
+  <div>
+    <label for="sign_lot_sign_product_id">Sign Product:</label>
+    <%= select_tag "sign_lot[sign_product_id]", options_for_select(SignProduct.find(:all, :conditions => "deleted != 1").collect{|x| [x.title_string, x.id]}, [!@sign_lot.nil? ? @sign_lot.sign_product_id : nil]), :id => "sign_lot_sign_product_id" %>
+  </div>
+
+  <div>
+    <label for="sign_lot_quantity">Quantity:</label>
+    <%= text_field("sign_lot", "quantity", :size => 5) %>
+  </div>
+  
+  <div>
+    <label for="sign_lot_price_alt">Price:</label>
+    <%= text_field("sign_lot", "price_alt", :size => 5) %>
+  </div>
+  
+  <div id="save_as_template_field"
+    <% if !params[:sign_lot].nil? && !params[:sign_lot][:name].nil? && !params[:sign_lot][:name].empty? %>
+    style="display: none;"
+    <% end %>
+  >
+    <%= check_box_tag("save_as_template", 1, false, {:onclick => "$('sign_lot_name_field').show();$('save_as_template_field').hide()"}) %> Save as template
+  </div>
+  
+  <div id="sign_lot_name_field" 
+    <% if params[:sign_lot].nil? || params[:sign_lot][:name].nil? || params[:sign_lot][:name].empty? %>
+    style="display: none;"
+    <% end %>
+  >
+    <label for="sign_lot_name">Template Name:</label>
+    <%= text_field("sign_lot", "name") %>
+  </div>
+
+

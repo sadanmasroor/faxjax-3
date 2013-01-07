@@ -1,0 +1,6 @@
+<strong>Restore data from</strong>
+<ul>
+  <% @dirs.each do |dir| %>
+    <li><%= link_to dir.strftime("%m-%d-%Y"), {:action => "restore", :date => dir.strftime("%m-%d-%Y")}, :confirm => "Are you sure you want to restore from this date?" %></li>
+  <% end %>
+</ul>

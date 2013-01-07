@@ -1,0 +1,13 @@
+    <tr id="sign_lot_<%= sign_lot.id %>">
+      <td><%= ok(sign_lot.sign_product.try(:sign_type)) %></td>
+      <td><%= ok(sign_lot.sign_product.try(:sign_duration)) %></td>
+      <td><%= sign_lot.quantity %></td>
+      <td><%= sign_lot.price_alt %></td>
+      <% if !@no_delete_sign_lots %>
+      <td nowrap="nowrap">
+        <%= link_to_remote "Delete", :url => {:action => "destroy_sign_lot", :id => sign_lot.id}, :success => "deleteSignLot(#{sign_lot.id.to_s})", :before => "$('sign_lot_spinner_#{sign_lot.id.to_s}').show()", :complete => "$('sign_lot_spinner_#{sign_lot.id.to_s}').hide()" %>
+        <%= image_tag("spinner.gif", :alt => "spinner", :id => "sign_lot_spinner_#{sign_lot.id.to_s}", :style => "display: none;", :align => "absmiddle") %>
+      </td>
+      <% end %>
+    </tr>
+
