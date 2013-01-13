@@ -153,11 +153,11 @@ $(document).ready(function() {
 });
 </script>
 <script>
-$(window).load(function() {
-	mCustomScrollbars();
-});
+//$(window).load(function() {
+//	mCustomScrollbars();
+//});
 
-function mCustomScrollbars(){
+//function mCustomScrollbars(){
 	/* 
 	malihu custom scrollbar function parameters: 
 	1) scroll type (values: "vertical" or "horizontal")
@@ -169,24 +169,24 @@ function mCustomScrollbars(){
 	7) scrolling via buttons support (values: "yes" or "no")
 	8) buttons scrolling speed (values: 1-20, 1 being the slowest)
 	*/
-	$("#mcs_container").mCustomScrollbar("vertical",300,"easeOutCirc",1.05,"auto","yes","yes",15); 
-}
+//	$("#mcs_container").mCustomScrollbar("vertical",300,"easeOutCirc",1.05,"auto","yes","yes",15); 
+//}
 
 /* function to fix the -10000 pixel limit of jquery.animate */
-$.fx.prototype.cur = function(){
-    if ( this.elem[this.prop] != null && (!this.elem.style || this.elem.style[this.prop] == null) ) {
-      return this.elem[ this.prop ];
-    }
-    var r = parseFloat( jQuery.css( this.elem, this.prop ) );
-    return typeof r == 'undefined' ? 0 : r;
-}
+//$.fx.prototype.cur = function(){
+   // if ( this.elem[this.prop] != null && (!this.elem.style || this.elem.style[this.prop] == null) ) {
+    //  return this.elem[ this.prop ];
+    //}
+   // var r = parseFloat( jQuery.css( this.elem, this.prop ) );
+   // return typeof r == 'undefined' ? 0 : r;
+//}
 
 /* function to load new content dynamically */
-function LoadNewContent(id,file){
-	$("#"+id+" .customScrollBox .content").load(file,function(){
-		mCustomScrollbars();
-	});
-}
+//function LoadNewContent(id,file){
+//	$("#"+id+" .customScrollBox .content").load(file,function(){
+//		mCustomScrollbars();
+//	});
+//}
 </script>
 <script type="text/javascript">
   var _gaq = _gaq || [];
@@ -324,7 +324,7 @@ function LoadNewContent(id,file){
                         </div>
                         
                     </div>
-                    <a href="#" class="scrollUpBtn"></a> <a href="#" class="scrollDownBtn"></a>
+                    <!--<a href="#" class="scrollUpBtn"></a> <a href="#" class="scrollDownBtn"></a> -->
                      </div>
                     
                     <div class="topic_main"><h1>Videos</h1></div>
