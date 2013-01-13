@@ -76,8 +76,10 @@
       <td class="label">
         <%= h field.name %>:
       </td>
+	<!-- Hack by Bill as the previous code was not working properly.This is not the recommended approach but works for us.-->
+	<% @value = ListingValue.find_by_field_id(field.id) %>
       <td>
-        <%= !field.blank? ? h(field.name) : "-" %>
+        <%= !@value.blank? ? @value.value : "-" %>
       </td>
       </tr>
     <% end %>

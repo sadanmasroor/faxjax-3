@@ -1,7 +1,7 @@
 <%= render :partial => "/cart" %>
 
 <% if !@category.nil? && !@category.root?  %>
-  <p id="category-list-back"><%= link_to "&lt;&lt; Back to #{@category.parent.name}", :controller => "listings", :action => "list", :id => @category.parent.id %></p>
+  <p id="category-list-back"><%= link_to "&lt;&lt; Back to #{@category.parent.name}".html_safe, :controller => "listings", :action => "list", :id => @category.parent.id %></p>
   <ul>
     <li style="font-weight: bold;" class="side-active">
     <%= h @category.name %></li>
