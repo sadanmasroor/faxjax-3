@@ -343,6 +343,12 @@ class BasicListingsController < ApplicationController
       redirect_to_referer
     end
 
+    # SHOW LARGE PHOTO
+  def show_large_photo
+    @listing = Listing.find(params[:id])
+    render :layout => "photo_popup"
+  end
+
 
     private
 

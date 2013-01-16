@@ -1,4 +1,4 @@
-<% form_for :message, @message, :url => {:controller => "listings", :action => "send_message", :id => @message_id} do |f| %>
+<%= form_for :message, @message, :url => {:controller => "listings", :action => "send_message", :id => @message_id} do |f| %>
     <%= f.hidden_field :listing_id, :value=>@listing.id %>
   <div>
     <label>To:</label>
@@ -7,7 +7,7 @@
   </div>
   <div>
   <% if !logged_in? %>
-    <label for="message_from_email">Your Email: <%= required_if_empty('') %></label>
+    <label for="message_from_email">Your Email: <%= required_if_empty('').html_safe %></label>
     <%= f.text_field :from_email, :size=>40 , :maxlength=> 40 %>
   <% else %>
     <%= f.hidden_field :from_email, :value => active_user.email %>
@@ -35,6 +35,6 @@
   <div>
   <%= submit_tag "Send Message", {:class => "submit"} %>
   </div>
-  <i> <%= required_if_empty('') %>Your email address will only be shared with this listing owner.
+  <i> <%= required_if_empty('').html_safe %>Your email address will only be shared with this listing owner.
 <% end %>
 
