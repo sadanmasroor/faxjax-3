@@ -26,12 +26,12 @@ class UsersController < ApplicationController
   end
 
   def list
-    @user_pages, @users = paginate_many_results User, {:page => params[:page], :per_page => !params[:per_page].nil? ? params[:per_page] : 10, :order => "last_name ASC"}
+    @user_pages = @users = User.paginate(:page => params[:page], :per_page => !params[:per_page].nil? ? params[:per_page] : 10, :order => "last_name ASC")
   end
 
   def show
     @user = User.find(params[:id])
-    @listing_pages, @listings = paginate_many_results Listing, {:page => params[:page], :per_page => !params[:per_page].nil? ? params[:per_page] : 100}, "SELECT * FROM listings WHERE user_id = #{@user.id}" 
+    @listing_pages = @listings = Listing.paginate(:page => params[:page], :per_page => !params[:per_page].nil? ? params[:per_page] : 100, :conditions => "user_id = #{@user.id}") 
   end
 
   def new

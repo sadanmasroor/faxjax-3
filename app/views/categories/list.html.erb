@@ -1,8 +1,8 @@
 
-<% form_tag do %>
+<%= form_tag do %>
   <div>
     <label for="category_category_id">Select a Category:</label>
-    <%= render_category_select(@root_category, {:property => "name", :name => "category_id", :selected => 1, :disable_fields => false}) %>
+    <%= render_category_select(@root_category, {:property => "name", :name => "category_id", :selected => 1, :disable_fields => false}).html_safe %>
   </div>
   <%= submit_tag "Add Subcategory", {:class => "submit"} %>
   <%= submit_tag "Edit", {:class => "submit"} %>
