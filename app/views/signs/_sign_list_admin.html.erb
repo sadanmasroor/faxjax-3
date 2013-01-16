@@ -1,4 +1,4 @@
-<% form_tag :action => 'list' do %>
+<%= form_tag :action => 'list' do %>
   By sign code:&nbsp;&nbsp;
   <input type="text" name="code" value="<%= params[:code] %>"/>
   <input type="submit" name="commit" value="GO"/>
@@ -6,7 +6,7 @@
   <br/><br/>
 <% end %>
 
-<%= render_paginator_controls @signs_pages %>
+<%= will_paginate @signs_pages %>
 <table cellspacing="0">
   <tr class="trh">
   <% for column in Sign.content_columns %>

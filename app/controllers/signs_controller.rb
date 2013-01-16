@@ -101,7 +101,11 @@ class SignsController < ApplicationController
         conditions = "code = '#{params[:code]}'"
       end
       @title = "Signs"
-      @signs_pages, @signs = paginate_many_results Sign, {:conditions => conditions, :page => params[:page], :per_page => !params[:per_page].nil? ? params[:per_page] : 25}
+     # @signs_pages, @signs = paginate_many_results Sign, {:conditions => conditions, :page => params[:page], :per_page => !params[:per_page].nil? ? params[:per_page] : 25}
+     
+      @signs_pages = @signs = Sign.paginate(:conditions => conditions, :page => params[:page], :per_page => !params[:per_page].nil? ? params[:per_page] : 25)
+
+     
     else
       @signs = active_user.signs
       @used_signs = []
