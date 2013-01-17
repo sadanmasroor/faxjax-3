@@ -54,7 +54,7 @@ config.action_mailer.raise_delivery_errors = false
 # Use SMTP protocol to deliver emails
 config.action_mailer.delivery_method = :smtp
 
-ActionMailer::Base.server_settings = {
+ActionMailer::Base.smtp_settings = {
   :address => "mail.faxjax.com",
   :port => 25,
   :authentication => :login,
