@@ -46,4 +46,26 @@ Faxjax3::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+  
+  
+  # Disable delivery errors if you bad email addresses should just be ignored
+config.action_mailer.raise_delivery_errors = false
+
+# Use SMTP protocol to deliver emails
+config.action_mailer.delivery_method = :smtp
+
+ActionMailer::Base.server_settings = {
+  :address => "mail.faxjax.com",
+  :port => 25,
+  :authentication => :login,
+  :user_name => "faxjax",
+  :password => "$ell$igns"
+}
+PAYPAL_POST_URL = 'https://www.sandbox.paypal.com/us/cgi-bin/webscr'
+PAYPAL_BUSINESS = 'seller_1202670841_biz@kalebwalton.com'
+PAYPAL_BASE_URL = 'http://www.faxjax.com'
+PAYPAL_IMAGE_URL = 'https://enki.site5.com/~faxjax/images/logo_whitebg.gif'
+
+  
+  
 end
