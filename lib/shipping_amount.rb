@@ -1,5 +1,5 @@
 class ShippingAmount
-  PATH = File.expand_path(File.join(RAILS_ROOT, "doc", 'shipping_amount.yaml'))
+  PATH = File.expand_path(File.join(Rails.root, "doc", 'shipping_amount.yaml'))
   attr_accessor :amount
   def initialize
     @amount = 997
