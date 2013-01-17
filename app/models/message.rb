@@ -41,7 +41,7 @@ class Message < ActiveRecord::Base
 
   def send_email url="http://www.faxjax.com"
     if valid?
-      @mail = Notifier.create_listing_inquiry(user.email, subject, message, nonce.value, url)
+      @mail = Notifier.listing_inquiry(user.email, subject, message, nonce.value, url)
       @mail.reply_to = self.from_email
       begin
         Notifier.deliver(@mail)
