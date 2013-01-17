@@ -1,5 +1,5 @@
 <% action = @listing.id.nil? ? "save" : "update" %>
-<% form_for :listing, @listing, :url => {:action => action} do |form| %>
+<%= form_for :listing, @listing, :url => {:action => action} do |form| %>
   <%= form.hidden_field :id %>
   <div>
     <label for="listing_category_id">Category:</label>

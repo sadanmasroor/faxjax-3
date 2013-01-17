@@ -16,9 +16,9 @@
     </tr>
   <% end %>
   </table>
-  
-  <%= link_to 'Previous page', { :page => @help_topic_pages.current.previous } if @help_topic_pages.current.previous %>
-  <%= link_to 'Next page', { :page => @help_topic_pages.current.next } if @help_topic_pages.current.next %> 
+  <%= will_paginate @help_topics %>
+  <%#= link_to 'Previous page', { :page => @help_topic_pages.current.previous } if @help_topic_pages.current.previous %>
+  <%#= link_to 'Next page', { :page => @help_topic_pages.current.next } if @help_topic_pages.current.next %> 
   
   <br />
   

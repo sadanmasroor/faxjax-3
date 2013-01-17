@@ -9,7 +9,7 @@
 <%= hidden_field_tag :id, @user.id %>
 
 <div>[&nbsp;<a style="color:red">*</a>&nbsp; Mandatory Fields&nbsp;]<br/><br/>
-  <label for="user_name">Username: <%= required_if_empty(@user.id).html_safe %></label>
+  <label for="user_name">Username: <%= required_if_empty(@user.id)%></label>
   <% if !@user.id.nil? %>
     <%= h @user.name %>
   <% else %>
@@ -26,7 +26,7 @@
 <% end %>
 
 <div>
-  <label for="user_name">First Name: <%= required_if_empty(@user.id).html_safe %></label>
+  <label for="user_name">First Name: <%= required_if_empty(@user.id) %></label>
   <%= text_field :user, :first_name, :size=>25 %>
 </div>
 
@@ -36,7 +36,7 @@
 </div>
 
 <div>
-  <label for="user_name">Email: <%= required_if_empty(@user.id).html_safe %></label>
+  <label for="user_name">Email: <%= required_if_empty(@user.id) %></label>
   <%= text_field :user, :email, :size=>25 %>
 </div>
 

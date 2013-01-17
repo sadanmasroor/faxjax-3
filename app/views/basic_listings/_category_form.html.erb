@@ -1,8 +1,8 @@
-    <% form_tag do %>
+    <%= form_tag do %>
       <%= hidden_field_tag :sign_id, params[:sign_id] %>
       <div>
         <label for="listing_category_id">Category:</label>
-        <%= render_category_select(@root_categories, {:property => "name", :name => "category_id", :selected => !@listing.nil? }) %>
+        <%= render_category_select(@root_categories, {:property => "name", :name => "category_id", :selected => !@listing.nil? }).html_safe %>
       </div>
 
       <%= submit_tag "Continue", {:class => "submit"} %>
