@@ -12,7 +12,11 @@ gem "will_paginate","3.0.0"
 gem "rake","0.8.7"
 gem 'dynamic_form'
 
-
+group :development, :test do
+	
+		gem 'rspec-rails','1.3.3'
+	
+end
 
 # Use unicorn as the web server
 # gem 'unicorn'

@@ -81,9 +81,9 @@
         <%= h field.name %>:
       </td>
       	<!-- Hack by Bill as the previous code was not working properly.This is not the recommended approach but works for us.-->
-	<% @value = ListingValue.find_by_field_id(field.id) %>
+	<% @value = ListingValue.find_by_listing_id_and_field_id(@listing.id,field.id) %>
       <td>
-        <%= !@value.blank? ? @value.value : "-" %>
+        <%= !@value.value.empty? ? @value.value : "-" %>
       </td>
       </tr>
     <% end %>
