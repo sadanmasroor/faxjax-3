@@ -4,7 +4,7 @@ module ApplicationHelper
   include UrlHelper
   #include Inflector
 
-
+    
   
   def logged_in
     session[:user_id] != nil

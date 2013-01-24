@@ -1,5 +1,5 @@
 require 'RMagick'
-
+require "#{Rails.root.join("app","models","field.rb").to_s}"
 
 class BasicListingsController < ApplicationController
   include ActionView::Helpers::TextHelper

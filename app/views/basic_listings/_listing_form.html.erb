@@ -44,8 +44,11 @@
     <% field_group.fields.each do |field| %>
     <%
       next if nef_hash[field.id] != true # If the field isn't in the non-excluded-fields list, don't show it
-      field_html = field.render_html(request)
-      next if field_html.nil? or field_html.empty?
+      	field_html = field.type.constantize.new.render_html(request)
+	#if Field::TYPES.include?(field.type)
+	#field_html =  Object.const_get(field.type).render_html(request)
+      #end	 	#field.render_html(request) if field.respond_to?("render_html")
+      #next if field_html.nil? or field_html.empty?
     %>
     <div style="clear: both;">
       <label for="field_<%= field.id %>"><%= field.name %>:&nbsp;<% if field.required %><span class="required">*</span><% end %></label>

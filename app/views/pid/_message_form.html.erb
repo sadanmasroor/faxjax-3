@@ -1,0 +1,40 @@
+<%= form_for @message,:as => :message, :url => {:controller => "pid", :action => "send_message", :id => @message_id} do |f| %>
+    <%= f.hidden_field :pid_id, :value=>@pid.id %>
+  <div>
+    <label>To:</label>
+    <%= h(@pid.user.name) %>
+    <%= f.hidden_field :user_id, :value => @pid.user_id %> 
+  </div>
+  <div>
+  <% if !logged_in? %>
+    <label for="message_from_email">Your Email: <%= required_if_empty('').html_safe %></label>
+    <%= f.text_field :from_email, :size=>40 , :maxlength=> 40 %>
+  <% else %>
+    <%= f.hidden_field :from_email, :value => active_user.email %>
+  <% end %>
+  </div>
+  <div>
+    <label for="message_subject">Subject:</label>
+    <%= f.text_field :subject, :size=>40, :maxlength=> 100 %>
+  </div>
+  
+  <div>
+    <label for="message_message">Message:</label>
+    <%= f.text_area :message, {:cols=>40, :rows=>5, :onkeyup => "return updateCharactersLeft(event, this, 1000);", :onkeypress => "return updateCharactersLeft(event, this, 1000);"} %><br/>
+    Characters left: <strong id="message_message-charsleft">1000</strong>
+    <script type="text/javascript">
+    <!--
+      Event.observe(window, 'load', updateMessageCharactersLeft, false);
+      function updateMessageCharactersLeft(event) {
+        updateCharactersLeft(event, $('message_message'), 1000);
+      }
+    //-->
+    </script>
+  </div>
+
+  <div>
+  <%= submit_tag "Send Message", {:class => "submit"} %>
+  </div>
+  <i> <%= required_if_empty('').html_safe %>Your email address will only be shared with this listing owner.
+<% end %>
+
