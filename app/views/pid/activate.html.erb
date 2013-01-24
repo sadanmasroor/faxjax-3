@@ -1,0 +1,54 @@
+<br/><div id="activate">
+<% form_tag('/pid/activated') do %>
+  <%= error_messages_for 'pid' %>
+  <fieldset>
+  <legend>Enter Your  Code &amp; PIN #</legend>
+  <div>
+    <label for="sign_code">1. PID code:</label>
+    <%= text_field_tag "code", !session[:activating_pid_code].nil? ? session[:activating_pid_code] : params[:code], { :size => 8, :maxlength => 10, :class => "sign-code" } %>
+  </div>
+  <div>
+    <label for="activation_key">2. PIN #:</label>
+    <%= text_field_tag "key1", !session[:activating_pid_key1].nil? ? session[:activating_pid_key1] : params[:key1], { :size => 3, :maxlength => 4, :onkeyup => "handlePINKeyUp(event, this, 1);"  } %>
+    <%= text_field_tag "key2", !session[:activating_pid_key2].nil? ? session[:activating_pid_key2] : params[:key2], { :size => 3, :maxlength => 4, :onkeyup => "handlePINKeyUp(event, this, 2);"  } %>
+    <%= text_field_tag "key3", !session[:activating_pid_key3].nil? ? session[:activating_pid_key3] : params[:key3], { :size => 3, :maxlength => 4 } %>
+    <%= text_field_tag "key4", !session[:activating_pid_key4].nil? ? session[:activating_pid_key4] : params[:key4], { :size => 3, :maxlength => 4 } %>	
+    <%
+      # Clear out the keys in the session
+      session[:activating_pid] = nil
+      session[:activating_pid_code] = nil
+      session[:activating_pid_key1] = nil
+      session[:activating_pid_key2] = nil
+      session[:activating_pid_key3] = nil
+      session[:activating_pid_key4] = nil
+    %>
+  </div>
+   <div>
+    <label for="sign_code">3. Address:</label>
+    <%= text_field_tag( :address,active_user.address) %>
+  </div>
+   <div>
+    <label for="sign_code">4. Address2:</label>
+    <%= text_field_tag( :address2,active_user.address2) %>
+  </div>
+  <div>
+    <label for="sign_code">5. City:</label>
+    <%= text_field_tag( :city,active_user.city) %>
+  </div>
+  <div>
+    <label for="sign_code">6. State:</label>
+	<select id="user_state" name="user[state]">
+    <option value=""></option>
+     	<%= state_abbrev_options_for_select(active_user.state) %>
+    </select>
+  </div>
+  <div>
+    <label for="sign_code">7. Zip Code:</label>
+    <%= text_field_tag(:zip,active_user.zip) %>
+  </div> 	
+  <%= submit_tag "Activate", {:class => "submit"} %>
+  </fieldset>
+<% end %>
+</div>
+
+<%= debug(@pid)%>

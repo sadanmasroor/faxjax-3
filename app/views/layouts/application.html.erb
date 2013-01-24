@@ -261,6 +261,7 @@ $(document).ready(function() {
 				<%= side_link_to "Your Signs", {:controller => "signs", :action => "list" } %>
 				<%= side_link_to "Your Listings", {:controller => "listings", :action => "list", :id => "yours" } %>
 				<%= side_link_to "Your Account", {:controller => "users", :action => "edit" } %>
+				<%= side_link_to "Activate Lost and Found", {:controller => "pid", :action => "activate" } %>
 			    </ul>
 			    </li>
 		    <li><%= link_to "How It Works", {:controller => "home", :action => "how_it_works"} %></li>
@@ -289,6 +290,7 @@ $(document).ready(function() {
 				<%= side_link_to "Your Signs", {:controller => "signs", :action => "list" } %>
 				<%= side_link_to "Your Listings", {:controller => "listings", :action => "list", :id => "yours" } %>
 				<%= side_link_to "Your Account", {:controller => "users", :action => "edit" } %>
+				<%= side_link_to "Activate Lost and Found", {:controller => "pid", :action => "activate" } %>
 			    </ul>
 			    </li>
 		    <li><%= link_to "How It Works", {:controller => "home", :action => "how_it_works"} %></li>

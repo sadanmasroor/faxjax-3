@@ -3,6 +3,7 @@ require "salted_hash"
 
 class User < ActiveRecord::Base
   has_many :signs
+  has_many :pids
   has_many :listings, :dependent => :destroy
   has_many :messages
   has_one :user_prefs, :dependent => :destroy

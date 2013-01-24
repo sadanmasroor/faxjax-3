@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20130124072934) do
 
   create_table "application_configs", :force => true do |t|
     t.string  "admin_password"
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(:version => 0) do
     t.text     "message"
     t.datetime "deleted_on"
     t.string   "from_email"
+    t.integer  "pid_id"
   end
 
   create_table "nonce_stores", :force => true do |t|
@@ -155,6 +156,14 @@ ActiveRecord::Schema.define(:version => 0) do
     t.string   "promo_code"
   end
 
+  create_table "pids", :force => true do |t|
+    t.string   "code"
+    t.string   "key"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "promo_codes", :force => true do |t|
     t.string   "name"
     t.string   "type"
@@ -167,10 +176,6 @@ ActiveRecord::Schema.define(:version => 0) do
     t.integer  "rebate_pct"
     t.datetime "created_on"
     t.datetime "updated_at"
-  end
-
-  create_table "schema_info", :id => false, :force => true do |t|
-    t.integer "version"
   end
 
   create_table "sessions", :force => true do |t|

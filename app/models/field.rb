@@ -110,7 +110,7 @@ class TextAreaField < Field
 end
 
 class StateSelectField < Field
-  #Field::TYPES << Field::StateSelectField.name
+  Field::TYPES << Field::StateSelectField.name
 
   def render_html(request)
     if !self.field_values.nil?
@@ -129,6 +129,20 @@ end
 class YearSelectField < Field
   Field::TYPES << Field::YearSelectField.name
 
+  def year_options_for_select(selected = nil, start_year = Time.now.year - 50, end_year = Time.now.year)
+        year_options = ""
+
+        years = []
+        year = end_year
+        while year >= start_year
+            years << year.to_s
+            year -= 1
+        end
+        
+       year_options += options_for_select(years, selected)
+        return year_options
+      end
+
   def render_html(request)
     if !self.field_values.nil?
       select_tag(
@@ -144,7 +158,7 @@ class YearSelectField < Field
 end
 
 class CountrySelectField < Field
-  #Field::TYPES << Field::CountrySelectField.name
+  Field::TYPES << Field::CountrySelectField.name
 
   def render_html(request)
     if !self.field_values.nil?

@@ -1,7 +1,7 @@
 <% @title = "Sign In" %>
 <%= form_tag(url_for(:controller => "home", :action => "sign_in")) do  %>
   <% if flash[:login_notice] %>
-    <div id="login-notice"><%= flash[:login_notice] %></div>
+    <div id="login-notice"><%= flash[:login_notice].html_safe %></div>
   <% end %>
 <br/>
   <div class="field">
