@@ -272,7 +272,7 @@ $(document).ready(function() {
 				    <% if active_user.unread_messages.empty? %>
 				    <%= side_link_to "Inbox", {:controller => "messages", :action => "inbox"} %>
 				    <% else %>
-				    <%= side_link_to "<strong>Inbox ("+active_user.unread_messages.length.to_s+")</strong>", {:controller => "messages", :action => "inbox"} %>
+				    <%= side_link_to "<strong>Inbox ("+active_user.unread_messages.length.to_s+")</strong>".html_safe, {:controller => "messages", :action => "inbox"} %>
 				    <% end %>
 				    <%= side_link_to "Sent", {:controller => "messages", :action => "sent"} %>
 			    </ul>
