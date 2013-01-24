@@ -1,4 +1,4 @@
-<br/><table width="100%" class="details">
+<% if @pid && @pid.user.present? %><br/><table width="100%" class="details">
 <tr>
   <td class="label">Username:</td>
   <td><strong><%= @pid.user.name %></strong></td>
@@ -29,7 +29,7 @@
   		</div>
 	</div>
 	<% end %>  
-
+<% end %>
   
     
   
