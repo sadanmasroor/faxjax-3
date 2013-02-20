@@ -309,7 +309,7 @@ $(document).ready(function() {
     <div class="body_main_contain">
     
           <div class="side_bar_main">
-                   <% if admin? && request.fullpath.to_s != "/pid/activate" %> 
+                   <% if request.fullpath.to_s != "/pid/activate" %> 
                      <div class="topic_main"><h1>Advertising Categories</h1></div>
                     <% end %>
                     <div id="mcs_container">
@@ -337,7 +337,7 @@ $(document).ready(function() {
 
                     <% end %>
                      <ul class="video_link ">
-		       <% if admin? && request.fullpath.to_s != "/pid/activate" %>     
+		       <% if request.fullpath.to_s != "/pid/activate" %>     
 		               <%= render :partial => '/video' %>
 		        <% end %>       
 		                           <!--<li><a href="">Video1</a></li>
@@ -440,7 +440,7 @@ $(document).ready(function() {
                 	<h1>SEARCH IN LISTINGS</h1>
                 	<%= form_tag :controller => "listings", :action => "search" do %>
                     <!--<form name="form1" action="">-->
-                    <span>Sign code</span> 
+                    <span>Code</span> 
 		    <%= text_field_tag "code", nil, { :size => 6, :maxlength => 5, :class => "sign-code" } %>
                     <!-- <input type="text" name="code" />-->
                 <%= submit_tag "Go" , {:class => "submit"} %>
@@ -466,7 +466,7 @@ $(document).ready(function() {
                     
                      <input type="text" name="code" />-->
 		     <%= text_field_tag "code", nil, { :size => 6, :maxlength => 5, :class => "sign-code" } %>
-                     <span>Sign code</span> <br />
+                     <span>Code</span> <br />
                      <!--<input type="text" name="keyword" class="pin" />
                      <input type="text" name="keyword" class="pin" />
                      <input type="text" name="keyword" class="pin" />-->
