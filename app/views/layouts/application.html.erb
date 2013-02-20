@@ -207,7 +207,7 @@ $(document).ready(function() {
 	<div class="header_main">
     
     	<div class="logo_main">
-        	<div class="logo"><%= link_to (image_tag "logo.png"), :controller => "/home"  %>
+        	<div class="logo"><%= link_to (image_tag "logo_old.png",:width => 248,:height => 72), :controller => "/home"  %>
 		<!--<img src="images/logo.png" width="248" height="72" />-->
 		</div>
         	<div class="logo_right">
@@ -309,8 +309,9 @@ $(document).ready(function() {
     <div class="body_main_contain">
     
           <div class="side_bar_main">
-                    <div class="topic_main"><h1>Advertising Categories</h1></div>
-                    
+                   <% if admin? && request.fullpath.to_s != "/pid/activate" %> 
+                     <div class="topic_main"><h1>Advertising Categories</h1></div>
+                    <% end %>
                     <div id="mcs_container">
 						<div class="customScrollBox">
                         
@@ -328,7 +329,7 @@ $(document).ready(function() {
                     </div>
                     <!--<a href="#" class="scrollUpBtn"></a> <a href="#" class="scrollDownBtn"></a> -->
                      </div>
-                    
+                      
                     <div class="topic_main"><h1>Videos</h1></div>
                     <% if admin? %>
                      <div class="topic_main"><%= link_to "Add Videos" ,:controller => "videos",:action => "new" %></div>
@@ -336,7 +337,9 @@ $(document).ready(function() {
 
                     <% end %>
                      <ul class="video_link ">
-		            <%= render :partial => '/video' %>
+		       <% if admin? && request.fullpath.to_s != "/pid/activate" %>     
+		               <%= render :partial => '/video' %>
+		        <% end %>       
 		                           <!--<li><a href="">Video1</a></li>
                       <li><a href="">Video2</a></li>
                       <li><a href="">Video3</a></li>

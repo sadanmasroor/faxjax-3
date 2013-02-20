@@ -22,7 +22,7 @@
       session[:activating_pid_key3] = nil
       session[:activating_pid_key4] = nil
     %>
-  </div>
+  </div><% if active_user %>
    <div>
     <label for="sign_code">3. Address:</label>
     <%= text_field_tag( :address,active_user.address) %>
@@ -45,8 +45,13 @@
   <div>
     <label for="sign_code">7. Zip Code:</label>
     <%= text_field_tag(:zip,active_user.zip) %>
-  </div> 	
+  </div> 
   <%= submit_tag "Activate", {:class => "submit"} %>
+  <% else %>	
+  <div>
+          <p style="color:red;"> You need to be logged in as user to activate the PID</p>
+  </div>
+  <% end %> 
   </fieldset>
 <% end %>
 </div>

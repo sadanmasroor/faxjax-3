@@ -1,4 +1,5 @@
 <%= render :partial => '/cart' %>
+<% if !admin? && request.fullpath.to_s != "/pid/activate" %>
 <% if !@category.nil? && !@category.root?%>
   <p id="category-list-back"><%= link_to "&lt;&lt; Back to #{@category.parent.name}", :controller => "listings", :action => "list", :id => @category.parent.id %></p>
   <ul>
@@ -16,7 +17,7 @@
     <% end %>
   </ul>
 <% end %>
-
+<% end %>
 <h1 style="margin-left:9px; font-weight: bold; color:#E76E29; font-size:17px;"><a>Administration</a></h1>
 <ul style="margin-left: .75em; font-weight: bold;"><b>
   <%= side_link_to "Home", :controller => "home" %>
