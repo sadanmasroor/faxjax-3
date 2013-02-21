@@ -1,27 +1,8 @@
-<% if @pid && @pid.user.present? %><br/><table width="100%" class="details">
-<tr>
-  <td class="label">Username:</td>
-  <td><strong><%= @pid.user.name %></strong></td>
-  </tr>
-  <tr>
-  <td class="label">Full Name:</td>
-  <td><%= @pid.user.first_name + ' ' + @pid.user.last_name%></td>
-  </tr>
- <tr>
-  <td class="label">Email:</td>
-  <td><%= @pid.user.email %> </td>
-  </tr>
-  <tr>
-  <td class="label">Address:</td>
-  <td><%= @pid.user.address + ", " + @pid.user.city + ", " + @pid.user.state + ". " + @pid.user.zip.to_s %></td>
-  </tr>
-</table>
-<br/>
-	<br/>	
+<% if @pid && @pid.user.present? %>
 	<% if show_message_form? %>
 	<div>
   		<div>
-    			<button type="button" class="submit" id="send-message-btn">Send message to <%= @pid.user.first_name + " " + @pid.user.last_name %></button>
+    			<button type="button" class="submit" id="send-message-btn">Send message to Owner</button>
   		</div>
   		<div id="send-message" style="display: none">
     			<h3>Please enter your Message:</h3>
