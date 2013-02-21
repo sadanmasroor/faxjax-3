@@ -1,13 +1,14 @@
 
 class PidController < ApplicationController
   
-  
-  
   def index
     if params[:search]
           @pid = Pid.find_by_code(params[:search].to_s)
           @message_controller = 'messages' if @message_controller.nil?
           @message_action = 'new' if @message_action.nil?
+          if !@pid.user.present?
+             flash[:warning] = "This code is not in use."
+          end  
     end  
   end
   

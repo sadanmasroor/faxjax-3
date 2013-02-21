@@ -4,7 +4,7 @@
  <table width="100%">
   <tr>
   <td class="label">Price:</td>
-  <td><strong><%= fmt_price(@listing.price) %></strong> <%= @listing.negotiable? ? "(OBO)" : "" %></td>
+  <td><strong><%= number_to_currency(@listing.price) %></strong> <%= @listing.negotiable? ? "(OBO)" : "" %></td>
   </tr>
   <tr>
     <td class="label">Sign Code:</td>

@@ -1,12 +1,9 @@
 <br/><h3><b>Corporate Office</b></h3><br/>
 <% @ci = HomeHelper::ContactInfo.from_yaml %>
 <blockquote>
-  <%= 
-strong do
-  @ci.name
-end %><br/>
+  <%= raw(strong do @ci.name end) %><br/>
 Phone: <%= @ci.phone %>
-<br/><%= mailto(@ci.email) %>
+<br/><%= mailto(@ci.email).html_safe %>
 </blockquote><br/>
 
 <!-- 
