@@ -1,6 +1,7 @@
 Faxjax3::Application.routes.draw do |map|
     
     match '/pid/q/s/:id',:to => "pid#show"
+    match '/PID/q/s/:id',:to => "pid#show"
     match '/pid', :to => "pid#index"
 
   map.sitemap '/sitemap.xml', :controller => 'sitemap', :action => 'sitemap'
