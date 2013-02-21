@@ -1,3 +1,6 @@
+<% if @pid && !@pid.user.present? %>
+<% flash[:warning] = "This code is not in use."%>
+<% end %>
 <h1>Welcome to Faxjax Lost and Found Center</h1>
 <br/><br/>
 <p>FAXJAX produces a line of Fast-Action ID TagsTM that allows people to protect their valuable properties while keeping their identity safe. </p>  

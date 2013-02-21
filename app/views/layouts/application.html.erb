@@ -261,11 +261,17 @@ $(document).ready(function() {
 				<%= side_link_to "Your Signs", {:controller => "signs", :action => "list" } %>
 				<%= side_link_to "Your Listings", {:controller => "listings", :action => "list", :id => "yours" } %>
 				<%= side_link_to "Your Account", {:controller => "users", :action => "edit" } %>
-				<%= side_link_to "Activate Lost and Found", {:controller => "pid", :action => "activate" } %>
+				<%= side_link_to "Lost and Found", {:controller => "pid", :action => "index" } %>
 			    </ul>
 			    </li>
 		    <li><%= link_to "How It Works", {:controller => "home", :action => "how_it_works"} %></li>
-		    <%= side_link_to "Activate", {:controller => "signs", :action => "activate" } %>
+		    <%#= side_link_to "Activate", {:controller => "signs", :action => "activate" } %>
+		    <li><%= link_to "Activate", {:controller => "signs", :action => "activate" } %>
+			    <ul class="expertise_submenu">
+				<%= side_link_to "Activate ID Tag", {:controller => "pid", :action => "activate" } %>
+				<%= side_link_to "Activate Classified Ad", {:controller => "signs", :action => "activate" } %>
+			    </ul>
+			 </li>
 		    <li><%= link_to "Help", {:controller => "help_topics"} %></li>
 			    <li><a href="">Messages</a><%#= link_to "Messages", {:controller => "listings"} %>
 			    <ul class="expertise_submenu">
@@ -290,11 +296,17 @@ $(document).ready(function() {
 				<%= side_link_to "Your Signs", {:controller => "signs", :action => "list" } %>
 				<%= side_link_to "Your Listings", {:controller => "listings", :action => "list", :id => "yours" } %>
 				<%= side_link_to "Your Account", {:controller => "users", :action => "edit" } %>
-				<%= side_link_to "Activate Lost and Found", {:controller => "pid", :action => "activate" } %>
+				<%= side_link_to "Lost and Found", {:controller => "pid", :action => "index" } %>
 			    </ul>
 			    </li>
 		    <li><%= link_to "How It Works", {:controller => "home", :action => "how_it_works"} %></li>
-		    <%= side_link_to "Activate", {:controller => "signs", :action => "activate" } %>
+		    <%#= side_link_to "Activate", {:controller => "signs", :action => "activate" } %>
+		    <li><%= link_to "Activate", {:controller => "signs", :action => "activate" } %>
+			    <ul class="expertise_submenu">
+				<%= side_link_to "Activate ID Tag", {:controller => "pid", :action => "activate" } %>
+				<%= side_link_to "Activate Classified Ad", {:controller => "signs", :action => "activate" } %>
+			    </ul>
+			 </li>
 		    <li><%= link_to "Help", {:controller => "help_topics"} %></li>
 		   <div class="clear"></div>
                 </ul>    
@@ -361,7 +373,9 @@ $(document).ready(function() {
                   <% if active_user.unread_messages.empty? %>
                     <%= side_link_to "Inbox", {:controller => "messages", :action => "inbox"} %>
                   <% else %>
-                    <%= side_link_to "<strong>Inbox ("+active_user.unread_messages.length.to_s+")</strong>", {:controller => "messages", :action => "inbox"} %>
+                    
+                        <li><a href="/messages/inbox"><strong>Inbox (<%= active_user.unread_messages.length.to_s %>)</strong></a></li>
+
                   <% end %>
                   <%= side_link_to "Sent", {:controller => "messages", :action => "sent"} %>
                 </ul>

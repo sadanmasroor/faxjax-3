@@ -9,7 +9,7 @@
         <% end %>
       </td>
       <td>
-        <%= link_to message.subject.truncate(50,"..."), {:action => "view", :id => message.nonce.value}, :alt => 'Read Message', :title => 'Read Message' %>
+        <%= link_to message.subject.truncate(50), {:action => "view", :id => message.nonce.value}, :alt => 'Read Message', :title => 'Read Message' %>
       </td>
       <td align="center">
         <%= TimeFunc::days_ago_as_string(message.created_on) %> ago
