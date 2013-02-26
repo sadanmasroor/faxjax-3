@@ -2,7 +2,7 @@
     <%= f.hidden_field :pid_id, :value=>@pid.id %>
   <div>
     <label>To:</label>
-    <%= h(@pid.user.name) %>
+    <%= h("Owner") %>
     <%= f.hidden_field :user_id, :value => @pid.user_id %> 
   </div>
   <div>
