@@ -50,8 +50,12 @@ class ListingsController < ApplicationController
       @listings = Listing.find_by_keywords(params[:keywords])
     elsif !params[:code].nil?
       code = params[:code]
-      @listings = search_listings_for_code code do |listing|
-        redirect_to :action => "show", :id => listing.id
+        if is_pid_code?(code)
+          redirect_to :controller => "pid",:action => "show",:id => code
+        else
+          @listings = search_listings_for_code code do |listing|
+          redirect_to :action => "show", :id => listing.id
+       end  
       end  
     end
   end
@@ -592,6 +596,12 @@ class ListingsController < ApplicationController
   
   # Private
   private
+  
+  def is_pid_code?(code)
+    return true if Pid.where(:code => code).count >= 1
+  end
+  
+  
 
   def build_category_crumbs(parent_category)
     category_crumbs = []
