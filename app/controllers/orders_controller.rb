@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
   end
 
   def list
-    @order_pages, @orders = paginate :orders, :per_page => 50
+    @order_pages = @orders = Order.paginate(:page => params[:page], :per_page => 50)
   end
 
   def show

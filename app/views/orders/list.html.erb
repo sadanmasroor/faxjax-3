@@ -7,7 +7,7 @@
 </script>
 
 <br/><p><%= link_to 'Create an order', :action => 'new' %></p><br/>
-<%= render_paginator_controls @order_pages %>
+<%= will_paginate @order_pages %>
 <table cellspacing="0">
   <tr class="trh">
     <th width="75">Created</th>
@@ -22,7 +22,7 @@
     <td valign="top"><%= fmt_date(order.created_on) %></td>
     <td valign="top"><%= !order.vendor.nil? ? order.vendor.name : "" %></td>
     <td valign="top">
-      <% form_remote_tag :url => {:action => "update_status", :id => order.id}, :complete => "$('save_status_spinner_#{order.id.to_s}').hide()", :success => "$('save_status_#{order.id.to_s}').hide();", :failure => "alert('Failed to save status')", :html => { :action => url_for(:action => "update_status", :id => order.id) } do %>
+      <%= form_for order,:url => {:action => "update_status", :id => order.id}, :complete => "$('save_status_spinner_#{order.id.to_s}').hide()", :success => "$('save_status_#{order.id.to_s}').hide();", :failure => "alert('Failed to save status')", :html => { :action => url_for(:action => "update_status", :id => order.id) } do %>
       <%= select_tag("status", options_for_select(Order::STATUSES, order.status), { :onchange => "handleStatusChange("+order.id.to_s+");"}) %>
       <%= submit_tag("Save", {:style => "display: none;", :id => "save_status_"+order.id.to_s, :onclick => "$('save_status_spinner_#{order.id.to_s}').show()"}) %>
       <%= image_tag("spinner.gif", :alt => "spinner", :id => "save_status_spinner_#{order.id.to_s}", :style => "display: none;", :align => "absmiddle") %>
@@ -59,6 +59,8 @@
 <% end %>
 </table>
 
-<%= link_to 'Previous page', { :page => @order_pages.current.previous } if @order_pages.current.previous %>
-<%= link_to 'Next page', { :page => @order_pages.current.next } if @order_pages.current.next %> 
+<%= will_paginate @order_pages %>
+
+<%#= link_to 'Previous page', { :page => @order_pages.current.previous } if @order_pages.current.previous %>
+<%#= link_to 'Next page', { :page => @order_pages.current.next } if @order_pages.current.next %> 
 
