@@ -1,6 +1,7 @@
+ <%= javascript_include_tag "prototype.js" %>
 <%= error_messages_for 'sign_lot' %>
 
-<% form_tag(:action => "create_step_2", :id => params[:id]) do %>
+<%= form_tag(:action => "create_step_2", :id => params[:id]) do %>
   <%= hidden_field_tag(:mode, @mode) %>
 
   <%= render(:partial => "form") %>

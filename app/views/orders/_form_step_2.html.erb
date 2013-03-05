@@ -1,3 +1,4 @@
+ 
   <h3>Add Sign Lots</h3>
   
   <% if !@order.sign_lots.nil? && !@order.sign_lots.empty? %>
@@ -22,8 +23,8 @@
   </script>
   <div id="use_template">
     <label for="sign_lot_template_id">Use Template:</label>
-    <%= select_tag("sign_lot_template_id", '<option>Select template (optional)</option>'+options_for_select(SignLot.find_templates.collect {|t| [ t.name, t.id ] }), {:onchange => "new Ajax.Request('/orders/sign_lot_template/'+($('sign_lot_template_id').options[$('sign_lot_template_id').selectedIndex].value), {asynchronous:true, evalScripts:true})"}) %>
-    <%= link_to_function "Delete", "
+    <%= select_tag("sign_lot_template_id", options_for_select(SignLot.find_templates.collect {|t| [ t.name, t.id ] }), {:onchange => "new Ajax.Request('/orders/sign_lot_template/'+($('sign_lot_template_id').options[$('sign_lot_template_id').selectedIndex].value), {asynchronous:true, evalScripts:true})".html_safe}) %>
+    <%= link_to_function "Delete","
       $('sign_lot_template_spinner').show();
       confirm('Are you sure you wish to delete this sign lot template?') ? new Ajax.Request(
         '/orders/destroy_sign_lot/'+($('sign_lot_template_id').options[$('sign_lot_template_id').selectedIndex].value),
@@ -42,7 +43,7 @@
             }
           }
         }
-      ) : alert('canceled');" %>
+      ) : alert('canceled');"%>
       <%= image_tag("spinner.gif", :alt => "spinner", :id => "sign_lot_template_spinner", :style => "display: none;", :align => "absmiddle") %>
   </div>
   <% end %>
@@ -62,19 +63,23 @@
     <%= text_field("sign_lot", "price_alt", :size => 5) %>
   </div>
   
-  <div id="save_as_template_field"
-    <% if !params[:sign_lot].nil? && !params[:sign_lot][:name].nil? && !params[:sign_lot][:name].empty? %>
-    style="display: none;"
+  <% if !params[:sign_lot].nil? && !params[:sign_lot][:name].nil? && !params[:sign_lot][:name].empty? %>
+  
+    <div id="save_as_template_field" style="display: none;" >
+    <% else %>
+      <div id="save_as_template_field">
     <% end %>
-  >
-    <%= check_box_tag("save_as_template", 1, false, {:onclick => "$('sign_lot_name_field').show();$('save_as_template_field').hide()"}) %> Save as template
+    
+    <%= check_box_tag("save_as_template", 1,false,{:onclick => "$('sign_lot_name_field').show();$('save_as_template_field').hide();".html_safe}) %> Save as template
   </div>
   
-  <div id="sign_lot_name_field" 
-    <% if params[:sign_lot].nil? || params[:sign_lot][:name].nil? || params[:sign_lot][:name].empty? %>
-    style="display: none;"
-    <% end %>
-  >
+  <% if params[:sign_lot].nil? || params[:sign_lot][:name].nil? || params[:sign_lot][:name].empty? %>
+  <div id="sign_lot_name_field" style="display: none;">
+  
+  <% else %>
+  <div id="sign_lot_name_field">
+  <% end %>
+  
     <label for="sign_lot_name">Template Name:</label>
     <%= text_field("sign_lot", "name") %>
   </div>
