@@ -72,7 +72,7 @@ class SignUtil
     File.join(File.expand_path(RAILS_ROOT), path)
   end
 
-  def self.clip_file(path, qty)
+  def self.clip_file(path, qty,type)
     orig_path = Pathname.new path
     
     path = self.full_path path
@@ -85,7 +85,7 @@ class SignUtil
     final = total - qty
     puts "will clip #{qty} from #{path}"
     puts "final #{final}"
-    newname=p.basename(p.extname).to_s+"-#{Time.now.strftime('%Y%m%d%H%M%S')}#{ext}"
+    newname=p.basename(p.extname).to_s+"-#{type}-#{Time.now.strftime('%Y%m%d%H%M%S')}#{ext}"
     oldname = p.basename(p.extname).to_s+"-old#{ext}"
     usedpath = File.join(dir.dirname, "used", newname)
     oldpath = File.join(dir, oldname)

@@ -456,7 +456,7 @@ $(document).ready(function() {
                 	<%= form_tag :controller => "listings", :action => "search" do %>
                     <!--<form name="form1" action="">-->
                     <span>Code</span> 
-		    <%= text_field_tag "code", nil, { :size => 6, :maxlength => 5, :class => "sign-code" } %>
+		    &nbsp;<%= text_field_tag "code", nil, { :size => 15, :maxlength => 10, :class => "sign-code" } %>
                     <!-- <input type="text" name="code" />-->
                 <%= submit_tag "Go" , {:class => "submit"} %>
                 <% end %>
