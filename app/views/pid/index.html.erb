@@ -16,7 +16,11 @@
 <br/>
 <br/>
 <br/>
+<% if active_user %>
+<h3><%= link_to("Activate",:controller => "pid",:action => "activate")%></h3>
+    <% else %>
 <h3><%= link_to("Activate",:controller => "home",:action => "sign_in")%></h3>
+<% end %>
 <br/>
 <br/>
 <br/>

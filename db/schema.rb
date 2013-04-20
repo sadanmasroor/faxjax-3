@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130124072934) do
+ActiveRecord::Schema.define(:version => 20130420203519) do
 
   create_table "application_configs", :force => true do |t|
     t.string  "admin_password"
@@ -178,13 +178,19 @@ ActiveRecord::Schema.define(:version => 20130124072934) do
     t.datetime "updated_at"
   end
 
+  create_table "schema_info", :id => false, :force => true do |t|
+    t.integer "version"
+  end
+
   create_table "sessions", :force => true do |t|
-    t.string   "session_id"
+    t.string   "session_id", :null => false
     t.text     "data"
+    t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "sessions", ["session_id"], :name => "sessions_session_id_index"
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "sign_lots", :force => true do |t|
     t.string  "order_id"
