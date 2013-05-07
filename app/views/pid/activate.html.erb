@@ -26,26 +26,26 @@
   </div><% if active_user %>
    <div>
     <label for="sign_code">3. Address:</label>
-    <%= text_field_tag( :address,active_user.address) %>&nbsp;<span class="required">*</span>
+    <%= text_field_tag( :address,active_user.address) %>&nbsp;
   </div>
    <div>
     <label for="sign_code">4. Address2:</label>
-    <%= text_field_tag( :address2,active_user.address2) %>&nbsp;<span class="required">*</span>
+    <%= text_field_tag( :address2,active_user.address2) %>&nbsp;
   </div>
   <div>
     <label for="sign_code">5. City:</label>
-    <%= text_field_tag( :city,active_user.city) %>&nbsp;<span class="required">*</span>
+    <%= text_field_tag( :city,active_user.city) %>&nbsp;
   </div>
   <div>
     <label for="sign_code">6. State:</label>
 	<select id="user_state" name="user[state]">
     <option value=""></option>
      	<%= state_abbrev_options_for_select(active_user.state) %>
-    </select>&nbsp;<span class="required">*</span>
+    </select>&nbsp;
   </div>
   <div>
     <label for="sign_code">7. Zip Code:</label>
-    <%= text_field_tag(:zip,active_user.zip) %>&nbsp;<span class="required">*</span>
+    <%= text_field_tag(:zip,active_user.zip) %>&nbsp;
   </div> 
   <%= submit_tag "Activate", {:class => "submit"} %>
   <% else %>	
