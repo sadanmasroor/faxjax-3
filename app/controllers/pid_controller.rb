@@ -37,8 +37,7 @@ class PidController < ApplicationController
       flash[:warning] = "Invalid code entered. Please retry you search."
       redirect_to :action => 'index'
     else
-      @title = "Search Results for sign code: #{@pid.code}"
-      render 'show'
+      redirect_to("http://www.fastidtag.com/pid/q/s/#{@pid.code}")
     end
    
   end
