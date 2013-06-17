@@ -66,7 +66,7 @@ class MessagesController < ApplicationController
         Notifier.deliver_inbox_notification(@message.user, 
                       active_user.name, 
                       @message.subject,
-                      self.request) if !@message.user.nil? && !@message.user.email.nil? # sends the email
+                      self.request).deliver if !@message.user.nil? && !@message.user.email.nil? # sends the email
       end
       
       flash[:notice] = "Message sent."
